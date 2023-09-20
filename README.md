@@ -1,0 +1,43 @@
+# Weather
+
+This app replicates much of the functionality of the UK Met Office weather app.
+
+## Description
+
+It is intended to showcase the author's take on some of the more recent architectural trends, including the following:
+ 
+* MVVM-C
+* Reactive programming using Swift's Combine
+* Generic networking API layer
+* CoreData
+* Small amount of SwiftUI (more to come)
+
+The app does not have access to the UK Met Office services (unsurprisingly), and so uses a public API service provided by OpenWeatherMap. 
+
+## Getting Started
+
+### Weather Tab
+
+* The Weather tab presents summary forecasts at defined locations - these locations are stored in CoreData and are managed by tapping the Edit button.
+* Tapping a summary forecast will display a full forecast for that location - that full forecast screen is WIP.
+* The Settings screen is WIP.
+
+### Edit locations
+
+* Current location - if enabled, the forecast for your current location will be shown on the Weather tab (not yet implemented).
+* UK video forecast -  if enabled, this would ideally show a video forecast, but this is not yet implemented. When it is, it will probably show a video of the author describing the app.
+* Locations - a list of the currently defined locations to be shown on the Weather tab. These can be reordered by drag-and-drop (after a long-press). The re-ordering is fully functional, though as of yet, the summary forecasts are not consequently reordered until the app is re-started.
+
+The addition and deletion of a location is not yet implemented - hence the set of hard-coded dummy locations.
+
+### Maps Tab
+
+Not yet implemented - contains dummy functionality
+
+### Warnings Tab
+
+Not yet implemented - contains dummy functionality
+
+## Acknowledgments
+
+* [WeatherMap](https://openweathermap.org)

@@ -75,6 +75,7 @@
 		AB8FBE892AAA71B500AA51CC /* UITableViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE882AAA71B500AA51CC /* UITableViewCell+Ext.swift */; };
 		AB8FBE8B2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE8A2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift */; };
 		AB8FBE8D2AAA7D3F00AA51CC /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE8C2AAA7D3F00AA51CC /* Date+Ext.swift */; };
+		ABB36DA42ABAF402007255A8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ABB36DA32ABAF402007255A8 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		AB8FBE882AAA71B500AA51CC /* UITableViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE8A2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE8C2AAA7D3F00AA51CC /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		ABB36DA32ABAF402007255A8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 		AB8136BA2AA0EACF005B26B0 = {
 			isa = PBXGroup;
 			children = (
+				ABB36DA32ABAF402007255A8 /* README.md */,
 				AB8136C52AA0EACF005B26B0 /* Weather */,
 				AB8136DF2AA0EAD1005B26B0 /* WeatherTests */,
 				AB8136E92AA0EAD1005B26B0 /* WeatherUITests */,
@@ -534,6 +537,7 @@
 				AB40BA062AB20E5900A00DCB /* LocationsViewController.xib in Resources */,
 				AB872BE52AA3707800EA5ACB /* FullForecastViewController.xib in Resources */,
 				AB872BE22AA355E200EA5ACB /* SummaryForecastsTableViewCell.xib in Resources */,
+				ABB36DA42ABAF402007255A8 /* README.md in Resources */,
 				AB6F50A12AA21A5E00B86F22 /* MapsViewController.xib in Resources */,
 				AB1B514D2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib in Resources */,
 				AB8136D32AA0EAD1005B26B0 /* Assets.xcassets in Resources */,
