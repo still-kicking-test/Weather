@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SummaryForecastCollectionViewCell" customModule="Weather" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="152"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="152"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qDL-x5-38f">
+                        <rect key="frame" x="0.0" y="10" width="200" height="142"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVE-Om-TnL">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rKn-zV-THy">
+                                <rect key="frame" x="0.0" y="38.666666666666664" width="200" height="39.999999999999993"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HgJ-Ly-uD2"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="now-vf-42i">
+                                <rect key="frame" x="0.0" y="99.333333333333329" width="200" height="42.666666666666671"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zo2-Iz-Lz5">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="21.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMy-yv-15M">
+                                        <rect key="frame" x="0.0" y="24.666666666666671" width="200" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qDL-x5-38f" secondAttribute="bottom" id="Sre-hP-aD8"/>
+                <constraint firstItem="qDL-x5-38f" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="aQS-1E-tnc"/>
+                <constraint firstAttribute="trailing" secondItem="qDL-x5-38f" secondAttribute="trailing" id="gKZ-dW-RRp"/>
+                <constraint firstItem="qDL-x5-38f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hgh-9I-PGC"/>
+            </constraints>
+            <size key="customSize" width="191" height="152"/>
+            <connections>
+                <outlet property="imageView" destination="rKn-zV-THy" id="ZWl-bd-BDS"/>
+                <outlet property="maxTemp" destination="Zo2-Iz-Lz5" id="quA-at-W6P"/>
+                <outlet property="minTemp" destination="cMy-yv-15M" id="H9P-U1-vBA"/>
+                <outlet property="stackView" destination="qDL-x5-38f" id="C6Q-ct-U9e"/>
+                <outlet property="timePeriod" destination="mVE-Om-TnL" id="5RQ-dJ-UER"/>
+            </connections>
+            <point key="canvasLocation" x="-306.87022900763355" y="-33.098591549295776"/>
+        </collectionViewCell>
+    </objects>
+</document>
