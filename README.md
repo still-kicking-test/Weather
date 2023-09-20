@@ -16,6 +16,8 @@ The app does not have access to the UK Met Office services (unsurprisingly), and
 
 ## Getting Started
 
+Note - app development has so far focussed on **Dark Mode** - switch to this for an optimal UI.
+
 ### Weather Tab
 
 * The Weather tab presents summary forecasts at defined locations - these locations are stored in CoreData and are managed by tapping the Edit button.
