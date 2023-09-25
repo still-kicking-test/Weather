@@ -30,7 +30,7 @@ import UIKit
             case .fetched(let image):
                 return image
             case .inProgress(let task):
-                return try await task.value
+                return try await task.value // can throw
             }
         }
 
@@ -40,7 +40,7 @@ import UIKit
         }
 
         images[urlRequest] = .inProgress(task)
-        let image = try await task.value
+        let image = try await task.value // can throw
         if let image = image {
             images[urlRequest] = .fetched(image)
         }

@@ -10,18 +10,32 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
 
+    
     var body: some View {
-        Button {
-          dismiss()
-        } label: {
-          Text("Close")
+        VStack(alignment: .leading, spacing: 20) {
+            HStack {
+                Spacer()
+                Button("Done", role: .cancel) {
+                    dismiss()
+                }
+                .buttonStyle(PlainButtonStyle(stateColour: .highlighted))
+            }
+            Spacer()
         }
-        Text("Settings - TBD")
+        .padding()
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+    }
+}
+
+struct PlainButtonStyle: ButtonStyle {
+    var stateColour: UIControl.State = .highlighted
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color(UIColor.button(for: stateColour)))
     }
 }

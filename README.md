@@ -4,15 +4,16 @@ This app replicates much of the functionality of the UK Met Office weather app.
 
 ## Description
 
-It is intended to showcase the author's take on some of the more recent architectural trends, including the following:
+It is intended to showcase the author's take on some of the more recent (and not so recent!) architectural trends, including the following:
  
 * MVVM-C
-* Reactive programming using Swift's Combine
+* Reactive approach using Swift's Combine
+* Asynchronous functions using async/await
 * Generic networking API layer
-* CoreData
 * Small amount of SwiftUI (more to come)
+* CoreData
 
-The app does not have access to the UK Met Office services (unsurprisingly), and so uses a public API service provided by OpenWeatherMap. 
+The app does not have access to the UK Met Office services (unsurprisingly), and so uses public API services provided by OpenWeather. 
 
 ## Getting Started
 
@@ -42,4 +43,4 @@ Not yet implemented - contains dummy functionality
 
 ## Acknowledgments
 
-* [WeatherMap](https://openweathermap.org)
+* [OpenWeather](https://openweathermap.org)
