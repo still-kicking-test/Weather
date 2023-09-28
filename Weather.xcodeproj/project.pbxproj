@@ -60,6 +60,8 @@
 		AB872BE52AA3707800EA5ACB /* FullForecastViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB872BE32AA3707800EA5ACB /* FullForecastViewController.xib */; };
 		AB872BE62AA3707800EA5ACB /* FullForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB872BE42AA3707800EA5ACB /* FullForecastViewController.swift */; };
 		AB872BEA2AA4A26800EA5ACB /* SummaryForecastsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB872BE92AA4A26800EA5ACB /* SummaryForecastsTableController.swift */; };
+		AB87CAA12AC5AC9900428046 /* SettingsRowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87CAA02AC5AC9900428046 /* SettingsRowModifier.swift */; };
+		AB87CAA32AC5AD3E00428046 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87CAA22AC5AD3E00428046 /* PrimaryButtonStyle.swift */; };
 		AB89D4872AA5C4270042B292 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D4862AA5C4270042B292 /* UITableView+Ext.swift */; };
 		AB89D48C2AA5CCEB0042B292 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D48B2AA5CCEB0042B292 /* Forecast.swift */; };
 		AB89D48E2AA5CD6A0042B292 /* Beaufort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */; };
@@ -75,6 +77,12 @@
 		AB8FBE892AAA71B500AA51CC /* UITableViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE882AAA71B500AA51CC /* UITableViewCell+Ext.swift */; };
 		AB8FBE8B2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE8A2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift */; };
 		AB8FBE8D2AAA7D3F00AA51CC /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE8C2AAA7D3F00AA51CC /* Date+Ext.swift */; };
+		AB9744B82AC30D7C00D9EEA4 /* CustomizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9744B72AC30D7C00D9EEA4 /* CustomizeView.swift */; };
+		AB9744BA2AC3294C00D9EEA4 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9744B92AC3294C00D9EEA4 /* SettingsRowView.swift */; };
+		AB9744BC2AC32F0E00D9EEA4 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9744BB2AC32F0E00D9EEA4 /* PrivacyPolicyView.swift */; };
+		AB9744BF2AC339FF00D9EEA4 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9744BE2AC339FF00D9EEA4 /* AcknowledgementsView.swift */; };
+		AB9744C12AC33A1B00D9EEA4 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9744C02AC33A1B00D9EEA4 /* NotificationsView.swift */; };
+		AB9744C32AC33A3600D9EEA4 /* RemoveAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9744C22AC33A3600D9EEA4 /* RemoveAdsView.swift */; };
 		ABB36DA42ABAF402007255A8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ABB36DA32ABAF402007255A8 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +161,8 @@
 		AB872BE32AA3707800EA5ACB /* FullForecastViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullForecastViewController.xib; sourceTree = "<group>"; };
 		AB872BE42AA3707800EA5ACB /* FullForecastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullForecastViewController.swift; sourceTree = "<group>"; };
 		AB872BE92AA4A26800EA5ACB /* SummaryForecastsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryForecastsTableController.swift; sourceTree = "<group>"; };
+		AB87CAA02AC5AC9900428046 /* SettingsRowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowModifier.swift; sourceTree = "<group>"; };
+		AB87CAA22AC5AD3E00428046 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		AB89D4862AA5C4270042B292 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		AB89D48B2AA5CCEB0042B292 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beaufort.swift; sourceTree = "<group>"; };
@@ -168,6 +178,12 @@
 		AB8FBE882AAA71B500AA51CC /* UITableViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE8A2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE8C2AAA7D3F00AA51CC /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		AB9744B72AC30D7C00D9EEA4 /* CustomizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeView.swift; sourceTree = "<group>"; };
+		AB9744B92AC3294C00D9EEA4 /* SettingsRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
+		AB9744BB2AC32F0E00D9EEA4 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		AB9744BE2AC339FF00D9EEA4 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
+		AB9744C02AC33A1B00D9EEA4 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		AB9744C22AC33A3600D9EEA4 /* RemoveAdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsView.swift; sourceTree = "<group>"; };
 		ABB36DA32ABAF402007255A8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 /* End PBXFileReference section */
 
@@ -214,7 +230,10 @@
 		AB40B9FA2AB1C0E000A00DCB /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AB9744BD2AC339AE00D9EEA4 /* DetailViews */,
 				AB40B9FB2AB1C0FC00A00DCB /* SettingsView.swift */,
+				AB9744B92AC3294C00D9EEA4 /* SettingsRowView.swift */,
+				AB87CAA02AC5AC9900428046 /* SettingsRowModifier.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -354,6 +373,7 @@
 			children = (
 				AB872BE82AA4A22900EA5ACB /* FullForecast */,
 				AB872BE72AA4A1EE00EA5ACB /* SummaryForecasts */,
+				AB87CAA22AC5AD3E00428046 /* PrimaryButtonStyle.swift */,
 				AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */,
 				AB1B51432AB9BBF200F8D69D /* Coordinates.swift */,
 				AB89D48F2AA5CDA70042B292 /* WindDirection.swift */,
@@ -425,6 +445,18 @@
 				AB7773692AAF592F0049E185 /* ImageLoader.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		AB9744BD2AC339AE00D9EEA4 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				AB9744B72AC30D7C00D9EEA4 /* CustomizeView.swift */,
+				AB9744BB2AC32F0E00D9EEA4 /* PrivacyPolicyView.swift */,
+				AB9744BE2AC339FF00D9EEA4 /* AcknowledgementsView.swift */,
+				AB9744C02AC33A1B00D9EEA4 /* NotificationsView.swift */,
+				AB9744C22AC33A3600D9EEA4 /* RemoveAdsView.swift */,
+			);
+			path = DetailViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,8 +599,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB9744C12AC33A1B00D9EEA4 /* NotificationsView.swift in Sources */,
 				AB872BE12AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift in Sources */,
 				AB8FBE892AAA71B500AA51CC /* UITableViewCell+Ext.swift in Sources */,
+				AB9744BA2AC3294C00D9EEA4 /* SettingsRowView.swift in Sources */,
 				AB391A942AB1A6B900199EFD /* IndexPath+Ext.swift in Sources */,
 				AB8136D12AA0EACF005B26B0 /* Weather.xcdatamodeld in Sources */,
 				AB8136FE2AA0EB9F005B26B0 /* WeatherCoordinator.swift in Sources */,
@@ -579,6 +613,7 @@
 				AB1B51422AB9B60500F8D69D /* Location+CoreDataProperties.swift in Sources */,
 				AB40B9FC2AB1C0FC00A00DCB /* SettingsView.swift in Sources */,
 				AB8BA04C2AB51010004212D3 /* CoreDataManager.swift in Sources */,
+				AB9744B82AC30D7C00D9EEA4 /* CustomizeView.swift in Sources */,
 				AB40BA0C2AB20F0C00A00DCB /* LocationsViewModel.swift in Sources */,
 				AB8136CB2AA0EACF005B26B0 /* WeatherViewController.swift in Sources */,
 				AB89D48C2AA5CCEB0042B292 /* Forecast.swift in Sources */,
@@ -590,6 +625,7 @@
 				AB89D4932AA616BB0042B292 /* APIService.swift in Sources */,
 				AB856A762AA8C339007CCFC1 /* Forecasts.swift in Sources */,
 				AB1B51412AB9B60500F8D69D /* Location+CoreDataClass.swift in Sources */,
+				AB9744C32AC33A3600D9EEA4 /* RemoveAdsView.swift in Sources */,
 				AB81370F2AA14146005B26B0 /* UIButton+Ext.swift in Sources */,
 				AB8FBE812AAA09B800AA51CC /* Int+Ext.swift in Sources */,
 				AB1B51442AB9BBF200F8D69D /* Coordinates.swift in Sources */,
@@ -607,6 +643,7 @@
 				AB1B51392AB8893F00F8D69D /* LocationsCollectionController.swift in Sources */,
 				AB40BA052AB20E5900A00DCB /* LocationsViewController.swift in Sources */,
 				AB8FBE842AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift in Sources */,
+				AB87CAA32AC5AD3E00428046 /* PrimaryButtonStyle.swift in Sources */,
 				AB391A982AB1A78400199EFD /* Locations.swift in Sources */,
 				AB1B514E2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift in Sources */,
 				AB6F509E2AA21A5E00B86F22 /* MapsViewModel.swift in Sources */,
@@ -618,9 +655,12 @@
 				AB872BEA2AA4A26800EA5ACB /* SummaryForecastsTableController.swift in Sources */,
 				AB8136C92AA0EACF005B26B0 /* SceneDelegate.swift in Sources */,
 				AB1B514A2AB9E6BE00F8D69D /* CALayer+Ext.swift in Sources */,
+				AB9744BC2AC32F0E00D9EEA4 /* PrivacyPolicyView.swift in Sources */,
+				AB87CAA12AC5AC9900428046 /* SettingsRowModifier.swift in Sources */,
 				AB856A732AA8ADA9007CCFC1 /* Endpoint.swift in Sources */,
 				AB8CAC2F2ABA319A00BA16BA /* SettingsManager.swift in Sources */,
 				AB8137002AA10C39005B26B0 /* WeatherViewModel.swift in Sources */,
+				AB9744BF2AC339FF00D9EEA4 /* AcknowledgementsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

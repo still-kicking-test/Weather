@@ -10,7 +10,7 @@ It is intended to showcase the author's take on some of the more recent (and not
 * Reactive approach using Swift's Combine
 * Asynchronous functions using async/await
 * Generic networking API layer
-* Small amount of SwiftUI (more to come)
+* SwiftUI
 * CoreData
 
 The app does not have access to the UK Met Office services (unsurprisingly), and so uses public API services provided by OpenWeather. 
@@ -23,7 +23,7 @@ Note - app development has so far focussed on **Dark Mode** - switch to this for
 
 * The Weather tab presents summary forecasts at defined locations - these locations are stored in CoreData and are managed by tapping the Edit button.
 * Tapping a summary forecast will display a full forecast for that location - that full forecast screen is WIP.
-* The Settings screen is WIP.
+* The Settings screen is written in SwiftUI, and currently WIP.
 
 ### Edit locations
 

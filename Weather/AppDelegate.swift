@@ -24,9 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = .backgroundSecondary(alpha: 0.5)
         tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .button(for: .normal)
-        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.button(for: .normal)]
+        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.button(for: .normal)]
         tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .button(for: .selected)
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.button(for: .selected)]
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.button(for: .selected)]
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
