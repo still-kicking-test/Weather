@@ -9,20 +9,61 @@ import Foundation
 import CoreData
 import UIKit
 
+extension NSNotification.Name {
+    static let coreDataSaved = Notification.Name("coreDataSaved")
+}
+
 class CoreDataManager {
- 
-    var locations: [Location] = []
-    lazy var moc: NSManagedObjectContext? = appDelegate?.persistentContainer.viewContext
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     static let shared = CoreDataManager()
+    var locations: [Location] = []
     
+    private lazy var moc: NSManagedObjectContext? = persistentContainer.viewContext
+    private lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Weather")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                 
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+
+    // MARK: - Core Data Saving support
+
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+                NotificationCenter.default.post(name: .coreDataSaved, object: nil)
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+
     func loadData() {
         guard let moc = moc else { return }
         
         let locationRequest: NSFetchRequest<Location> = Location.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "displayOrder", ascending: true)
         locationRequest.sortDescriptors = [sortDescriptor]
+        // locationRequest.predicate = NSPredicate(format: "name BEGINSWITH %@", "L")
         do {
             try locations = moc.fetch(locationRequest)
             print("CoreData locations:\n")
@@ -47,10 +88,6 @@ class CoreDataManager {
         locationItem.longitude = NSDecimalNumber(decimal: coordinates.longitude)
         locationItem.country = country
         locationItem.state = state
-    }
-
-    func saveContext() {
-        appDelegate?.saveContext()
     }
 }
 

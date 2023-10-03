@@ -4,7 +4,7 @@ This app replicates much of the functionality of the UK Met Office weather app.
 
 ## Description
 
-It is intended to showcase the author's take on some of the more recent (and not so recent!) architectural trends, including the following:
+This is not intended to be a production-ready app. It is simply a showcase of the author's take on some of the more recent (and not so recent!) architectural trends:
  
 * MVVM-C
 * Reactive approach using Swift's Combine
@@ -29,7 +29,7 @@ Note - app development has so far focussed on **Dark Mode** - switch to this for
 
 * Current location - if enabled, the forecast for your current location will be shown on the Weather tab (not yet implemented).
 * UK video forecast -  if enabled, this would ideally show a video forecast, but this is not yet implemented. When it is, it will probably show a video of the author describing the app.
-* Locations - a list of the currently defined locations to be shown on the Weather tab. These can be reordered by drag-and-drop (after a long-press). The re-ordering is fully functional, though as of yet, the summary forecasts are not consequently reordered until the app is re-started.
+* Locations - a list of the currently defined locations to be shown on the Weather tab. These can be reordered by drag-and-drop (after a long-press).
 
 The addition and deletion of a location is not yet implemented - hence the set of hard-coded dummy locations.
 

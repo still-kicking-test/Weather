@@ -17,6 +17,7 @@ class WeatherViewController: UIViewController {
     
     private var summaryForecastsTableController: SummaryForecastsTableController?
     private var cancellables = Set<AnyCancellable>()
+    private var busyViewController = BusyViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,14 @@ class WeatherViewController: UIViewController {
     }
 
     private func bindToViewModel() {
+        viewModel?.$isLoading
+             .receive(on: DispatchQueue.main)
+             .sink{ [weak self] isLoading in
+                 guard let self else { return }
+                 busyViewController.isHidden(!isLoading, in: self)
+             }
+             .store(in: &cancellables)
+
         viewModel?.$generalError
              .receive(on: DispatchQueue.main)
              .sink{ [weak self] error in

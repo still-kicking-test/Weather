@@ -34,6 +34,8 @@ class LocationsViewModel {
     }
     
     public var displayItemsCount: Int {
+        // Could use a derived data type here (locationsCount) for the count, but that would
+        // require the creation of another entity just to hold that count, so a bit of an overkill.
         coreDataManager.locations.count + immovableDisplayItemsCount
     }
     
