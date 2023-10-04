@@ -27,7 +27,7 @@ Note - app development has so far focussed on **Dark Mode** - switch to this for
 
 ### Edit locations
 
-* Current location - if enabled, the forecast for your current location will be shown on the Weather tab (not yet implemented).
+* Current location - if enabled, the forecast for your current location will be shown on the Weather tab. The first time this is enabled, the app will ask for location permissions.
 * UK video forecast -  if enabled, this would ideally show a video forecast, but this is not yet implemented. When it is, it will probably show a video of the author describing the app.
 * Locations - a list of the currently defined locations to be shown on the Weather tab. These can be reordered by drag-and-drop (after a long-press).
 
