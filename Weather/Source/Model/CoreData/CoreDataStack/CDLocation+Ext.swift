@@ -1,5 +1,5 @@
 //
-//  Location+Ext.swift
+//  CDLocation+Ext.swift
 //  Weather
 //
 //  Created by jonathan saville on 19/09/2023.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// wrapper functionality  to convert from Swift types to CoreData (objc) types
-extension Location {
+extension CDLocation {
     
     func setDisplayOrder(_ value: Int) {
         displayOrder = Int16(value)

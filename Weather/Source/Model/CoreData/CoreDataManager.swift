@@ -16,7 +16,7 @@ extension NSNotification.Name {
 class CoreDataManager {
 
     static let shared = CoreDataManager()
-    var locations: [Location] = []
+    var locations: [CDLocation] = []
     
     private lazy var moc: NSManagedObjectContext? = persistentContainer.viewContext
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -60,7 +60,7 @@ class CoreDataManager {
     func loadData() {
         guard let moc = moc else { return }
         
-        let locationRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        let locationRequest: NSFetchRequest<CDLocation> = CDLocation.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "displayOrder", ascending: true)
         locationRequest.sortDescriptors = [sortDescriptor]
         // locationRequest.predicate = NSPredicate(format: "name BEGINSWITH %@", "L")
@@ -81,7 +81,7 @@ class CoreDataManager {
         
         guard let moc = moc else { return }
         
-        let locationItem = Location(context: moc)
+        let locationItem = CDLocation(context: moc)
         locationItem.displayOrder = Int16(displayOrder)
         locationItem.name = name
         locationItem.latitude = NSDecimalNumber(decimal: coordinates.latitude)

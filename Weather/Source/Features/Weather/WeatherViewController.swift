@@ -22,8 +22,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        bindToViewModel()
-        viewModel?.loadForecasts()
+        bind()
         extendedLayoutIncludesOpaqueBars = true
     }
 
@@ -39,7 +38,7 @@ class WeatherViewController: UIViewController {
         summaryForecastsTableController = SummaryForecastsTableController(tableView: tableView, viewModel: viewModel, delegate: self)
     }
 
-    private func bindToViewModel() {
+    private func bind() {
         viewModel?.$isLoading
              .receive(on: DispatchQueue.main)
              .sink{ [weak self] isLoading in

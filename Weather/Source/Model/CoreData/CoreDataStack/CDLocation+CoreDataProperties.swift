@@ -1,8 +1,8 @@
 //
-//  Location+CoreDataProperties.swift
+//  CDLocation+CoreDataProperties.swift
 //  Weather
 //
-//  Created by jonathan saville on 19/09/2023.
+//  Created by jonathan saville on 03/10/2023.
 //
 //
 
@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension Location {
+extension CDLocation {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Location> {
-        return NSFetchRequest<Location>(entityName: "Location")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDLocation> {
+        return NSFetchRequest<CDLocation>(entityName: "CDLocation")
     }
 
     @NSManaged public var country: String
@@ -25,6 +25,6 @@ extension Location {
 
 }
 
-extension Location : Identifiable {
+extension CDLocation : Identifiable {
 
 }

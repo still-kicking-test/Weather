@@ -54,7 +54,7 @@ extension LocationsCollectionController: UICollectionViewDataSource {
         guard let displayItem = viewModel?.displayItem(forIndex: indexPath.row) else { return UICollectionViewCell() }
         
         switch displayItem {
-        case .current(let isEnabled):
+        case .local(let isEnabled):
             guard let cell: SelectableCollectionViewCell = collectionView.dequeueReusableCell(withType: SelectableCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
             
@@ -65,7 +65,7 @@ extension LocationsCollectionController: UICollectionViewDataSource {
             guard let cell: LocationCollectionViewCell = collectionView.dequeueReusableCell(withType: LocationCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
             
-            cell.configure(with: value, for: indexPath, delegate: self)
+            cell.configure(with: value, for: indexPath)
             return cell
             
         case .video(let isEnabled):
@@ -113,12 +113,9 @@ extension LocationsCollectionController: UICollectionViewDragDelegate, UICollect
     }
 }
 
-extension LocationsCollectionController: LocationCollectionViewCellDelegate {
-    func tappedCell() {
-    }
-}
-
 extension LocationsCollectionController: SelectableCollectionViewCellDelegate {
-    func changedValue() {
+    func changedValue(sender: UISwitch) {
+        viewModel?.valueDidChangeAt(IndexPath(row: sender.tag, section: 0),
+                                    with: sender.isOn)
     }
 }

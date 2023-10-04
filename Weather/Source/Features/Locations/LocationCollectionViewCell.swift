@@ -7,18 +7,13 @@
 
 import UIKit
 
-protocol LocationCollectionViewCellDelegate: AnyObject {
-    func tappedCell()
-}
-
 class LocationCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var reorderImage: UIImageView!
     @IBOutlet weak var deleteButton: UIButton!
 
-    private var location: Location?
-    private weak var delegate: LocationCollectionViewCellDelegate?
+    private var location: CDLocation?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,11 +28,9 @@ class LocationCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = true
     }
     
-    func configure(with location: Location,
-                   for indexPath: IndexPath,
-                   delegate: LocationCollectionViewCellDelegate) {
+    func configure(with location: CDLocation,
+                   for indexPath: IndexPath) {
         self.location = location
-        self.delegate = delegate
         name.text = location.name
     }
 

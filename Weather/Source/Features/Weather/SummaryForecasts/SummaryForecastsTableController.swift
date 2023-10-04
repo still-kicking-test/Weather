@@ -29,7 +29,7 @@ class SummaryForecastsTableController: NSObject {
         self.delegate = delegate
         super.init()
         initUI()
-        bindToViewModel()
+        bind()
     }
     
     private func initUI() {
@@ -40,7 +40,7 @@ class SummaryForecastsTableController: NSObject {
         tableView.registerCell(withType: SummaryForecastsTableViewCell.self)
     }
     
-    private func bindToViewModel() {
+    private func bind() {
         viewModel?.$forecast
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] _ in
@@ -53,7 +53,7 @@ class SummaryForecastsTableController: NSObject {
 extension SummaryForecastsTableController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        viewModel?.forecastCount ?? 0
+        viewModel?.displayItemCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,12 +61,20 @@ extension SummaryForecastsTableController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let forecast = viewModel?.forecast(forIndex: indexPath.section),
-              let cell: SummaryForecastsTableViewCell = tableView.dequeueReusableCell(withType: SummaryForecastsTableViewCell.self, for: indexPath)
-        else { return UITableViewCell() }
+        guard let displayItem = viewModel?.displayItem(forIndex: indexPath.section) else { return UITableViewCell() }
         
-        cell.configure(with: forecast, delegate: self)
-        return cell
+        switch displayItem {
+        case .location(let forecast):
+            guard let cell: SummaryForecastsTableViewCell = tableView.dequeueReusableCell(withType: SummaryForecastsTableViewCell.self, for: indexPath)
+            else { return UITableViewCell() }
+
+            cell.configure(with: forecast, delegate: self)
+            return cell
+            
+        case .video(_):
+            let cell = UITableViewCell()
+            return cell
+        }
     }
 }
 

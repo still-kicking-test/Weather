@@ -10,9 +10,9 @@ import Combine
 import UIKit
 
 enum LocationsDisplayItem {
-    case location(value: Location)
+    case location(value: CDLocation)
     case video(isEnabled: Bool)
-    case current(isEnabled: Bool)
+    case local(isEnabled: Bool)
 }
 
 class LocationsViewModel {
@@ -22,7 +22,7 @@ class LocationsViewModel {
     private let apiService: APIServiceProtocol
     private let coreDataManager: CoreDataManager
     private var cancellables = Set<AnyCancellable>()
-    private let settingsManager: SettingsManagerProtocol
+    private var settingsManager: SettingsManagerProtocol
     private let immovableDisplayItemsCount = 2 // allows for the current-location and UK-video rows
     
     init(apiService: APIServiceProtocol = APIService.shared,
@@ -42,7 +42,7 @@ class LocationsViewModel {
     public func displayItem(forIndex index: Int) -> LocationsDisplayItem? {
         switch index {
         case 0:
-            return .current(isEnabled: settingsManager.showCurrentLocation)
+            return .local(isEnabled: settingsManager.showCurrentLocation)
         case 1:
             return .video(isEnabled: settingsManager.showVideo)
         default:
@@ -55,6 +55,14 @@ class LocationsViewModel {
         }
     }
     
+    func valueDidChangeAt(_ indexPath: IndexPath, with value: Bool) {
+        switch indexPath.row {
+        case 0: settingsManager.showCurrentLocation = value
+        case 1: settingsManager.showVideo = value
+        default: break
+        }
+    }
+
     func removeLocationAt(_ indexPath: IndexPath, shouldPersist: Bool = true) {
         coreDataManager.locations.remove(at: indexPath.row)
         if shouldPersist {
@@ -62,7 +70,7 @@ class LocationsViewModel {
         }
     }
     
-    func insertLocation(_ location: Location, at indexPath: IndexPath, shouldPersist: Bool = true) {
+    func insertLocation(_ location: CDLocation, at indexPath: IndexPath, shouldPersist: Bool = true) {
         coreDataManager.locations.insert(location, at: indexPath.row)
         saveChanges()
     }

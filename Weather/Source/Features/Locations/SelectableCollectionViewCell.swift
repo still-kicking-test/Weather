@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SelectableCollectionViewCellDelegate: AnyObject {
-    func changedValue()
+    func changedValue(sender: UISwitch)
 }
 
 class SelectableCollectionViewCell: UICollectionViewCell {
@@ -16,7 +16,7 @@ class SelectableCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var enablingSwitch: UISwitch!
     
-    private var location: Location?
+    private var location: CDLocation?
     private weak var delegate: SelectableCollectionViewCellDelegate?
     
     override func awakeFromNib() {
@@ -34,12 +34,13 @@ class SelectableCollectionViewCell: UICollectionViewCell {
                    text: String,
                    for indexPath: IndexPath,
                    delegate: SelectableCollectionViewCellDelegate) {
-        self.enablingSwitch.isOn = isEnabled
         self.delegate = delegate
+        enablingSwitch.isOn = isEnabled
+        enablingSwitch.tag = indexPath.row
         name.text = text
     }
     
     @IBAction func didChangeSwitch(sender: UISwitch) {
-        delegate?.changedValue()
+        delegate?.changedValue(sender: sender)
     }
 }
