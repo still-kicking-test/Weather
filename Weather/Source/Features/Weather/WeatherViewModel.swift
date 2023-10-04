@@ -10,7 +10,7 @@ import CoreLocation
 import UIKit
 
 enum WeatherDisplayItem {
-    case video(url: URL)
+    case video(title: String, url: URL)
     case location(forecast: Forecast)
 }
 
@@ -24,8 +24,11 @@ class WeatherViewModel: NSObject {
     private let settingsManager: SettingsManagerProtocol
     private let coreDataManager: CoreDataManager
     private var cancellables = Set<AnyCancellable>()
-    private let videoUrl = URL(string: "https://bbc.co.uk")!
     
+    /// There is  no easy way to determine the latest MetOffice video forecast, so for the time being, hardcode an existing one...
+    private let videoUrl = URL(string: "https://www.youtube.com/embed/MS8g7QYg6As?playsinline=1")!
+    private let videoTitle = "UK video forecast (from archives)"
+
     private var locations: [Location] {
         var locations: [Location] = coreDataManager.locations.map { Location(from: $0) }
         locations.injectCurrentLocationIfRequired()
@@ -57,7 +60,7 @@ class WeatherViewModel: NSObject {
         }
         
         if index == showVideoAt {
-            return .video(url: videoUrl)
+            return .video(title: videoTitle, url: videoUrl)
         }
 
         guard forecast.indices.contains(index - forecastOffset) else { return nil }

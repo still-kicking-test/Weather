@@ -65,6 +65,8 @@
 		AB87D1F72ACC61F800D1067A /* CDLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87D1F52ACC61F800D1067A /* CDLocation+CoreDataProperties.swift */; };
 		AB87D1F92ACC656D00D1067A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87D1F82ACC656D00D1067A /* Location.swift */; };
 		AB87D1FD2ACD623F00D1067A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87D1FC2ACD623F00D1067A /* LocationManager.swift */; };
+		AB87D2002ACD976300D1067A /* WebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87D1FE2ACD976300D1067A /* WebViewTableViewCell.swift */; };
+		AB87D2012ACD976300D1067A /* WebViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB87D1FF2ACD976300D1067A /* WebViewTableViewCell.xib */; };
 		AB89D4872AA5C4270042B292 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D4862AA5C4270042B292 /* UITableView+Ext.swift */; };
 		AB89D48C2AA5CCEB0042B292 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D48B2AA5CCEB0042B292 /* Forecast.swift */; };
 		AB89D48E2AA5CD6A0042B292 /* Beaufort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */; };
@@ -169,6 +171,8 @@
 		AB87D1F52ACC61F800D1067A /* CDLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AB87D1F82ACC656D00D1067A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		AB87D1FC2ACD623F00D1067A /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AB87D1FE2ACD976300D1067A /* WebViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTableViewCell.swift; sourceTree = "<group>"; };
+		AB87D1FF2ACD976300D1067A /* WebViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewTableViewCell.xib; sourceTree = "<group>"; };
 		AB89D4862AA5C4270042B292 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		AB89D48B2AA5CCEB0042B292 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beaufort.swift; sourceTree = "<group>"; };
@@ -380,13 +384,15 @@
 		AB81370B2AA12BB5005B26B0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AB8136F92AA0EAF8005B26B0 /* Coordinator.swift */,
+				AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */,
 				AB87D1FC2ACD623F00D1067A /* LocationManager.swift */,
+				AB87D1FE2ACD976300D1067A /* WebViewTableViewCell.swift */,
+				AB87D1FF2ACD976300D1067A /* WebViewTableViewCell.xib */,
 				AB87CAA22AC5AD3E00428046 /* PrimaryButtonStyle.swift */,
 				AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */,
 				AB1B51432AB9BBF200F8D69D /* Coordinates.swift */,
 				AB89D48F2AA5CDA70042B292 /* WindDirection.swift */,
-				AB8136F92AA0EAF8005B26B0 /* Coordinator.swift */,
-				AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 				AB872BE52AA3707800EA5ACB /* FullForecastViewController.xib in Resources */,
 				AB872BE22AA355E200EA5ACB /* SummaryForecastsTableViewCell.xib in Resources */,
 				ABB36DA42ABAF402007255A8 /* README.md in Resources */,
+				AB87D2012ACD976300D1067A /* WebViewTableViewCell.xib in Resources */,
 				AB6F50A12AA21A5E00B86F22 /* MapsViewController.xib in Resources */,
 				AB1B514D2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib in Resources */,
 				AB8136D32AA0EAD1005B26B0 /* Assets.xcassets in Resources */,
@@ -643,6 +650,7 @@
 				AB8136CB2AA0EACF005B26B0 /* WeatherViewController.swift in Sources */,
 				AB89D48C2AA5CCEB0042B292 /* Forecast.swift in Sources */,
 				AB89D4902AA5CDA70042B292 /* WindDirection.swift in Sources */,
+				AB87D2002ACD976300D1067A /* WebViewTableViewCell.swift in Sources */,
 				AB89D4872AA5C4270042B292 /* UITableView+Ext.swift in Sources */,
 				AB8136FA2AA0EAF8005B26B0 /* Coordinator.swift in Sources */,
 				AB6F50A92AA21A6800B86F22 /* WarningsViewController.swift in Sources */,

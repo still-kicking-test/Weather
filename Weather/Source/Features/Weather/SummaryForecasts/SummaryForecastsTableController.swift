@@ -37,6 +37,7 @@ class SummaryForecastsTableController: NSObject {
         tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerCell(withType: WebViewTableViewCell.self)
         tableView.registerCell(withType: SummaryForecastsTableViewCell.self)
     }
     
@@ -71,10 +72,13 @@ extension SummaryForecastsTableController: UITableViewDataSource {
             cell.configure(with: forecast, delegate: self)
             return cell
             
-        case .video(_):
-            let cell = UITableViewCell()
+        case .video(let title, let url):
+            guard let cell: WebViewTableViewCell = tableView.dequeueReusableCell(withType: WebViewTableViewCell.self, for: indexPath)
+            else { return UITableViewCell() }
+            
+            cell.configure(with: title, url: url)
             return cell
-        }
+       }
     }
 }
 
