@@ -26,6 +26,12 @@ class WeatherViewModel: NSObject {
     private var cancellables = Set<AnyCancellable>()
     private let videoUrl = URL(string: "https://bbc.co.uk")!
     
+    private var locations: [Location] {
+        var locations: [Location] = coreDataManager.locations.map { Location(from: $0) }
+        locations.injectCurrentLocationIfRequired()
+        return locations
+    }
+
     init(apiService: APIServiceProtocol = APIService.shared,
          settingsManager: SettingsManagerProtocol = SettingsManager.shared,
          coreDataManager: CoreDataManager = CoreDataManager.shared) {
@@ -59,16 +65,12 @@ class WeatherViewModel: NSObject {
     }
 
     @objc
-    func loadForecasts() {
+    private func loadForecasts() {
         isLoading = true
         let delay: CGFloat = 0.5 // set to non-zero for dev testing, then reset to 0 (or remove)
-        var locations: [Location] = coreDataManager.locations.map { Location(from: $0) }
-        if SettingsManager.shared.showCurrentLocation,
-           let currentLocation = LocationManager.shared.getCurrentLocation(withName: "Current Location") {
-            locations.insert(currentLocation, at: 0)
-        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.apiService.getForecasts(locations: locations.compactMap{ $0 })
+            self.apiService.getForecasts(locations: self.locations)
                 .sink{
                     self.isLoading = false
                     switch $0 {
@@ -107,5 +109,15 @@ class WeatherViewModel: NSObject {
                 self?.loadForecasts()
             }
             .store(in: &cancellables)
+    }
+}
+
+private extension Array where Element == Location {
+ 
+    mutating func injectCurrentLocationIfRequired() {
+        guard SettingsManager.shared.showCurrentLocation,
+              let currentLocation = LocationManager.shared.getCurrentLocation(withName: "Current Location") else { return }
+        
+        insert(currentLocation, at: 0)
     }
 }

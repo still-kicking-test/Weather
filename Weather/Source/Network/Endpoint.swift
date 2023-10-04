@@ -14,8 +14,7 @@ struct Endpoint<T: Decodable> {
 
 extension Endpoint {
     var request: URLRequest? {
-        let defaultQueryItems = [URLQueryItem(name: "apiKey", value: "5188f5c9af2c5d545d8640c21b6f5f60")
-        ]
+        let defaultQueryItems = [URLQueryItem(name: "apiKey", value: "5188f5c9af2c5d545d8640c21b6f5f60")]
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.openweathermap.org"

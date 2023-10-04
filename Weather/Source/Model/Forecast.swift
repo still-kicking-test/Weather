@@ -11,6 +11,9 @@ struct Forecast {
     var location: Location?
     let daily: [DailyForecast]
     
+    /// When loading forecast information from the API service, only the coords are supplied, not the location name, etc. So we have to be able to inject these - we do that by matching the
+    /// returned coordinates with those in the locations used in the intial request. Sounds straightforward, but unfortunately the API does not necessarily return exactly the same coordinates
+    /// as was requested - some precision is lost, for some reason. Three decimal places seem OK, however, so we restrict the match to just those three decimal places.
     mutating func loadLocation(with coords: Coordinates,
                                from locations: [Location]) {
         let places = 3
@@ -23,6 +26,7 @@ struct Forecast {
         }
     }
 }
+
 struct DailyForecast {
     let date: Date
     let sunrise: Int

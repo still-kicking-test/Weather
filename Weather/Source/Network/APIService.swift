@@ -17,6 +17,7 @@ enum APIError: LocalizedError {
     case badURL
     case networkError(Error)
     case invalidResponse
+    case authError
     case clientError(String)
     case serverError(String)
     case jsonError(Error)
@@ -30,6 +31,8 @@ enum APIError: LocalizedError {
             return "Network error: \(error.localizedDescription)"
         case .invalidResponse:
             return "Invalid response received"
+        case .authError:
+            return "Authorization failure - the OpenWeather apiKey is likely out-of-date. Please contact the app's author."
         case .clientError(let message):
             return "Client Error: \(message)"
         case .serverError(let message):
@@ -43,8 +46,13 @@ enum APIError: LocalizedError {
 }
 
 private struct APIErrorMessage: Decodable {
-  var error: Bool
-  var reason: String
+    var error: Bool
+    var reason: String
+    
+    static func decodeFromJSON(_ data: Data) -> String {
+        let message = try? JSONDecoder().decode(APIErrorMessage.self, from: data)
+        return message?.reason ?? "Unexpected data received from server"
+    }
 }
 
 class APIService: APIServiceProtocol {
@@ -66,11 +74,11 @@ class APIService: APIServiceProtocol {
                if (200..<300) ~= urlResponse.statusCode {
                }
                else {
-                   let apiError = try JSONDecoder().decode(APIErrorMessage.self, from: data)
                    switch urlResponse.statusCode {
-                   case 300..<400: throw APIError.unexpected(apiError.reason)
-                   case 400..<500: throw APIError.clientError(apiError.reason)
-                   case 500..<600: throw APIError.serverError(apiError.reason)
+                   case 300..<400: throw APIError.unexpected(APIErrorMessage.decodeFromJSON(data))
+                   case 401: throw APIError.authError
+                   case 400..<500: throw APIError.clientError(APIErrorMessage.decodeFromJSON(data))
+                   case 500..<600: throw APIError.serverError(APIErrorMessage.decodeFromJSON(data))
                    default: throw APIError.invalidResponse
                    }
                }
