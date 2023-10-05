@@ -25,7 +25,7 @@ class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
 
     func start() {
         let vc = WeatherViewController.fromNib()
-        let viewModel = WeatherViewModel()
+        let viewModel = WeatherViewModel() // apiService: MockAPIService.shared)
         vc.coordinator = self
         vc.viewModel = viewModel
         navigationController.pushViewController(vc, animated: false)

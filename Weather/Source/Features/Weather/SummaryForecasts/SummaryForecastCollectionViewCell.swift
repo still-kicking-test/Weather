@@ -14,7 +14,15 @@ class SummaryForecastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var maxTemp: UILabel!
     @IBOutlet weak var minTemp: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    
+   
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = .backgroundPrimary()
+        timePeriod.textColor = UIColor.defaultText()
+        maxTemp.textColor = UIColor.defaultText()
+        minTemp.textColor = UIColor.defaultText()
+    }
+
     func configure(with dailyForecast: DailyForecast) {
         timePeriod.text = dailyForecast.date.shortDayOfWeek
         maxTemp.text = "\(dailyForecast.temperature.max.rounded(0))°"

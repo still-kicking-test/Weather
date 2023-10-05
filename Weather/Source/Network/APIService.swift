@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol APIServiceProtocol {
-    func get<T: Decodable>(endpoint: Endpoint<T>) -> AnyPublisher<T, Error>
-    func getArray<T: Decodable>(endpoint: Endpoint<T>) -> AnyPublisher<[T], Never>
+    func getForecasts(locations: [Location]) -> AnyPublisher<Result<[Forecast], Error>, Never>
+    func getLocations(query: String) -> AnyPublisher<Result<[LocationDataModel], Error>, Never>
 }
 
 enum APIError: LocalizedError {

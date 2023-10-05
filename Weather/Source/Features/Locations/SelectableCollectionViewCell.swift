@@ -22,6 +22,7 @@ class SelectableCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .backgroundPrimary()
+        name.textColor = UIColor.defaultText()
     }
     
     override func layoutSubviews() {

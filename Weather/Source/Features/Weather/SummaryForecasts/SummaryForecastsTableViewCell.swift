@@ -59,7 +59,7 @@ class SummaryForecastsTableViewCell: UITableViewCell {
         } else {
             title = "<unknown>"
         }
-        locationButton.normalTitleText = title
+        locationButton.configuration?.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18.0)]))
         collectionView.reloadData()
     }
     

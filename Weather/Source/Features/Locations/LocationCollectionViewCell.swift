@@ -18,6 +18,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .backgroundPrimary()
+        name.textColor = UIColor.defaultText()
         reorderImage.tintColor = .backgroundTertiary()
         deleteButton.tintColor = .red
     }

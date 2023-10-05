@@ -52,6 +52,12 @@
 		AB81370F2AA14146005B26B0 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81370E2AA14146005B26B0 /* UIButton+Ext.swift */; };
 		AB81371D2AA1EDDD005B26B0 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81371C2AA1EDDD005B26B0 /* TabBarCoordinator.swift */; };
 		AB81371F2AA1EE13005B26B0 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81371E2AA1EE13005B26B0 /* TabBarItem.swift */; };
+		AB819B942ACEA65E00DF11A4 /* OneCall(52.656,0.486).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B932ACEA65E00DF11A4 /* OneCall(52.656,0.486).json */; };
+		AB819B972ACEA69900DF11A4 /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB819B962ACEA69900DF11A4 /* MockAPIService.swift */; };
+		AB819B992ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B982ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json */; };
+		AB819B9B2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B9A2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json */; };
+		AB819B9D2ACEE80700DF11A4 /* OneCall(41.893,12.483).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B9C2ACEE80700DF11A4 /* OneCall(41.893,12.483).json */; };
+		AB819B9F2ACEE86500DF11A4 /* OneCall(35.71,139.454).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B9E2ACEE86500DF11A4 /* OneCall(35.71,139.454).json */; };
 		AB856A732AA8ADA9007CCFC1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB856A722AA8ADA9007CCFC1 /* Endpoint.swift */; };
 		AB856A762AA8C339007CCFC1 /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB856A752AA8C339007CCFC1 /* Forecasts.swift */; };
 		AB872BE12AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB872BDF2AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift */; };
@@ -158,6 +164,12 @@
 		AB81370E2AA14146005B26B0 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		AB81371C2AA1EDDD005B26B0 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		AB81371E2AA1EE13005B26B0 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		AB819B932ACEA65E00DF11A4 /* OneCall(52.656,0.486).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(52.656,0.486).json"; sourceTree = "<group>"; };
+		AB819B962ACEA69900DF11A4 /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
+		AB819B982ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(51.488,-0.169).json"; sourceTree = "<group>"; };
+		AB819B9A2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(41.876,-87.624).json"; sourceTree = "<group>"; };
+		AB819B9C2ACEE80700DF11A4 /* OneCall(41.893,12.483).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(41.893,12.483).json"; sourceTree = "<group>"; };
+		AB819B9E2ACEE86500DF11A4 /* OneCall(35.71,139.454).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(35.71,139.454).json"; sourceTree = "<group>"; };
 		AB856A722AA8ADA9007CCFC1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AB856A752AA8C339007CCFC1 /* Forecasts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecasts.swift; sourceTree = "<group>"; };
 		AB872BDF2AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryForecastsTableViewCell.swift; sourceTree = "<group>"; };
@@ -295,6 +307,8 @@
 		AB8136C52AA0EACF005B26B0 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				AB819B952ACEA68600DF11A4 /* Mocks */,
+				AB819B912ACEA5F300DF11A4 /* Resources */,
 				AB8137052AA12ABC005B26B0 /* Source */,
 				AB8136C62AA0EACF005B26B0 /* AppDelegate.swift */,
 				AB8136C82AA0EACF005B26B0 /* SceneDelegate.swift */,
@@ -405,6 +419,34 @@
 				AB1B51472AB9CEB400F8D69D /* TabBarController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		AB819B912ACEA5F300DF11A4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB819B922ACEA5FE00DF11A4 /* json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AB819B922ACEA5FE00DF11A4 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				AB819B9E2ACEE86500DF11A4 /* OneCall(35.71,139.454).json */,
+				AB819B9C2ACEE80700DF11A4 /* OneCall(41.893,12.483).json */,
+				AB819B9A2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json */,
+				AB819B982ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json */,
+				AB819B932ACEA65E00DF11A4 /* OneCall(52.656,0.486).json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		AB819B952ACEA68600DF11A4 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AB819B962ACEA69900DF11A4 /* MockAPIService.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		AB856A742AA8C327007CCFC1 /* Services */ = {
@@ -594,17 +636,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB819B942ACEA65E00DF11A4 /* OneCall(52.656,0.486).json in Resources */,
 				AB8136D62AA0EAD1005B26B0 /* LaunchScreen.storyboard in Resources */,
 				AB6F50A62AA21A6800B86F22 /* WarningsViewController.xib in Resources */,
 				AB8FBE852AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib in Resources */,
 				AB40BA062AB20E5900A00DCB /* LocationsViewController.xib in Resources */,
+				AB819B9B2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json in Resources */,
 				AB872BE52AA3707800EA5ACB /* FullForecastViewController.xib in Resources */,
 				AB872BE22AA355E200EA5ACB /* SummaryForecastsTableViewCell.xib in Resources */,
 				ABB36DA42ABAF402007255A8 /* README.md in Resources */,
 				AB87D2012ACD976300D1067A /* WebViewTableViewCell.xib in Resources */,
+				AB819B9D2ACEE80700DF11A4 /* OneCall(41.893,12.483).json in Resources */,
 				AB6F50A12AA21A5E00B86F22 /* MapsViewController.xib in Resources */,
 				AB1B514D2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib in Resources */,
+				AB819B992ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json in Resources */,
 				AB8136D32AA0EAD1005B26B0 /* Assets.xcassets in Resources */,
+				AB819B9F2ACEE86500DF11A4 /* OneCall(35.71,139.454).json in Resources */,
 				AB8137042AA11161005B26B0 /* WeatherViewController.xib in Resources */,
 				AB1B513A2AB8893F00F8D69D /* LocationCollectionViewCell.xib in Resources */,
 			);
@@ -642,6 +689,7 @@
 				AB8AE5452AAE16DD007DD02E /* DataModel.swift in Sources */,
 				AB74B67F2AB5F16300F2F492 /* Decimal+Ext.swift in Sources */,
 				AB1B51382AB8893F00F8D69D /* LocationCollectionViewCell.swift in Sources */,
+				AB819B972ACEA69900DF11A4 /* MockAPIService.swift in Sources */,
 				AB40B9FC2AB1C0FC00A00DCB /* SettingsView.swift in Sources */,
 				AB87D1FD2ACD623F00D1067A /* LocationManager.swift in Sources */,
 				AB8BA04C2AB51010004212D3 /* CoreDataManager.swift in Sources */,

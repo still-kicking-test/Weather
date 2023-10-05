@@ -19,7 +19,7 @@ private extension Endpoint where T == OneCallDataModel {
     }
 }
 
-extension APIServiceProtocol {
+extension APIService {
     
     func getForecasts(locations: [Location]) -> AnyPublisher<Result<[Forecast], Error>, Never> {
         guard locations.isEmpty == false else {
@@ -50,7 +50,7 @@ extension APIServiceProtocol {
     }
 }
 
-private struct OneCallDataModel: DataModel {
+struct OneCallDataModel: DataModel {
     var lat: Decimal
     var lon: Decimal
     var timezone: String
@@ -61,7 +61,7 @@ private struct OneCallDataModel: DataModel {
     }
 }
 
-private struct DailyDataModel: DataModel {
+struct DailyDataModel: DataModel {
     var dt: Double
     var sunrise: Int
     var sunset: Int
@@ -87,7 +87,7 @@ private struct DailyDataModel: DataModel {
     }
 }
 
-private struct DailyTempDataModel: DataModel {
+struct DailyTempDataModel: DataModel {
     var day: Decimal
     var min: Decimal
     var max: Decimal
@@ -105,7 +105,7 @@ private struct DailyTempDataModel: DataModel {
     }
 }
 
-private struct WeatherDataModel: DataModel {
+struct WeatherDataModel: DataModel {
     var id: Int
     var main: String
     var description: String

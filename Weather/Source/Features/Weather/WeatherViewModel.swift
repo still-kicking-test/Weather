@@ -119,7 +119,7 @@ private extension Array where Element == Location {
  
     mutating func injectCurrentLocationIfRequired() {
         guard SettingsManager.shared.showCurrentLocation,
-              let currentLocation = LocationManager.shared.getCurrentLocation(withName: "Current Location") else { return }
+              let currentLocation = LocationManager.shared.getCurrentLocation(withName: "\u{1F4CC} Current Location") else { return }
         
         insert(currentLocation, at: 0)
     }

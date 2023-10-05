@@ -9,7 +9,7 @@ import Foundation
 
 struct Forecast {
     var location: Location?
-    let daily: [DailyForecast]
+    var daily: [DailyForecast]
     
     /// When loading forecast information from the API service, only the coords are supplied, not the location name, etc. So we have to be able to inject these - we do that by matching the
     /// returned coordinates with those in the locations used in the intial request. Sounds straightforward, but unfortunately the API does not necessarily return exactly the same coordinates
@@ -28,7 +28,7 @@ struct Forecast {
 }
 
 struct DailyForecast {
-    let date: Date
+    var date: Date
     let sunrise: Int
     let sunset: Int
     let pressure: Int

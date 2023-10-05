@@ -17,7 +17,7 @@ private extension Endpoint where T == [LocationDataModel] {
     }
 }
 
-extension APIServiceProtocol {
+extension APIService {
     
     typealias LocationPublisher = AnyPublisher<[Location], Error>
 

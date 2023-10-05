@@ -27,7 +27,11 @@ class WebViewTableViewCell: UITableViewCell {
     }
 
     func configure(with title: String, url: URL) {
-        titleLabel.text = title
+        titleLabel.attributedText = NSAttributedString(string: title,
+                                                       attributes: [
+                                                        .font : UIFont.boldSystemFont(ofSize: 18.0),
+                                                        .foregroundColor: UIColor.defaultText()
+                                                       ])
         webView.load(URLRequest(url: url))
     }
 }
