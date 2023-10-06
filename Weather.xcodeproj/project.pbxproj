@@ -79,7 +79,6 @@
 		AB89D4932AA616BB0042B292 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D4922AA616BB0042B292 /* APIService.swift */; };
 		AB8AE5452AAE16DD007DD02E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8AE5442AAE16DD007DD02E /* DataModel.swift */; };
 		AB8BA04C2AB51010004212D3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8BA04B2AB51010004212D3 /* CoreDataManager.swift */; };
-		AB8CAC2F2ABA319A00BA16BA /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CAC2E2ABA319A00BA16BA /* SettingsManager.swift */; };
 		AB8FBE812AAA09B800AA51CC /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE802AAA09B800AA51CC /* Int+Ext.swift */; };
 		AB8FBE842AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE822AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift */; };
 		AB8FBE852AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB8FBE832AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib */; };
@@ -190,7 +189,6 @@
 		AB89D4922AA616BB0042B292 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		AB8AE5442AAE16DD007DD02E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AB8BA04B2AB51010004212D3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		AB8CAC2E2ABA319A00BA16BA /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		AB8FBE802AAA09B800AA51CC /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE822AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryForecastCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB8FBE832AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryForecastCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -235,6 +233,7 @@
 		AB40B9F72AB1B96A00A00DCB /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				AB87D1FC2ACD623F00D1067A /* LocationManager.swift */,
 				AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */,
 				AB40BA032AB20E5800A00DCB /* LocationsViewController.swift */,
 				AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */,
@@ -251,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				AB9744BD2AC339AE00D9EEA4 /* DetailViews */,
-				AB8CAC2E2ABA319A00BA16BA /* SettingsManager.swift */,
 				AB40B9FB2AB1C0FC00A00DCB /* SettingsView.swift */,
 				AB9744B92AC3294C00D9EEA4 /* SettingsRowView.swift */,
 				AB87CAA02AC5AC9900428046 /* SettingsRowModifier.swift */,
@@ -275,6 +273,15 @@
 				AB7194D42AD01B6600FE7DA6 /* WarningsView.swift */,
 			);
 			path = Warnings;
+			sourceTree = "<group>";
+		};
+		AB7194D62AD0244600FE7DA6 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				AB87D1FF2ACD976300D1067A /* WebViewTableViewCell.xib */,
+				AB87D1FE2ACD976300D1067A /* WebViewTableViewCell.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		AB8136BA2AA0EACF005B26B0 = {
@@ -393,12 +400,10 @@
 		AB81370B2AA12BB5005B26B0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AB7194D62AD0244600FE7DA6 /* WebView */,
 				AB819BA32ACEF1EB00DF11A4 /* SettingsBundleHelper.swift */,
 				AB8136F92AA0EAF8005B26B0 /* Coordinator.swift */,
 				AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */,
-				AB87D1FC2ACD623F00D1067A /* LocationManager.swift */,
-				AB87D1FE2ACD976300D1067A /* WebViewTableViewCell.swift */,
-				AB87D1FF2ACD976300D1067A /* WebViewTableViewCell.xib */,
 				AB87CAA22AC5AD3E00428046 /* PrimaryButtonStyle.swift */,
 				AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */,
 				AB1B51432AB9BBF200F8D69D /* Coordinates.swift */,
@@ -411,8 +416,8 @@
 			isa = PBXGroup;
 			children = (
 				AB81371C2AA1EDDD005B26B0 /* TabBarCoordinator.swift */,
-				AB81371E2AA1EE13005B26B0 /* TabBarItem.swift */,
 				AB1B51472AB9CEB400F8D69D /* TabBarController.swift */,
+				AB81371E2AA1EE13005B26B0 /* TabBarItem.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -760,7 +765,6 @@
 				AB87CAA12AC5AC9900428046 /* SettingsRowModifier.swift in Sources */,
 				AB856A732AA8ADA9007CCFC1 /* Endpoint.swift in Sources */,
 				AB819BA42ACEF1EB00DF11A4 /* SettingsBundleHelper.swift in Sources */,
-				AB8CAC2F2ABA319A00BA16BA /* SettingsManager.swift in Sources */,
 				AB8137002AA10C39005B26B0 /* WeatherViewModel.swift in Sources */,
 				AB9744BF2AC339FF00D9EEA4 /* AcknowledgementsView.swift in Sources */,
 			);

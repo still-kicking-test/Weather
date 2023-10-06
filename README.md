@@ -21,7 +21,7 @@ Note - app development has so far focussed on **Dark Mode** - switch to this for
 
 ### Weather Tab
 
-* Displays summary forecasts at defined locations - these are managed on the Edit screen (and persisted in CoreData).
+* Displays summary forecasts at defined locations - locations are managed on the Edit screen (and persisted in CoreData).
 * Optionally displays a forecast for your current location and a UK video forecast. Optional display managed on the Edit screen.
 * Tapping a summary forecast will display a full forecast for that location - currently in WIP.
 * The Settings screen is written in SwiftUI - links from that screen are currently in WIP.
@@ -31,17 +31,16 @@ Note - app development has so far focussed on **Dark Mode** - switch to this for
 * Access by tapping the Edit button on the Weather tab.
 * Current location - if enabled, the forecast for your current location will be shown on the Weather tab. The first time this is enabled, the app will ask for location permissions.
 * UK video forecast -  if enabled, shows a UK video forecast from the MetOffice. Ideally today's video forecast would be displayed, but without access to the MetOffice servers, there is no easy way to determine its URL. An archived forecast from the 4th October 2023 is therefore displayed instead.
-* Locations - a list of the currently defined locations to be shown on the Weather tab. These can be reordered by drag-and-drop (after a long-press).
+* Locations - a list of the currently defined locations to be shown on the Weather tab. These can be reordered by drag-and-drop (after a long-press). The addition and deletion of locations is in WIP, a set of hard-coded example locations is used instead.
 
-The addition and deletion of locations is in WIP - hence the set of hard-coded example locations.
 
 ### Maps Tab
 
-WIP - contains dummy functionality
+WIP
 
 ### Warnings Tab
 
-WIP - contains dummy functionality
+WIP
 
 ## Acknowledgments
 

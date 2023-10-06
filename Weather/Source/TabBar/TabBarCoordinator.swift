@@ -23,7 +23,6 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
     var tabBarController: UITabBarController
 
     let apiService: APIServiceProtocol
-    let settingsManager: SettingsManager
     let locationManager: LocationManagerProtocol
     let coreDataManager: CoreDataManager
         
@@ -31,7 +30,6 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
         self.navigationController = navigationController
         
         tabBarController = TabBarController()
-        settingsManager = SettingsManager()
         coreDataManager = CoreDataManager.shared // SceneDelegate needs access to this, so shared
 
         if SettingsBundleHelper.shared.isAPIMocked {
@@ -85,7 +83,6 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
         case .weather:
             coordinator = WeatherCoordinator(navigationController: navController,
                                              apiService: apiService,
-                                             settingsManager: settingsManager,
                                              locationManager: locationManager,
                                              coreDataManager: coreDataManager)
 

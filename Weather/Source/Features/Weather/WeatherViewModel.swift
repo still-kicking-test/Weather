@@ -11,6 +11,7 @@ import UIKit
 
 enum WeatherDisplayItem {
     static let currentLocationName = "\u{1F4CC} Current location"
+    static let videoTitle = "UK video forecast (from archives)"
 
     case video(title: String, url: URL)
     case location(forecast: Forecast)
@@ -25,18 +26,16 @@ class WeatherViewModel: NSObject {
     private var cancellables = Set<AnyCancellable>()
     
     private let apiService: APIServiceProtocol
-    private let settingsManager: SettingsManager
     private let locationManager: LocationManagerProtocol
     private let coreDataManager: CoreDataManager
 
     /// There is  no easy way to determine the latest MetOffice video forecast, so for the time being, hardcode an existing one...
     private let videoUrl = URL(string: "https://www.youtube.com/embed/MS8g7QYg6As?playsinline=1")!
-    private let videoTitle = "UK video forecast (from archives)"
 
     private var locations: [Location] {
         var locations: [Location] = coreDataManager.locations.map { Location(from: $0) }
         
-        if settingsManager.showCurrentLocation,
+        if locationManager.showCurrentLocation,
            let currentLocation = locationManager.getCurrentLocation(withName: WeatherDisplayItem.currentLocationName) {
             locations.insert(currentLocation, at: 0)
         }
@@ -44,11 +43,9 @@ class WeatherViewModel: NSObject {
     }
 
     init(apiService: APIServiceProtocol,
-         settingsManager: SettingsManager,
          locationManager: LocationManagerProtocol,
          coreDataManager: CoreDataManager) {
         self.apiService = apiService
-        self.settingsManager = settingsManager
         self.locationManager = locationManager
         self.coreDataManager = coreDataManager
         super.init()
@@ -57,20 +54,20 @@ class WeatherViewModel: NSObject {
     }
 
     var displayItemCount: Int {
-        forecast.count + (settingsManager.showVideo ? 1 : 0)
+        forecast.count + (locationManager.showVideo ? 1 : 0)
     }
 
     func displayItem(forIndex index: Int) -> WeatherDisplayItem? {
         var forecastOffset = 0
         var showVideoAt: Int?
         
-        if settingsManager.showVideo {
+        if locationManager.showVideo {
             showVideoAt = locations.containsCurrentLocation ? 1 : 0
             forecastOffset = index > showVideoAt! ? 1 : 0
         }
         
         if index == showVideoAt {
-            return .video(title: videoTitle, url: videoUrl)
+            return .video(title: WeatherDisplayItem.videoTitle, url: videoUrl)
         }
 
         guard forecast.indices.contains(index - forecastOffset) else { return nil }
@@ -109,14 +106,14 @@ class WeatherViewModel: NSObject {
             }
             .store(in: &cancellables)
 
-        settingsManager.$shouldShowVideo
+        locationManager.showVideoPublisher
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] _ in
                 self?.loadForecasts()
             }
             .store(in: &cancellables)
 
-        settingsManager.$shouldShowCurrentLocation
+        locationManager.showCurrentLocationPublisher
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] _ in
                 self?.loadForecasts()

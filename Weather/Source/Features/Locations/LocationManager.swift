@@ -10,33 +10,55 @@ import Combine
 import CoreLocation
 
 protocol LocationManagerProtocol {
-    // We must synthesize 'authorized' as it defined in a protocol
-    var authorized: Bool { get }
-    var authorizedPublished: Published<Bool> { get }
-    var authorizedPublisher: Published<Bool>.Publisher { get }
-
     func requestAuthorizationIfRequired()
     func getCurrentLocation(withName name: String) -> Location?
+    
+    // We must synthesize @Published properties as they defined in a protocol
+    var authorized: Bool { get }
+    var authorizedPublisher: Published<Bool>.Publisher { get }
+
+    var showVideo: Bool { get set }
+    var showVideoPublisher: Published<Bool>.Publisher { get }
+
+    var showCurrentLocation: Bool { get set }
+    var showCurrentLocationPublisher: Published<Bool>.Publisher { get }
 }
 
 class LocationManager: NSObject, LocationManagerProtocol {
+
+    private enum Keys {
+        static let showVideo = "showVideo"
+        static let showCurrentLocation = "showCurrentLocation"
+    }
+
     @Published var authorized: Bool = false
-    var authorizedPublished: Published<Bool> { _authorized }
     var authorizedPublisher: Published<Bool>.Publisher { $authorized }
+    
+    @Published var showVideo: Bool {
+        didSet { defaults.set(showVideo, forKey: Keys.showVideo) }
+    }
+    var showVideoPublisher: Published<Bool>.Publisher { $showVideo }
+
+    @Published var showCurrentLocation: Bool = false {
+        didSet { defaults.set(showCurrentLocation, forKey: Keys.showCurrentLocation) }
+    }
+    var showCurrentLocationPublisher: Published<Bool>.Publisher { $showCurrentLocation }
 
     private let clLocationManager = CLLocationManager()
-    
+    private var defaults = UserDefaults.standard
+
     override init() {
+        showVideo = defaults.object(forKey: Keys.showVideo) as? Bool ?? false
+        showCurrentLocation = defaults.object(forKey: Keys.showCurrentLocation) as? Bool ?? false
         super.init()
         clLocationManager.delegate = self
     }
-    
+
     func requestAuthorizationIfRequired() {
         clLocationManager.requestWhenInUseAuthorization()
     }
 
     func getCurrentLocation(withName name: String) -> Location? {
-
         switch clLocationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             guard let currentLocation = clLocationManager.location else { return nil }
@@ -58,4 +80,3 @@ extension LocationManager: CLLocationManagerDelegate {
         }
     }
 }
-

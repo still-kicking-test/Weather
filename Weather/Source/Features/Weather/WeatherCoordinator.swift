@@ -18,7 +18,6 @@ protocol WeatherCoordinatorProtocol: NSObject, Coordinator {
 class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
 
     let apiService: APIServiceProtocol
-    let settingsManager: SettingsManager
     let locationManager: LocationManagerProtocol
     let coreDataManager: CoreDataManager
 
@@ -27,12 +26,10 @@ class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
 
     init(navigationController: UINavigationController,
          apiService: APIServiceProtocol,
-         settingsManager: SettingsManager,
          locationManager: LocationManagerProtocol,
          coreDataManager: CoreDataManager) {
         self.navigationController = navigationController
         self.apiService = apiService
-        self.settingsManager = settingsManager
         self.locationManager = locationManager
         self.coreDataManager = coreDataManager
     }
@@ -40,7 +37,6 @@ class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
     func start() {
         let vc = WeatherViewController.fromNib()
         let viewModel = WeatherViewModel(apiService: apiService,
-                                         settingsManager: settingsManager,
                                          locationManager: locationManager,
                                          coreDataManager: coreDataManager)
         vc.viewModel = viewModel
@@ -51,7 +47,6 @@ class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
     func showEdit() {
         let vc = LocationsViewController.fromNib()
         let viewModel = LocationsViewModel(apiService: apiService,
-                                           settingsManager: settingsManager,
                                            locationManager: locationManager,
                                            coreDataManager: coreDataManager)
 
