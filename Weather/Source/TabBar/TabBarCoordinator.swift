@@ -22,12 +22,31 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
     var navigationController: UINavigationController
     var tabBarController: UITabBarController
 
+    let apiService: APIServiceProtocol
+    let settingsManager: SettingsManager
+    let locationManager: LocationManagerProtocol
+    let coreDataManager: CoreDataManager
+        
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.tabBarController = TabBarController()
+        
+        tabBarController = TabBarController()
+        settingsManager = SettingsManager()
+        coreDataManager = CoreDataManager.shared // SceneDelegate needs access to this, so shared
+
+        if SettingsBundleHelper.shared.isAPIMocked {
+            apiService = MockAPIService()
+            locationManager = MockLocationManager()
+        } else {
+            apiService = APIService()
+            locationManager = LocationManager()
+        }
     }
 
     func start() {
+        coreDataManager.loadData()
+        coreDataManager.loadTestDataIfEmpty() // DEV ONLY
+
         let tabs: [TabBarItem] = [.weather, .maps, .warnings]
             .sorted(by: { $0 < $1 })
         
@@ -64,7 +83,12 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
 
         switch tabBarItem {
         case .weather:
-            coordinator = WeatherCoordinator(navigationController: navController)
+            coordinator = WeatherCoordinator(navigationController: navController,
+                                             apiService: apiService,
+                                             settingsManager: settingsManager,
+                                             locationManager: locationManager,
+                                             coreDataManager: coreDataManager)
+
         case .maps:
             coordinator = MapsCoordinator(navigationController: navController)
         case .warnings:

@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UISwitch.appearance().onTintColor = .button(for: .highlighted)
 
+        registerSettingsBundleDefaults()
+
         return true
     }
 
@@ -47,6 +49,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    /// Will do nothing if the Settings bundle is not found (i.e. if the app is a production Release)
+    private func registerSettingsBundleDefaults() {
+        let userDefaults = UserDefaults.standard
+
+        let pathStr = Bundle.main.bundlePath
+        let settingsBundlePath = (pathStr as NSString).appendingPathComponent("Settings.bundle")
+        let finalPath = (settingsBundlePath as NSString).appendingPathComponent("Root.plist")
+        let settingsDict = NSDictionary(contentsOfFile: finalPath)
+        guard let preferenceSpecifiers = settingsDict?.object(forKey: "PreferenceSpecifiers") as? [[String: Any]] else {
+            return
+        }
+
+        var defaults = [String: Any]()
+
+        for item in preferenceSpecifiers {
+            guard let key = item["Key"] as? String else { continue }
+            defaults[key] = item["DefaultValue"]
+        }
+        userDefaults.register(defaults: defaults)
     }
 }
 

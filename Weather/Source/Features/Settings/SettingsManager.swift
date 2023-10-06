@@ -23,20 +23,12 @@ class SettingsManager: SettingsManagerProtocol {
         static let showCurrentLocation = "showCurrentLocation"
     }
 
-    static let shared = SettingsManager()
     private var defaults = UserDefaults.standard
 
-    private init() { }
- 
     var showCurrentLocation: Bool {
         get { return defaults.object(forKey: Keys.showCurrentLocation) as? Bool ?? false }
-        set {
-            defaults.set(newValue, forKey: Keys.showCurrentLocation)
-            shouldShowCurrentLocation = newValue
-
-            if newValue {
-                LocationManager.shared.requestAuthorizationIfRequired()
-            }
+        set { defaults.set(newValue, forKey: Keys.showCurrentLocation)
+              shouldShowCurrentLocation = newValue
         }
     }
     

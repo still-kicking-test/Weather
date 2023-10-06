@@ -16,24 +16,45 @@ protocol WeatherCoordinatorProtocol: NSObject, Coordinator {
 }
 
 class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
+
+    let apiService: APIServiceProtocol
+    let settingsManager: SettingsManager
+    let locationManager: LocationManagerProtocol
+    let coreDataManager: CoreDataManager
+
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController,
+         apiService: APIServiceProtocol,
+         settingsManager: SettingsManager,
+         locationManager: LocationManagerProtocol,
+         coreDataManager: CoreDataManager) {
         self.navigationController = navigationController
+        self.apiService = apiService
+        self.settingsManager = settingsManager
+        self.locationManager = locationManager
+        self.coreDataManager = coreDataManager
     }
 
     func start() {
         let vc = WeatherViewController.fromNib()
-        let viewModel = WeatherViewModel() // apiService: MockAPIService.shared)
-        vc.coordinator = self
+        let viewModel = WeatherViewModel(apiService: apiService,
+                                         settingsManager: settingsManager,
+                                         locationManager: locationManager,
+                                         coreDataManager: coreDataManager)
         vc.viewModel = viewModel
+        vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
  
     func showEdit() {
         let vc = LocationsViewController.fromNib()
-        let viewModel = LocationsViewModel()
+        let viewModel = LocationsViewModel(apiService: apiService,
+                                           settingsManager: settingsManager,
+                                           locationManager: locationManager,
+                                           coreDataManager: coreDataManager)
+
         vc.viewModel = viewModel
         navigationController.pushViewController(vc, animated: false)
     }

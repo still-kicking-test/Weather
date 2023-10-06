@@ -10,6 +10,8 @@ import CoreLocation
 import UIKit
 
 enum WeatherDisplayItem {
+    static let currentLocationName = "\u{1F4CC} Current location"
+
     case video(title: String, url: URL)
     case location(forecast: Forecast)
 }
@@ -20,26 +22,34 @@ class WeatherViewModel: NSObject {
     @Published var isLoading: Bool = false
     @Published var generalError: Error? = nil
 
-    private let apiService: APIServiceProtocol
-    private let settingsManager: SettingsManagerProtocol
-    private let coreDataManager: CoreDataManager
     private var cancellables = Set<AnyCancellable>()
     
+    private let apiService: APIServiceProtocol
+    private let settingsManager: SettingsManager
+    private let locationManager: LocationManagerProtocol
+    private let coreDataManager: CoreDataManager
+
     /// There is  no easy way to determine the latest MetOffice video forecast, so for the time being, hardcode an existing one...
     private let videoUrl = URL(string: "https://www.youtube.com/embed/MS8g7QYg6As?playsinline=1")!
     private let videoTitle = "UK video forecast (from archives)"
 
     private var locations: [Location] {
         var locations: [Location] = coreDataManager.locations.map { Location(from: $0) }
-        locations.injectCurrentLocationIfRequired()
+        
+        if settingsManager.showCurrentLocation,
+           let currentLocation = locationManager.getCurrentLocation(withName: WeatherDisplayItem.currentLocationName) {
+            locations.insert(currentLocation, at: 0)
+        }
         return locations
     }
 
-    init(apiService: APIServiceProtocol = APIService.shared,
-         settingsManager: SettingsManagerProtocol = SettingsManager.shared,
-         coreDataManager: CoreDataManager = CoreDataManager.shared) {
+    init(apiService: APIServiceProtocol,
+         settingsManager: SettingsManager,
+         locationManager: LocationManagerProtocol,
+         coreDataManager: CoreDataManager) {
         self.apiService = apiService
         self.settingsManager = settingsManager
+        self.locationManager = locationManager
         self.coreDataManager = coreDataManager
         super.init()
         
@@ -55,7 +65,7 @@ class WeatherViewModel: NSObject {
         var showVideoAt: Int?
         
         if settingsManager.showVideo {
-            showVideoAt = settingsManager.showCurrentLocation && LocationManager.shared.authorized ? 1 : 0
+            showVideoAt = locations.containsCurrentLocation ? 1 : 0
             forecastOffset = index > showVideoAt! ? 1 : 0
         }
         
@@ -92,21 +102,21 @@ class WeatherViewModel: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(loadForecasts), name: .coreDataSaved, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadForecasts), name: UIApplication.willEnterForegroundNotification, object: nil)
 
-        LocationManager.shared.$authorized
+        locationManager.authorizedPublisher
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] _ in
                 self?.loadForecasts()
             }
             .store(in: &cancellables)
 
-        SettingsManager.shared.$shouldShowVideo
+        settingsManager.$shouldShowVideo
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] _ in
                 self?.loadForecasts()
             }
             .store(in: &cancellables)
 
-        SettingsManager.shared.$shouldShowCurrentLocation
+        settingsManager.$shouldShowCurrentLocation
             .receive(on: DispatchQueue.main)
             .sink{ [weak self] _ in
                 self?.loadForecasts()
@@ -115,12 +125,9 @@ class WeatherViewModel: NSObject {
     }
 }
 
-private extension Array where Element == Location {
+private extension Array where Element: Location {
  
-    mutating func injectCurrentLocationIfRequired() {
-        guard SettingsManager.shared.showCurrentLocation,
-              let currentLocation = LocationManager.shared.getCurrentLocation(withName: "\u{1F4CC} Current Location") else { return }
-        
-        insert(currentLocation, at: 0)
+    var containsCurrentLocation: Bool {
+        first{ $0.name == WeatherDisplayItem.currentLocationName } != nil
     }
 }

@@ -20,16 +20,19 @@ class LocationsViewModel {
     @Published var generalError: Error? = nil
     
     private let apiService: APIServiceProtocol
+    private var settingsManager: SettingsManagerProtocol
+    private var locationManager: LocationManagerProtocol
     private let coreDataManager: CoreDataManager
     private var cancellables = Set<AnyCancellable>()
-    private var settingsManager: SettingsManagerProtocol
     private let immovableDisplayItemsCount = 2 // allows for the current-location and UK-video rows
     
-    init(apiService: APIServiceProtocol = APIService.shared,
-         settingsManager: SettingsManagerProtocol = SettingsManager.shared,
-         coreDataManager: CoreDataManager = CoreDataManager.shared) {
+    init(apiService: APIServiceProtocol,
+         settingsManager: SettingsManagerProtocol,
+         locationManager: LocationManagerProtocol,
+         coreDataManager: CoreDataManager) {
         self.apiService = apiService
         self.settingsManager = settingsManager
+        self.locationManager = locationManager
         self.coreDataManager = coreDataManager
     }
     
@@ -58,6 +61,9 @@ class LocationsViewModel {
     func valueDidChangeAt(_ indexPath: IndexPath, with value: Bool) {
         switch indexPath.row {
         case 0: settingsManager.showCurrentLocation = value
+                if value {
+                    locationManager.requestAuthorizationIfRequired()
+                }
         case 1: settingsManager.showVideo = value
         default: break
         }

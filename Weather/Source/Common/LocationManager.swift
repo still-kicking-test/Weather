@@ -9,14 +9,24 @@ import Foundation
 import Combine
 import CoreLocation
 
-class LocationManager: NSObject {
-    
+protocol LocationManagerProtocol {
+    // We must synthesize 'authorized' as it defined in a protocol
+    var authorized: Bool { get }
+    var authorizedPublished: Published<Bool> { get }
+    var authorizedPublisher: Published<Bool>.Publisher { get }
+
+    func requestAuthorizationIfRequired()
+    func getCurrentLocation(withName name: String) -> Location?
+}
+
+class LocationManager: NSObject, LocationManagerProtocol {
     @Published var authorized: Bool = false
-    
-    static let shared = LocationManager()
+    var authorizedPublished: Published<Bool> { _authorized }
+    var authorizedPublisher: Published<Bool>.Publisher { $authorized }
+
     private let clLocationManager = CLLocationManager()
     
-    override private init() {
+    override init() {
         super.init()
         clLocationManager.delegate = self
     }

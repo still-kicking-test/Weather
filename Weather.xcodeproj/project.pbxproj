@@ -58,6 +58,9 @@
 		AB819B9B2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B9A2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json */; };
 		AB819B9D2ACEE80700DF11A4 /* OneCall(41.893,12.483).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B9C2ACEE80700DF11A4 /* OneCall(41.893,12.483).json */; };
 		AB819B9F2ACEE86500DF11A4 /* OneCall(35.71,139.454).json in Resources */ = {isa = PBXBuildFile; fileRef = AB819B9E2ACEE86500DF11A4 /* OneCall(35.71,139.454).json */; };
+		AB819BA22ACEEFBD00DF11A4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB819BA12ACEEFBD00DF11A4 /* Settings.bundle */; };
+		AB819BA42ACEF1EB00DF11A4 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB819BA32ACEF1EB00DF11A4 /* SettingsBundleHelper.swift */; };
+		AB819BA82ACF1B6A00DF11A4 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB819BA72ACF1B6A00DF11A4 /* MockLocationManager.swift */; };
 		AB856A732AA8ADA9007CCFC1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB856A722AA8ADA9007CCFC1 /* Endpoint.swift */; };
 		AB856A762AA8C339007CCFC1 /* Forecasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB856A752AA8C339007CCFC1 /* Forecasts.swift */; };
 		AB872BE12AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB872BDF2AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift */; };
@@ -170,6 +173,9 @@
 		AB819B9A2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(41.876,-87.624).json"; sourceTree = "<group>"; };
 		AB819B9C2ACEE80700DF11A4 /* OneCall(41.893,12.483).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(41.893,12.483).json"; sourceTree = "<group>"; };
 		AB819B9E2ACEE86500DF11A4 /* OneCall(35.71,139.454).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "OneCall(35.71,139.454).json"; sourceTree = "<group>"; };
+		AB819BA12ACEEFBD00DF11A4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		AB819BA32ACEF1EB00DF11A4 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		AB819BA72ACF1B6A00DF11A4 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		AB856A722AA8ADA9007CCFC1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AB856A752AA8C339007CCFC1 /* Forecasts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecasts.swift; sourceTree = "<group>"; };
 		AB872BDF2AA355E200EA5ACB /* SummaryForecastsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryForecastsTableViewCell.swift; sourceTree = "<group>"; };
@@ -316,6 +322,7 @@
 				AB8136D42AA0EAD1005B26B0 /* LaunchScreen.storyboard */,
 				AB8136D72AA0EAD1005B26B0 /* Info.plist */,
 				AB8136CF2AA0EACF005B26B0 /* Weather.xcdatamodeld */,
+				AB819BA12ACEEFBD00DF11A4 /* Settings.bundle */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -398,6 +405,7 @@
 		AB81370B2AA12BB5005B26B0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AB819BA32ACEF1EB00DF11A4 /* SettingsBundleHelper.swift */,
 				AB8136F92AA0EAF8005B26B0 /* Coordinator.swift */,
 				AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */,
 				AB87D1FC2ACD623F00D1067A /* LocationManager.swift */,
@@ -445,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				AB819B962ACEA69900DF11A4 /* MockAPIService.swift */,
+				AB819BA72ACF1B6A00DF11A4 /* MockLocationManager.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -542,6 +551,7 @@
 				AB8136BF2AA0EACF005B26B0 /* Sources */,
 				AB8136C02AA0EACF005B26B0 /* Frameworks */,
 				AB8136C12AA0EACF005B26B0 /* Resources */,
+				AB819BA02ACEEE1C00DF11A4 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -637,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB819B942ACEA65E00DF11A4 /* OneCall(52.656,0.486).json in Resources */,
+				AB819BA22ACEEFBD00DF11A4 /* Settings.bundle in Resources */,
 				AB8136D62AA0EAD1005B26B0 /* LaunchScreen.storyboard in Resources */,
 				AB6F50A62AA21A6800B86F22 /* WarningsViewController.xib in Resources */,
 				AB8FBE852AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib in Resources */,
@@ -673,6 +684,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AB819BA02ACEEE1C00DF11A4 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_APP_DIR=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\n\nif [ $CONFIGURATION == \"Release\" ]; then\n    rm -rf \"$BUILD_APP_DIR/Settings.bundle\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AB8136BF2AA0EACF005B26B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -708,6 +740,7 @@
 				AB9744C32AC33A3600D9EEA4 /* RemoveAdsView.swift in Sources */,
 				AB81370F2AA14146005B26B0 /* UIButton+Ext.swift in Sources */,
 				AB8FBE812AAA09B800AA51CC /* Int+Ext.swift in Sources */,
+				AB819BA82ACF1B6A00DF11A4 /* MockLocationManager.swift in Sources */,
 				AB87D1F62ACC61F800D1067A /* CDLocation+CoreDataClass.swift in Sources */,
 				AB1B51442AB9BBF200F8D69D /* Coordinates.swift in Sources */,
 				AB8FBE8D2AAA7D3F00AA51CC /* Date+Ext.swift in Sources */,
@@ -742,6 +775,7 @@
 				AB9744BC2AC32F0E00D9EEA4 /* PrivacyPolicyView.swift in Sources */,
 				AB87CAA12AC5AC9900428046 /* SettingsRowModifier.swift in Sources */,
 				AB856A732AA8ADA9007CCFC1 /* Endpoint.swift in Sources */,
+				AB819BA42ACEF1EB00DF11A4 /* SettingsBundleHelper.swift in Sources */,
 				AB8CAC2F2ABA319A00BA16BA /* SettingsManager.swift in Sources */,
 				AB8137002AA10C39005B26B0 /* WeatherViewModel.swift in Sources */,
 				AB9744BF2AC339FF00D9EEA4 /* AcknowledgementsView.swift in Sources */,

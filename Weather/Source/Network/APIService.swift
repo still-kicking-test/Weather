@@ -57,7 +57,6 @@ private struct APIErrorMessage: Decodable {
 
 class APIService: APIServiceProtocol {
     
-    public static let shared = APIService()
     private let urlSession = URLSession.shared
 
     public func get<T: Decodable>(endpoint: Endpoint<T>) -> AnyPublisher<T, Error> {

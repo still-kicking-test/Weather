@@ -16,9 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let appWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
         appWindow.windowScene = windowScene
         
-        CoreDataManager.shared.loadData()
-        CoreDataManager.shared.loadTestDataIfEmpty() // DEV ONLY
-        
         let navigationController = UINavigationController()
         navigationController.setNavigationBarHidden(true, animated: false)
         let coordinator = TabBarCoordinator(navigationController: navigationController)

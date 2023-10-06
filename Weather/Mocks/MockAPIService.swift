@@ -10,9 +10,6 @@ import Combine
 
 class MockAPIService: APIServiceProtocol {
 
-    public static let shared = MockAPIService()
-    private init() {}
-    
     func getLocations(query: String) -> AnyPublisher<Result<[LocationDataModel], Error>, Never> {
         let emptyResult: Result<[LocationDataModel], Error> = .success([])
         return Just(emptyResult).eraseToAnyPublisher()

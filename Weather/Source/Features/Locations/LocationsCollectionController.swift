@@ -58,7 +58,7 @@ extension LocationsCollectionController: UICollectionViewDataSource {
             guard let cell: SelectableCollectionViewCell = collectionView.dequeueReusableCell(withType: SelectableCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
             
-            cell.configure(with: isEnabled, text: "\u{1F4CC} Current location", for: indexPath, delegate: self)
+            cell.configure(with: isEnabled, text: WeatherDisplayItem.currentLocationName, for: indexPath, delegate: self)
             return cell
             
         case .location(let value):
