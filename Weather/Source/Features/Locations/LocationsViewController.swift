@@ -20,7 +20,7 @@ class LocationsViewController: UIViewController {
      override func viewDidLoad() {
          super.viewDidLoad()
          initUI()
-         bindToViewModel()
+         bind()
      }
      
      private func initUI() {
@@ -33,7 +33,7 @@ class LocationsViewController: UIViewController {
          locationsCollectionController = LocationsCollectionController(collectionView: collectionView, viewModel: viewModel)
      }
      
-     private func bindToViewModel() {
+     private func bind() {
          viewModel?.$generalError
              .receive(on: DispatchQueue.main)
              .sink{ [weak self] error in

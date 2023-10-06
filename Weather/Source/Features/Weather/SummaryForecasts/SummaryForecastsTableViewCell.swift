@@ -33,7 +33,7 @@ class SummaryForecastsTableViewCell: UITableViewCell {
         initCollectionView()
         initNavigationViewStack()
 
-        // Observe the initial setting of the collectionView's contentSize, and set the enabled state of the crollRightButton accordingly.
+        // Observe the initial setting of the collectionView's contentSize, and set the enabled state of the scrollRightButton accordingly.
         contentSizeObservation = collectionView.observe(\.contentSize) { [weak self] _, _ in
             guard let self else { return }
             scrollRightButton.isEnabled = forecast?.daily.count ?? 0 > 0
@@ -150,7 +150,20 @@ extension SummaryForecastsTableViewCell: UIScrollViewDelegate {
         let visibleItems = collectionView.indexPathsForFullyVisibleItems.map{ $0.row }
         guard visibleItems.isEmpty == false else { return }
         
-        scrollLeftButton.isEnabled = !visibleItems.contains(0)
-        scrollRightButton.isEnabled = !visibleItems.contains(collectionView.numberOfItems(inSection: 0) - 1)
+        let isFirstCellFullyVisible = visibleItems.contains(0)
+
+        // Very odd iOS (16.6.1) bug - indexPathsForFullyVisibleItems returns the correct set of items on the siumlator
+        // but NOT on a real device (it misses out the final indexPath when scrolled completely to the right). So on a real
+        // device, I have to calculate 'by hand' whether there is still scrollable content to the right - but even then, I
+        // need to add 1 pixel to the calculation (the bug is evidently in the sizing of the contentSize or the contentOffset).
+        // All very surprising!
+        #if IOS_SIMULATOR
+        let isLastCellFullyVisible = visibleItems.contains(collectionView.numberOfItems(inSection: 0) - 1)
+        #else
+        let isLastCellFullyVisible = scrollView.contentOffset.x + scrollView.bounds.size.width + 1 > scrollView.contentSize.width
+        #endif
+
+        scrollLeftButton.isEnabled = !isFirstCellFullyVisible
+        scrollRightButton.isEnabled = !isLastCellFullyVisible
     }
 }

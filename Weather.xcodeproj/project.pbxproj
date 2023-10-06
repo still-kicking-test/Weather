@@ -233,7 +233,6 @@
 		AB40B9F72AB1B96A00A00DCB /* Locations */ = {
 			isa = PBXGroup;
 			children = (
-				AB87D1FC2ACD623F00D1067A /* LocationManager.swift */,
 				AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */,
 				AB40BA032AB20E5800A00DCB /* LocationsViewController.swift */,
 				AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */,
@@ -486,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC9DB8C2AC6C89A00F1ABA3 /* CoreData */,
+				AB87D1FC2ACD623F00D1067A /* LocationManager.swift */,
 				AB87D1F82ACC656D00D1067A /* Location.swift */,
 				AB89D48B2AA5CCEB0042B292 /* Forecast.swift */,
 			);
