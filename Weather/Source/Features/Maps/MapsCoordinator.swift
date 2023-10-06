@@ -7,13 +7,10 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
-protocol MapsCoordinatorProtocol: Coordinator {
-    func pressMeTapped()
-}
-
-class MapsCoordinator: MapsCoordinatorProtocol {
-    var childCoordinators = [Coordinator]()
+class MapsCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -22,12 +19,7 @@ class MapsCoordinator: MapsCoordinatorProtocol {
     }
 
     func start() {
-        let vc = MapsViewController.fromNib()
-        vc.coordinator = self
-        vc.viewModel = MapsViewModel()
+        let vc = UIHostingController(rootView: MapsView())
         navigationController.pushViewController(vc, animated: false)
-    }
- 
-    func pressMeTapped() {
     }
 }

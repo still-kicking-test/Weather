@@ -7,13 +7,10 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
-protocol WarningsCoordinatorProtocol: Coordinator {
-    func pressMeTapped()
-}
-
-class WarningsCoordinator: WarningsCoordinatorProtocol {
-    var childCoordinators = [Coordinator]()
+class WarningsCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -22,12 +19,7 @@ class WarningsCoordinator: WarningsCoordinatorProtocol {
     }
 
     func start() {
-        let vc = WarningsViewController.fromNib()
-        vc.coordinator = self
-        vc.viewModel = WarningsViewModel()
+        let vc = UIHostingController(rootView: WarningsView())
         navigationController.pushViewController(vc, animated: false)
-    }
- 
-    func pressMeTapped() {
     }
 }

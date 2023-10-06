@@ -23,15 +23,11 @@
 		AB40BA052AB20E5900A00DCB /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40BA032AB20E5800A00DCB /* LocationsViewController.swift */; };
 		AB40BA062AB20E5900A00DCB /* LocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */; };
 		AB40BA0C2AB20F0C00A00DCB /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */; };
-		AB6F509E2AA21A5E00B86F22 /* MapsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F509A2AA21A5E00B86F22 /* MapsViewModel.swift */; };
 		AB6F509F2AA21A5E00B86F22 /* MapsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F509B2AA21A5E00B86F22 /* MapsCoordinator.swift */; };
-		AB6F50A02AA21A5E00B86F22 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F509C2AA21A5E00B86F22 /* MapsViewController.swift */; };
-		AB6F50A12AA21A5E00B86F22 /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6F509D2AA21A5E00B86F22 /* MapsViewController.xib */; };
-		AB6F50A62AA21A6800B86F22 /* WarningsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6F50A22AA21A6800B86F22 /* WarningsViewController.xib */; };
 		AB6F50A72AA21A6800B86F22 /* WarningsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F50A32AA21A6800B86F22 /* WarningsCoordinator.swift */; };
-		AB6F50A82AA21A6800B86F22 /* WarningsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F50A42AA21A6800B86F22 /* WarningsViewModel.swift */; };
-		AB6F50A92AA21A6800B86F22 /* WarningsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F50A52AA21A6800B86F22 /* WarningsViewController.swift */; };
 		AB6F50AF2AA23B0400B86F22 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F50AE2AA23B0400B86F22 /* UIColor+Ext.swift */; };
+		AB7194D32AD014EC00FE7DA6 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7194D22AD014EC00FE7DA6 /* MapsView.swift */; };
+		AB7194D52AD01B6600FE7DA6 /* WarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7194D42AD01B6600FE7DA6 /* WarningsView.swift */; };
 		AB74B67F2AB5F16300F2F492 /* Decimal+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB74B67E2AB5F16300F2F492 /* Decimal+Ext.swift */; };
 		AB77736A2AAF592F0049E185 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7773692AAF592F0049E185 /* ImageLoader.swift */; };
 		AB7A118F2ACAE8AB007F14ED /* BusyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */; };
@@ -134,15 +130,11 @@
 		AB40BA032AB20E5800A00DCB /* LocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationsViewController.xib; sourceTree = "<group>"; };
 		AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
-		AB6F509A2AA21A5E00B86F22 /* MapsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewModel.swift; sourceTree = "<group>"; };
 		AB6F509B2AA21A5E00B86F22 /* MapsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsCoordinator.swift; sourceTree = "<group>"; };
-		AB6F509C2AA21A5E00B86F22 /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
-		AB6F509D2AA21A5E00B86F22 /* MapsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsViewController.xib; sourceTree = "<group>"; };
-		AB6F50A22AA21A6800B86F22 /* WarningsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningsViewController.xib; sourceTree = "<group>"; };
 		AB6F50A32AA21A6800B86F22 /* WarningsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningsCoordinator.swift; sourceTree = "<group>"; };
-		AB6F50A42AA21A6800B86F22 /* WarningsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningsViewModel.swift; sourceTree = "<group>"; };
-		AB6F50A52AA21A6800B86F22 /* WarningsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningsViewController.swift; sourceTree = "<group>"; };
 		AB6F50AE2AA23B0400B86F22 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		AB7194D22AD014EC00FE7DA6 /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
+		AB7194D42AD01B6600FE7DA6 /* WarningsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningsView.swift; sourceTree = "<group>"; };
 		AB74B67E2AB5F16300F2F492 /* Decimal+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Ext.swift"; sourceTree = "<group>"; };
 		AB7773692AAF592F0049E185 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusyViewController.swift; sourceTree = "<group>"; };
@@ -271,9 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				AB6F509B2AA21A5E00B86F22 /* MapsCoordinator.swift */,
-				AB6F509C2AA21A5E00B86F22 /* MapsViewController.swift */,
-				AB6F509D2AA21A5E00B86F22 /* MapsViewController.xib */,
-				AB6F509A2AA21A5E00B86F22 /* MapsViewModel.swift */,
+				AB7194D22AD014EC00FE7DA6 /* MapsView.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -282,9 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				AB6F50A32AA21A6800B86F22 /* WarningsCoordinator.swift */,
-				AB6F50A52AA21A6800B86F22 /* WarningsViewController.swift */,
-				AB6F50A22AA21A6800B86F22 /* WarningsViewController.xib */,
-				AB6F50A42AA21A6800B86F22 /* WarningsViewModel.swift */,
+				AB7194D42AD01B6600FE7DA6 /* WarningsView.swift */,
 			);
 			path = Warnings;
 			sourceTree = "<group>";
@@ -649,7 +637,6 @@
 				AB819B942ACEA65E00DF11A4 /* OneCall(52.656,0.486).json in Resources */,
 				AB819BA22ACEEFBD00DF11A4 /* Settings.bundle in Resources */,
 				AB8136D62AA0EAD1005B26B0 /* LaunchScreen.storyboard in Resources */,
-				AB6F50A62AA21A6800B86F22 /* WarningsViewController.xib in Resources */,
 				AB8FBE852AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib in Resources */,
 				AB40BA062AB20E5900A00DCB /* LocationsViewController.xib in Resources */,
 				AB819B9B2ACEE79900DF11A4 /* OneCall(41.876,-87.624).json in Resources */,
@@ -658,7 +645,6 @@
 				ABB36DA42ABAF402007255A8 /* README.md in Resources */,
 				AB87D2012ACD976300D1067A /* WebViewTableViewCell.xib in Resources */,
 				AB819B9D2ACEE80700DF11A4 /* OneCall(41.893,12.483).json in Resources */,
-				AB6F50A12AA21A5E00B86F22 /* MapsViewController.xib in Resources */,
 				AB1B514D2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib in Resources */,
 				AB819B992ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json in Resources */,
 				AB8136D32AA0EAD1005B26B0 /* Assets.xcassets in Resources */,
@@ -715,6 +701,7 @@
 				AB8FBE892AAA71B500AA51CC /* UITableViewCell+Ext.swift in Sources */,
 				AB9744BA2AC3294C00D9EEA4 /* SettingsRowView.swift in Sources */,
 				AB391A942AB1A6B900199EFD /* IndexPath+Ext.swift in Sources */,
+				AB7194D32AD014EC00FE7DA6 /* MapsView.swift in Sources */,
 				AB8136D12AA0EACF005B26B0 /* Weather.xcdatamodeld in Sources */,
 				AB8136FE2AA0EB9F005B26B0 /* WeatherCoordinator.swift in Sources */,
 				AB3AF4652AAF304200EE0043 /* Publisher+Ext.swift in Sources */,
@@ -733,7 +720,6 @@
 				AB87D2002ACD976300D1067A /* WebViewTableViewCell.swift in Sources */,
 				AB89D4872AA5C4270042B292 /* UITableView+Ext.swift in Sources */,
 				AB8136FA2AA0EAF8005B26B0 /* Coordinator.swift in Sources */,
-				AB6F50A92AA21A6800B86F22 /* WarningsViewController.swift in Sources */,
 				AB77736A2AAF592F0049E185 /* ImageLoader.swift in Sources */,
 				AB89D4932AA616BB0042B292 /* APIService.swift in Sources */,
 				AB856A762AA8C339007CCFC1 /* Forecasts.swift in Sources */,
@@ -746,13 +732,12 @@
 				AB8FBE8D2AAA7D3F00AA51CC /* Date+Ext.swift in Sources */,
 				AB8137092AA12B06005B26B0 /* UIViewController+Ext.swift in Sources */,
 				AB6F50AF2AA23B0400B86F22 /* UIColor+Ext.swift in Sources */,
-				AB6F50A02AA21A5E00B86F22 /* MapsViewController.swift in Sources */,
 				AB6F50A72AA21A6800B86F22 /* WarningsCoordinator.swift in Sources */,
 				AB87D1F92ACC656D00D1067A /* Location.swift in Sources */,
 				AB872BE62AA3707800EA5ACB /* FullForecastViewController.swift in Sources */,
+				AB7194D52AD01B6600FE7DA6 /* WarningsView.swift in Sources */,
 				AB8FBE872AAA709000AA51CC /* UICollectionView+Ext.swift in Sources */,
 				AB89D48E2AA5CD6A0042B292 /* Beaufort.swift in Sources */,
-				AB6F50A82AA21A6800B86F22 /* WarningsViewModel.swift in Sources */,
 				AB7A118F2ACAE8AB007F14ED /* BusyViewController.swift in Sources */,
 				AB81371F2AA1EE13005B26B0 /* TabBarItem.swift in Sources */,
 				AB8136C72AA0EACF005B26B0 /* AppDelegate.swift in Sources */,
@@ -762,7 +747,6 @@
 				AB87CAA32AC5AD3E00428046 /* PrimaryButtonStyle.swift in Sources */,
 				AB391A982AB1A78400199EFD /* Locations.swift in Sources */,
 				AB1B514E2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift in Sources */,
-				AB6F509E2AA21A5E00B86F22 /* MapsViewModel.swift in Sources */,
 				AB6F509F2AA21A5E00B86F22 /* MapsCoordinator.swift in Sources */,
 				AB1B51482AB9CEB400F8D69D /* TabBarController.swift in Sources */,
 				AB8FBE8B2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift in Sources */,
