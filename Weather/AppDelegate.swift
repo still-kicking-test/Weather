@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    /// Will do nothing if the Settings bundle is not found (i.e. if the app is a production Release)
+    /// Will do nothing if the Settings bundle is not found (i.e. if the app is a Production release)
     private func registerSettingsBundleDefaults() {
         let userDefaults = UserDefaults.standard
 

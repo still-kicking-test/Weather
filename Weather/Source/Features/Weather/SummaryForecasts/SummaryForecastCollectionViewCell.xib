@@ -62,6 +62,7 @@
             <size key="customSize" width="191" height="152"/>
             <connections>
                 <outlet property="imageView" destination="rKn-zV-THy" id="ZWl-bd-BDS"/>
+                <outlet property="imageViewHeightConstraint" destination="HgJ-Ly-uD2" id="Qdz-HH-GkS"/>
                 <outlet property="maxTemp" destination="Zo2-Iz-Lz5" id="quA-at-W6P"/>
                 <outlet property="minTemp" destination="cMy-yv-15M" id="H9P-U1-vBA"/>
                 <outlet property="stackView" destination="qDL-x5-38f" id="C6Q-ct-U9e"/>

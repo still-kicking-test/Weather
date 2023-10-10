@@ -14,8 +14,12 @@ import UIKit
 
     private var images: [URLRequest: LoaderStatus] = [:]
     
+    public static func imageURL(for iconId: String) -> URL? {
+        URL(string: "https://openweathermap.org/img/wn/\(iconId)@2x.png")
+    }
+
     public func fetchIcon(id: String) async throws -> UIImage? {
-        guard let url = URL(string: "https://openweathermap.org/img/wn/\(id)@2x.png") else { return nil }
+        guard let url = ImageLoader.imageURL(for: id) else { return nil }
         return try await fetch(url)
     }
 

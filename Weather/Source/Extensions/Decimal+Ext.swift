@@ -21,5 +21,9 @@ extension Decimal {
         return result
     }
 
+    var temperatureString: String {
+        "\(rounded(0))°"
+    }
+
     var beaufort: Beaufort { Beaufort.fromSpeed(self) }
 }

@@ -52,13 +52,7 @@ class SummaryForecastsTableViewCell: UITableViewCell {
                    delegate: SummaryForecastsTableViewCellDelegate) {
         self.forecast = forecast
         self.delegate = delegate
-        let title: String
-        if let location = forecast.location {
-            let state = location.state.isEmpty ? "" : " (\(location.state))"
-            title = "\(location.name)\(state)"
-        } else {
-            title = "<unknown>"
-        }
+        let title = forecast.location?.fullName ?? "<unknown>"
         locationButton.configuration?.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18.0)]))
         collectionView.reloadData()
     }

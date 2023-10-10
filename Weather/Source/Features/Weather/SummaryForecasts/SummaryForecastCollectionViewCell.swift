@@ -14,19 +14,25 @@ class SummaryForecastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var maxTemp: UILabel!
     @IBOutlet weak var minTemp: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-   
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .backgroundPrimary()
+        imageViewHeightConstraint.constant = 40
+        
+        timePeriod.font = .defaultFont
         timePeriod.textColor = UIColor.defaultText()
+        maxTemp.font = .largeFont
         maxTemp.textColor = UIColor.defaultText()
+        minTemp.font = .defaultFont
         minTemp.textColor = UIColor.defaultText()
     }
 
     func configure(with dailyForecast: DailyForecast) {
         timePeriod.text = dailyForecast.date.shortDayOfWeek
-        maxTemp.text = "\(dailyForecast.temperature.max.rounded(0))°"
-        minTemp.text = "\(dailyForecast.temperature.min.rounded(0))°"
+        maxTemp.text = dailyForecast.temperature.max.temperatureString
+        minTemp.text = dailyForecast.temperature.max.temperatureString
         
         Task {
             await loadImage(iconId: dailyForecast.displayable.first?.icon)

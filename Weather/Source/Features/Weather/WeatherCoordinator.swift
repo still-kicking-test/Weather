@@ -62,7 +62,7 @@ class WeatherCoordinator: NSObject, WeatherCoordinatorProtocol {
     func showFullForecast(_ forecast: Forecast, day: Int) {
         guard let location = forecast.location else { return }
         print("Showing full forecast for \(location.name), day: \(forecast.daily[day].date.shortDayOfWeek)")
-        let vc = FullForecastViewController.fromNib()
-        navigationController.topViewController?.present(vc,animated: true)
+        let vc = UIHostingController(rootView: FullForecastView(location: location, forecast: forecast, day: day))
+        navigationController.topViewController?.present(vc, animated: true)
     }
 }

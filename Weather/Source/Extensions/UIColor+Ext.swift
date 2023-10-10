@@ -15,7 +15,7 @@ extension UIColor {
             static let backgroundPrimary = UIColor.black
             static let backgroundSecondary = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
             static let backgroundTertiary = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
-            static let backgroundGradientFrom = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
+            static let backgroundGradientFrom = backgroundSecondary
             static let backgroundGradientTo = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
             static let navbarBackground = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
             static let buttonNormal = UIColor.gray

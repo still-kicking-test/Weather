@@ -15,6 +15,11 @@ class Location {
     var state: String
     var country: String
 
+    var fullName: String {
+        let stateDescr = state.isEmpty ? "" : " (\(state))"
+        return "\(name)\(stateDescr)"
+    }
+    
     init(coordinates: CLLocationCoordinate2D,
          name: String,
          country: String = "",

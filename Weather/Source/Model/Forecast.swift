@@ -27,7 +27,8 @@ struct Forecast {
     }
 }
 
-struct DailyForecast {
+struct DailyForecast: Identifiable {
+    let id = UUID()
     var date: Date
     let sunrise: Int
     let sunset: Int

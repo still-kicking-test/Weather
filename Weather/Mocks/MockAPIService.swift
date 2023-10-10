@@ -23,23 +23,27 @@ class MockAPIService: APIServiceProtocol {
 
         var forecasts: [Forecast] = []
         for location in locations {
-            var dataModel: OneCallDataModel
             do {
-                let filename = "OneCall(\(location.coordinates.latitude.rounded(3)),\(location.coordinates.longitude.rounded(3)))"
-                dataModel = try decodeJSON(from: filename)
+                let forecast = try getForecast(for: location, from: locations)
+                forecasts.append(forecast)
             }
             catch {
                 let errorResult: Result<[Forecast], Error> = .failure(APIError.jsonError(error))
                 return Just(errorResult).eraseToAnyPublisher()
             }
-            var forecast = dataModel.toModel()
-            forecast.loadLocation(with: (dataModel.lat, dataModel.lon), from: locations)
-            forecast.resetDailyDates()
-            forecasts.append(forecast)
         }
 
         let result: Result<[Forecast], Error> = .success(forecasts)
         return Just(result).eraseToAnyPublisher()
+    }
+
+    func getForecast(for location: Location, from locations: [Location]) throws -> Forecast {
+        let filename = "OneCall(\(location.coordinates.latitude.rounded(3)),\(location.coordinates.longitude.rounded(3)))"
+        let dataModel: OneCallDataModel = try decodeJSON(from: filename)
+        var forecast = dataModel.toModel()
+        forecast.loadLocation(with: (dataModel.lat, dataModel.lon), from: locations)
+        forecast.resetDailyDates()
+        return forecast
     }
 
     private func decodeJSON<T: Decodable>(from resource: String, type: String = "json", in bundle: Bundle = .main) throws -> T {
