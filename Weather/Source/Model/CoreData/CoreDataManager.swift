@@ -75,7 +75,8 @@ class CoreDataManager {
     
     func addLocation(displayOrder: Int,
                      name: String,
-                     coordinates: Coordinates,
+                     latitude: Decimal,
+                     longitude: Decimal,
                      country: String,
                      state: String) {
         
@@ -84,8 +85,8 @@ class CoreDataManager {
         let locationItem = CDLocation(context: moc)
         locationItem.displayOrder = Int16(displayOrder)
         locationItem.name = name
-        locationItem.latitude = NSDecimalNumber(decimal: coordinates.latitude)
-        locationItem.longitude = NSDecimalNumber(decimal: coordinates.longitude)
+        locationItem.latitude = NSDecimalNumber(decimal: latitude)
+        locationItem.longitude = NSDecimalNumber(decimal: longitude)
         locationItem.country = country
         locationItem.state = state
     }
@@ -97,10 +98,10 @@ extension CoreDataManager {
     func loadTestDataIfEmpty() {
         guard locations.isEmpty else { return }
         
-        CoreDataManager.shared.addLocation(displayOrder: 0, name: "London", coordinates: (latitude: 51.4875167, longitude: -0.1687007), country: "GB", state: "England")
-        CoreDataManager.shared.addLocation(displayOrder: 1, name: "Chicago", coordinates: (latitude: 41.8755616, longitude: -87.6244212), country: "US", state: "Illinois")
-        CoreDataManager.shared.addLocation(displayOrder: 2, name: "Rome", coordinates: (latitude: 41.8933203, longitude: 12.4829321), country: "IT", state: "Lazio")
-        CoreDataManager.shared.addLocation(displayOrder: 3, name: "Tokyo", coordinates: (latitude: 35.709674, longitude: 139.454224), country: "JP", state: "")
+        CoreDataManager.shared.addLocation(displayOrder: 0, name: "London", latitude: 51.4875167, longitude: -0.1687007, country: "GB", state: "England")
+        CoreDataManager.shared.addLocation(displayOrder: 1, name: "Chicago", latitude: 41.8755616, longitude: -87.6244212, country: "US", state: "Illinois")
+        CoreDataManager.shared.addLocation(displayOrder: 2, name: "Rome", latitude: 41.8933203, longitude: 12.4829321, country: "IT", state: "Lazio")
+        CoreDataManager.shared.addLocation(displayOrder: 3, name: "Tokyo", latitude: 35.709674, longitude: 139.454224, country: "JP", state: "")
         CoreDataManager.shared.saveContext()
         loadData()
     }

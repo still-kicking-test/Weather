@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import CoreLocation
+import WeatherNetworkingKit
 
 protocol LocationManagerProtocol {
     func requestAuthorizationIfRequired()

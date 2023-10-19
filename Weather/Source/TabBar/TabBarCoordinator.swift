@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import WeatherNetworkingKit
 
 protocol TabCoordinatorProtocol: Coordinator {
     var tabBarController: UITabBarController { get set }
@@ -36,7 +37,7 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
             apiService = MockAPIService()
             locationManager = MockLocationManager()
         } else {
-            apiService = APIService()
+            apiService = APIService.shared
             locationManager = LocationManager()
         }
     }

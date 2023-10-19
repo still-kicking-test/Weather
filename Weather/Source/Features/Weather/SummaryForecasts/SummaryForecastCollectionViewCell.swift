@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WeatherNetworkingKit
 
 class SummaryForecastCollectionViewCell: UICollectionViewCell {
 
@@ -41,6 +42,6 @@ class SummaryForecastCollectionViewCell: UICollectionViewCell {
     
     func loadImage(iconId: String?) async {
         guard let iconId = iconId else { return }
-        try! await imageView.image = ImageLoader.shared.fetchIcon(id: iconId)
+        try! await imageView.image = ImageLoader.shared.fetchIcon(for: iconId)
     }
 }

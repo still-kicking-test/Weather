@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Combine
+import WeatherNetworkingKit
 
 protocol SummaryForecastsTableControllerDelegate: NSObject {
     func tappedSummary(_ forecast: Forecast, day: Int)

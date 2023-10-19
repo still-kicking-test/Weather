@@ -9,9 +9,9 @@ This is not intended to be a production-ready app. It is simply a showcase of th
 * MVVM-C
 * Reactive approach using Swift's Combine
 * Asynchronous functions using async/await
-* Generic networking API layer
 * SwiftUI
 * CoreData
+* Generic networking API layer (provided as an xcframework library downloaded using Swift Package Manager). Source code downloadable from WeatherNetworking repo. 
 
 The app does not have access to the UK Met Office services (unsurprisingly), and so uses public API services provided by OpenWeather. 
 

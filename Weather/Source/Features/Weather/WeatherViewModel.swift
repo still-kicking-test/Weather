@@ -8,6 +8,7 @@ import Foundation
 import Combine
 import CoreLocation
 import UIKit
+import WeatherNetworkingKit
 
 enum WeatherDisplayItem {
     static let currentLocationName = "\u{1F4CC} Current location"
@@ -126,5 +127,15 @@ private extension Array where Element: Location {
  
     var containsCurrentLocation: Bool {
         first{ $0.name == WeatherDisplayItem.currentLocationName } != nil
+    }
+}
+
+private extension Location {
+    convenience init(from cdLocation: CDLocation) {
+        self.init(coordinates: CLLocationCoordinate2D(latitude: Double(truncating: cdLocation.latitude),
+                                                      longitude: Double(truncating: cdLocation.longitude)),
+                  name: cdLocation.name,
+                  country: cdLocation.country,
+                  state: cdLocation.state)
     }
 }

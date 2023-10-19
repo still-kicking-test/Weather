@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import WeatherNetworkingKit
 
 struct FullForecastView: View {
     @Environment(\.dismiss) var dismiss
@@ -81,7 +82,7 @@ struct FullForecastView: View {
 
 struct FullForecastView_Previews: PreviewProvider {
     static let location = Location(coordinates: CLLocationCoordinate2D(latitude: 41.8933203, longitude: 12.4829321), name: "Rome (Lazio)")
-    static let forecast: Forecast = try! MockAPIService().getForecast(for: location, from: [location])
+    static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
         FullForecastView(location: location, forecast: forecast, day: 5)

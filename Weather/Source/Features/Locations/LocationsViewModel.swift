@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import WeatherNetworkingKit
 
 enum LocationsDisplayItem {
     case location(value: CDLocation)

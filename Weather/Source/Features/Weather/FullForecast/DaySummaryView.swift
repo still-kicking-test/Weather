@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import WeatherNetworkingKit
 
 struct DaySummaryView: View {
     @State var forecast: DailyForecast
@@ -36,7 +37,7 @@ struct DaySummaryView: View {
 
 struct DaySummaryView_Previews: PreviewProvider {
     static let location = Location(coordinates: CLLocationCoordinate2D(latitude: 41.8933203, longitude: 12.4829321), name: "Rome (Lazio)")
-    static let forecast: Forecast = try! MockAPIService().getForecast(for: location, from: [location])
+    static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
         DaySummaryView(forecast: forecast.daily.first!)

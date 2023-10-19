@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import UIKit
+import WeatherNetworkingKit
 
 struct DayForecastView: View {
 
@@ -15,7 +16,7 @@ struct DayForecastView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: ImageLoader.imageURL(for: forecast.displayable.first?.icon ?? "")) { image in
+            AsyncImage(url: ImageLoader.iconURL(for: forecast.displayable.first?.icon ?? "")) { image in
                 image
                    .resizable()
                    .aspectRatio(contentMode: .fit)
@@ -34,7 +35,7 @@ struct DayForecastView: View {
 
 struct DayForecastView_Previews: PreviewProvider {
     static let location = Location(coordinates: CLLocationCoordinate2D(latitude: 41.8933203, longitude: 12.4829321), name: "Rome (Lazio)")
-    static let forecast: Forecast = try! MockAPIService().getForecast(for: location, from: [location])
+    static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
         DayForecastView(forecast: forecast.daily.first!)

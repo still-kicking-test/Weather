@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WeatherNetworkingKit
 
 protocol SummaryForecastsTableViewCellDelegate: AnyObject {
     func tappedCell(with forecast: Forecast, day: Int)

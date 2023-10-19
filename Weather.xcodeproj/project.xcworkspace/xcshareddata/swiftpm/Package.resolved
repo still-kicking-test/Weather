@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "weathernetworkingkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/still-kicking-test/WeatherNetworkingKit",
+      "state" : {
+        "revision" : "e7089e3610d94f99aa56c5e07f0912702c8fb028",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}

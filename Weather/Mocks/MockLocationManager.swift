@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import Combine
+import WeatherNetworkingKit
 
 class MockLocationManager: NSObject, LocationManagerProtocol {
 
