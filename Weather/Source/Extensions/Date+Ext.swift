@@ -16,4 +16,10 @@ extension Date {
         dateFormatter.dateFormat = "EEE"
         return dateFormatter.string(from: self).capitalized
     }
+    
+    var formattedTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        return dateFormatter.string(from: self)
+    }
 }

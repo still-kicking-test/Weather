@@ -11,11 +11,11 @@ import UIKit
 import WeatherNetworkingKit
 
 struct DayForecastView: View {
-    var forecast: DailyForecast
+    var dailyForecast: DailyForecast
     
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: ImageLoader.iconURL(for: forecast.displayable.first?.icon ?? "")) { image in
+            AsyncImage(url: ImageLoader.iconURL(for: dailyForecast.displayable.first?.icon ?? "")) { image in
                 image
                    .resizable()
                    .aspectRatio(contentMode: .fit)
@@ -25,7 +25,7 @@ struct DayForecastView: View {
             .frame(height: 40)
             .padding(.bottom, 0)
 
-            Text(forecast.date.shortDayOfWeek)
+            Text(dailyForecast.date.shortDayOfWeek)
                 .font(Font(UIFont.largeFont))
                 .padding(.bottom, 8)
        }
@@ -38,7 +38,7 @@ struct DayForecastView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        DayForecastView(forecast: forecast.daily.first!)
+        DayForecastView(dailyForecast: forecast.daily.first!)
             .preferredColorScheme(.dark)
     }
 }

@@ -31,7 +31,7 @@ struct FullForecastView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .top, spacing: 0) {
                             ForEach(Array(forecastModel.forecast.daily.enumerated()), id: \.offset) { index, dailyForecast in
-                                DayForecastView(forecast: dailyForecast)
+                                DayForecastView(dailyForecast: dailyForecast)
                                     .background(forecastModel.day == index ? Color(UIColor.navbarBackground()) : Color(UIColor.backgroundPrimary()))
                                     .overlay(forecastModel.day == index ?
                                              RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1) : nil
@@ -46,16 +46,20 @@ struct FullForecastView: View {
 
                     DaySummaryView(forecastModel: forecastModel)
                         .padding([.top, .bottom])
-                    
-                    HStack {
-                        Text("hourly forecast")
-                            .padding()
-                        Spacer()
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .top, spacing: 0) {
+                            ForEach(forecastModel.forecast.hourly) { hourlyForecast in
+                                HourForecastView(hourlyForecast: hourlyForecast)
+                            }
+                        }
                     }
+                    .padding([.top, .bottom], 8)
                     .background(Color(UIColor.backgroundPrimary()))
                     .cornerRadius(12)
                     .padding([.leading, .trailing], 8)
-                     Spacer()
+
+                    Spacer()
                 }
                 .foregroundColor(Color(UIColor.defaultText()))
                 .font(Font(UIFont.defaultFont))

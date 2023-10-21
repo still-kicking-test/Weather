@@ -92,4 +92,28 @@ extension UIColor {
             UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.backgroundTertiary : Colours.light.backgroundTertiary
         }
     }
+    
+    static func colour(for degreesCelsius: Decimal) -> UIColor {
+
+        func mapValue(value: CGFloat, inMin: CGFloat, inMax: CGFloat, outMin: CGFloat, outMax: CGFloat) -> CGFloat {
+            let value = max(min(value, inMax), inMin)
+            let div = inMax - inMin
+            guard div > 0 else { return inMin }
+
+            return (value - inMin) / div * (outMax - outMin) + outMin
+        }
+
+        lazy var colourImage = UIImage(named: "temperatureColourScale.png")!
+        let imageSize = colourImage.size
+        let inMin: CGFloat = -30
+        let inMax: CGFloat = 40
+
+        let mappedInput = mapValue(value: CGFloat(NSDecimalNumber(decimal: degreesCelsius).floatValue),
+                                   inMin: inMin, inMax: inMax,
+                                   outMin: 0, outMax: imageSize.width - 1)
+
+        let pixelPosition = CGPoint(x: mappedInput, y: 0)
+
+        return colourImage.getPixelColor(position: pixelPosition)
+    }
 }
