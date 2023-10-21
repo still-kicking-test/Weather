@@ -8,7 +8,7 @@
 import UIKit
 import WeatherNetworkingKit
 
-class SummaryForecastCollectionViewCell: UICollectionViewCell {
+class SummaryForecastCollectionViewCell:  WeatherCollectionViewCell {
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var timePeriod: UILabel!
@@ -30,7 +30,9 @@ class SummaryForecastCollectionViewCell: UICollectionViewCell {
         minTemp.textColor = UIColor.defaultText()
     }
 
-    func configure(with dailyForecast: DailyForecast) {
+    override func configure(with forecast: Forecast, indexPath: IndexPath) {
+        guard let dailyForecast = forecast.daily[safe: indexPath.row] else { return }
+        
         timePeriod.text = dailyForecast.date.shortDayOfWeek
         maxTemp.text = dailyForecast.temperature.max.temperatureString
         minTemp.text = dailyForecast.temperature.max.temperatureString
@@ -40,7 +42,7 @@ class SummaryForecastCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func loadImage(iconId: String?) async {
+    private func loadImage(iconId: String?) async {
         guard let iconId = iconId else { return }
         try! await imageView.image = ImageLoader.shared.fetchIcon(for: iconId)
     }

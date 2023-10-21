@@ -1,5 +1,5 @@
 //
-//  SummaryForecastsTableViewCell.swift
+//  WeatherForecastTableViewCell.swift
 //  Weather
 //
 //  Created by jonathan saville on 02/09/2023.
@@ -8,21 +8,23 @@
 import UIKit
 import WeatherNetworkingKit
 
-protocol SummaryForecastsTableViewCellDelegate: AnyObject {
-    func tappedCell(with forecast: Forecast, day: Int)
+protocol WeatherForecastTableViewCellDelegate: AnyObject {
+    func tappedCell(with forecast: Forecast, indexPath: IndexPath)
 }
 
-class SummaryForecastsTableViewCell: UITableViewCell {
-    @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var fullForecastButton: UIButton!
+class WeatherForecastTableViewCell: UITableViewCell {
+    @IBOutlet weak var headerContainer: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewFooterContainer: UIView!
     @IBOutlet weak var navigationStackView: UIStackView!
     @IBOutlet weak var scrollLeftButton: UIButton!
     @IBOutlet weak var scrollRightButton: UIButton!
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+
     private var forecast: Forecast?
+    private var collectionCellType: WeatherCollectionViewCell.Type?
     private var contentSizeObservation: NSKeyValueObservation?
-    private weak var delegate: SummaryForecastsTableViewCellDelegate?
+    
+    private weak var delegate: WeatherForecastTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +32,6 @@ class SummaryForecastsTableViewCell: UITableViewCell {
         backgroundColor = .backgroundPrimary()
         selectionStyle = .none
 
-        initButtons()
         initCollectionView()
         initNavigationViewStack()
 
@@ -50,22 +51,25 @@ class SummaryForecastsTableViewCell: UITableViewCell {
     }
     
     func configure(with forecast: Forecast,
-                   delegate: SummaryForecastsTableViewCellDelegate) {
+                   delegate: WeatherForecastTableViewCellDelegate,
+                   collectionCellType: WeatherCollectionViewCell.Type,
+                   header: UIView,
+                   collectionFooter: UIView) {
         self.forecast = forecast
         self.delegate = delegate
-        let title = forecast.location?.fullName ?? "<unknown>"
-        locationButton.configuration?.attributedTitle = AttributedString(title, attributes: AttributeContainer([NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18.0)]))
-        collectionView.reloadData()
-    }
-    
-    @IBAction func fullForecastButtonTapped(sender: UIButton) {
-        guard let forecast = forecast else { return }
-        delegate?.tappedCell(with: forecast, day: 0)
-    }
-    
-    @IBAction func locationButtonTapped(sender: UIButton) {
-        guard let forecast = forecast else { return }
-        delegate?.tappedCell(with: forecast, day: 0)
+        self.collectionCellType = collectionCellType
+
+        collectionView.registerCell(withType: collectionCellType) // repeated registration?
+
+        headerContainer.removeAllSubviews()
+        headerContainer.addSubview(header)
+        header.translatesAutoresizingMaskIntoConstraints = false
+        header.pinEdges(to: headerContainer)
+
+        collectionViewFooterContainer.removeAllSubviews()
+        collectionViewFooterContainer.addSubview(collectionFooter)
+        collectionFooter.translatesAutoresizingMaskIntoConstraints = false
+        collectionFooter.pinEdges(to: collectionViewFooterContainer)
     }
     
     @IBAction func scrollLeftButtonTapped(sender: UIButton) {
@@ -81,15 +85,8 @@ class SummaryForecastsTableViewCell: UITableViewCell {
             collectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
         }
     }
-    
-    private func initButtons() {
-        fullForecastButton.normalTitleText = "View full forecast"
-        fullForecastButton.configure(baseForegroundColor: .button(for: .highlighted))
-        locationButton.configure(baseForegroundColor: .defaultText())
-    }
 
     private func initCollectionView() {
-        collectionView.registerCell(withType: SummaryForecastCollectionViewCell.self)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
@@ -107,15 +104,23 @@ class SummaryForecastsTableViewCell: UITableViewCell {
     }
 }
 
-extension SummaryForecastsTableViewCell: UICollectionViewDelegateFlowLayout {
+extension WeatherForecastTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numVisibleCollectionItems = 5
-        return CGSize(width: collectionView.frame.size.width / CGFloat(numVisibleCollectionItems), height: 120)
-    }
+        let width: CGFloat
+        if #available(iOS 17, *) {
+            // We use rounded below because iOS17 has introduced a bug (at least on the Simulator) which, very oddly, results
+            // in a particular cell not being re-drawn on its first re-use - and rounding the width fixes it!
+            width = (collectionView.frame.size.width / CGFloat(numVisibleCollectionItems)).rounded()
+        } else {
+            width = (collectionView.frame.size.width / CGFloat(numVisibleCollectionItems))
+        }
+        return CGSize(width: width, height: 120)
+     }
 }
 
-extension SummaryForecastsTableViewCell: UICollectionViewDataSource {
+extension WeatherForecastTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         forecast?.daily.count ?? 0
@@ -123,23 +128,24 @@ extension SummaryForecastsTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let forecast = forecast,
-              let cell: SummaryForecastCollectionViewCell = collectionView.dequeueReusableCell(withType: SummaryForecastCollectionViewCell.self, for: indexPath)
+              let collectionCellType = collectionCellType,
+              let cell: WeatherCollectionViewCell = collectionView.dequeueReusableCell(withType: collectionCellType, for: indexPath)
         else { return UICollectionViewCell() }
         
-        cell.configure(with: forecast.daily[indexPath.row])
+        cell.configure(with: forecast, indexPath: indexPath)
         return cell
     }
 }
 
-extension SummaryForecastsTableViewCell: UICollectionViewDelegate {
+extension WeatherForecastTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let forecast = forecast else { return }
-        delegate?.tappedCell(with: forecast, day: indexPath.row)
+        delegate?.tappedCell(with: forecast, indexPath: indexPath)
     }
 }
 
-extension SummaryForecastsTableViewCell: UIScrollViewDelegate {
+extension WeatherForecastTableViewCell: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let visibleItems = collectionView.indexPathsForFullyVisibleItems.map{ $0.row }

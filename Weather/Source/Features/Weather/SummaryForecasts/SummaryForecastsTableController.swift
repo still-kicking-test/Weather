@@ -39,7 +39,7 @@ class SummaryForecastsTableController: NSObject {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerCell(withType: WebViewTableViewCell.self)
-        tableView.registerCell(withType: SummaryForecastsTableViewCell.self)
+        tableView.registerCell(withType: WeatherForecastTableViewCell.self)
     }
     
     private func bind() {
@@ -67,10 +67,19 @@ extension SummaryForecastsTableController: UITableViewDataSource {
         
         switch displayItem {
         case .location(let forecast):
-            guard let cell: SummaryForecastsTableViewCell = tableView.dequeueReusableCell(withType: SummaryForecastsTableViewCell.self, for: indexPath)
+            guard let cell: WeatherForecastTableViewCell = tableView.dequeueReusableCell(withType: WeatherForecastTableViewCell.self, for: indexPath)
             else { return UITableViewCell() }
-
-            cell.configure(with: forecast, delegate: self)
+            
+            let header = UIButton(title: forecast.location?.fullName ?? "<unknown>",
+                                  attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: UIColor.defaultText(),
+                                                                  NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0)]),
+                                  isUserInteractionEnabled: false)
+         
+            let collectionFooter = UIButton(title: "View full forecast")
+            collectionFooter.tag = indexPath.section
+            collectionFooter.addTarget(self, action: #selector(tappedCollectionFooter(_:)), for: .touchUpInside)
+            
+            cell.configure(with: forecast, delegate: self, collectionCellType: SummaryForecastCollectionViewCell.self, header: header, collectionFooter: collectionFooter)
             return cell
             
         case .video(let title, let url):
@@ -80,6 +89,15 @@ extension SummaryForecastsTableController: UITableViewDataSource {
             cell.configure(with: title, url: url)
             return cell
        }
+    }
+    
+    @objc
+    private func tappedCollectionFooter(_ sender: Any) {
+        guard let sender = sender as? UIButton,
+              let displayItem = viewModel?.displayItem(forIndex: sender.tag),
+              case .location(let forecast) = displayItem else { return }
+    
+        delegate.tappedSummary(forecast, day: 0)
     }
 }
 
@@ -94,9 +112,9 @@ extension SummaryForecastsTableController: UITableViewDelegate {
     }
 }
 
-extension SummaryForecastsTableController: SummaryForecastsTableViewCellDelegate {
+extension SummaryForecastsTableController: WeatherForecastTableViewCellDelegate {
     
-    func tappedCell(with forecast: Forecast, day: Int) {
-        delegate.tappedSummary(forecast, day: day)
+    func tappedCell(with forecast: Forecast, indexPath: IndexPath) {
+        delegate.tappedSummary(forecast, day: indexPath.row)
     }
 }

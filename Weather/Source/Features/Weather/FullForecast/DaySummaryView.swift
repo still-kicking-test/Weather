@@ -21,13 +21,13 @@ struct DaySummaryView: View {
 
             HStack(spacing: 4) {
                 Text("Day")
-                    .font(Font(UIFont.defaultFontBold))
                     .padding(.leading)
                 Text(forecast.temperature.max.temperatureString)
-                    .font(Font(UIFont.largeFontBold))
+                    .font(Font(UIFont.veryLargeFontBold))
                 Text("/")
+                    .font(Font(UIFont.veryLargeFont))
                 Text(forecast.temperature.min.temperatureString)
-                    .font(Font(UIFont.largeFont))
+                    .font(Font(UIFont.veryLargeFontBold))
                 Text("Night")
                Spacer()
             }

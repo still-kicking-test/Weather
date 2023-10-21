@@ -18,11 +18,24 @@ extension UIButton {
         }
     }
     
-    func configure(baseForegroundColor: UIColor = .button(for: .normal)) {
+    convenience init(title: String,
+                     attributes: AttributeContainer = AttributeContainer([NSAttributedString.Key.foregroundColor: UIColor.button(for: .highlighted)]),
+                     isUserInteractionEnabled: Bool = true,
+                     numberOfLines: Int = 0,
+                     contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .left,
+                     contentInsets: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
+                   
+    {
+        self.init()
         var config = UIButton.Configuration.plain()
-        config.baseForegroundColor = baseForegroundColor
+        config.contentInsets = contentInsets
         configuration = config
-        // config.cornerStyle = .large
-        // config.titleAlignment = .center
+
+        self.isUserInteractionEnabled = isUserInteractionEnabled
+        self.titleLabel?.numberOfLines = numberOfLines
+        self.contentHorizontalAlignment = contentHorizontalAlignment
+        
+        let attrTitle = NSAttributedString(AttributedString(title, attributes: attributes))
+        setAttributedTitle(attrTitle, for: .normal)
     }
 }
