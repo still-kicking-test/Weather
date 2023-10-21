@@ -11,7 +11,6 @@ import UIKit
 import WeatherNetworkingKit
 
 struct DayForecastView: View {
-
     var forecast: DailyForecast
     
     var body: some View {
@@ -28,7 +27,8 @@ struct DayForecastView: View {
 
             Text(forecast.date.shortDayOfWeek)
                 .font(Font(UIFont.largeFont))
-        }
+                .padding(.bottom, 8)
+       }
         .frame(width: UIScreen.main.bounds.width / 4.5) // ensure user sees there is scrollable content
     }
 }

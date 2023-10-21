@@ -10,23 +10,23 @@ import CoreLocation
 import WeatherNetworkingKit
 
 struct DaySummaryView: View {
-    @State var forecast: DailyForecast
+    @ObservedObject var forecastModel: ForecastModel
     
     var body: some View {
         VStack(spacing: 0) {
             
-            Text(forecast.displayable.first?.description ?? "")
+            Text(forecastModel.forecast.daily[safe: forecastModel.day]?.displayable.first?.description ?? "")
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack(spacing: 4) {
                 Text("Day")
                     .padding(.leading)
-                Text(forecast.temperature.max.temperatureString)
+                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.max.temperatureString ?? "")
                     .font(Font(UIFont.veryLargeFontBold))
                 Text("/")
                     .font(Font(UIFont.veryLargeFont))
-                Text(forecast.temperature.min.temperatureString)
+                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.min.temperatureString ?? "")
                     .font(Font(UIFont.veryLargeFontBold))
                 Text("Night")
                Spacer()
@@ -40,7 +40,7 @@ struct DaySummaryView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        DaySummaryView(forecast: forecast.daily.first!)
+        DaySummaryView(forecastModel: ForecastModel(location: location, forecast: forecast, day: 5))
             .preferredColorScheme(.dark)
     }
 }

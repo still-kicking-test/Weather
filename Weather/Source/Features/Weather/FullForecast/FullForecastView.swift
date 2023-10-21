@@ -11,10 +11,7 @@ import WeatherNetworkingKit
 
 struct FullForecastView: View {
     @Environment(\.dismiss) var dismiss
-
-    var location: Location
-    let forecast: Forecast
-    var day: Int
+    @ObservedObject var forecastModel: ForecastModel
 
     var body: some View {
         NavigationStack() {
@@ -25,7 +22,7 @@ struct FullForecastView: View {
                 VStack(spacing: 0) {
                     Divider()
                         .background(Color(UIColor.backgroundPrimary()))
-                    Text(location.fullName)
+                    Text(forecastModel.location.fullName)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(Font(UIFont.largeFontBold))
                         .padding([.bottom, .leading, .trailing])
@@ -33,16 +30,21 @@ struct FullForecastView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .top, spacing: 0) {
-                            ForEach(forecast.daily) { dailyForecast in
+                            ForEach(Array(forecastModel.forecast.daily.enumerated()), id: \.offset) { index, dailyForecast in
                                 DayForecastView(forecast: dailyForecast)
-                                    .background(Color(UIColor.backgroundPrimary()))
+                                    .background(forecastModel.day == index ? Color(UIColor.navbarBackground()) : Color(UIColor.backgroundPrimary()))
+                                    .overlay(forecastModel.day == index ?
+                                             RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1) : nil
+                                    )
+                                    .onTapGesture() {
+                                        forecastModel.day = index
+                                    }
                              }
                         }
-                        .padding(.bottom)
                     }
                     .background(Color(UIColor.backgroundPrimary()))
 
-                    DaySummaryView(forecast: forecast.daily.first!)
+                    DaySummaryView(forecastModel: forecastModel)
                         .padding([.top, .bottom])
                     
                     HStack {
@@ -85,7 +87,7 @@ struct FullForecastView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        FullForecastView(location: location, forecast: forecast, day: 5)
+        FullForecastView(forecastModel: ForecastModel(location: location, forecast: forecast, day: 5))
         .preferredColorScheme(.dark)
    }
 }
