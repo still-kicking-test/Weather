@@ -19,7 +19,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         backgroundColor = .backgroundPrimary()
         name.textColor = UIColor.defaultText()
-        reorderImage.tintColor = .backgroundTertiary()
+        reorderImage.tintColor = .divider()
         deleteButton.tintColor = .red
     }
     

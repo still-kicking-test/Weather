@@ -86,7 +86,7 @@ class WeatherViewModel: NSObject {
                     self.isLoading = false
                     switch $0 {
                     case .failure(let error): self.generalError = error
-                    case .success(let value): self.forecast = value
+                    case .success(var value): self.forecast = value.appendMissingHourlyForecasts()
                     }
                 }
                 .store(in: &self.cancellables)
@@ -122,6 +122,22 @@ class WeatherViewModel: NSObject {
             .store(in: &cancellables)
     }
 }
+
+private extension Array where Element == Forecast {
+ 
+    mutating func appendMissingHourlyForecasts() -> [Forecast] {
+        for i in 0..<self.count {
+            let lastDailyDateAtMidnight = self[i].daily.last!.date.midnight
+            var currHourlyDate = self[i].hourly.last!.date.nextDay
+            while currHourlyDate < lastDailyDateAtMidnight {
+                self[i].appendEmptyHourlyForecast(with: currHourlyDate, lastForecastOfDay: true)
+                currHourlyDate = currHourlyDate.nextDay
+            }
+        }
+        return self
+    }
+}
+
 
 private extension Array where Element: Location {
  

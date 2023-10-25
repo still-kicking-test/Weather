@@ -12,7 +12,8 @@ import WeatherNetworkingKit
 
 struct DayForecastView: View {
     var dailyForecast: DailyForecast
-    
+    var timezoneOffset: Int = 0
+
     var body: some View {
         VStack(spacing: 0) {
             AsyncImage(url: ImageLoader.iconURL(for: dailyForecast.displayable.first?.icon ?? "")) { image in
@@ -25,11 +26,10 @@ struct DayForecastView: View {
             .frame(height: 40)
             .padding(.bottom, 0)
 
-            Text(dailyForecast.date.shortDayOfWeek)
+            Text(dailyForecast.date.shortDayOfWeek(timezoneOffset) ?? "-")
                 .font(Font(UIFont.largeFont))
                 .padding(.bottom, 8)
        }
-        .frame(width: UIScreen.main.bounds.width / 4.5) // ensure user sees there is scrollable content
     }
 }
 
@@ -38,7 +38,7 @@ struct DayForecastView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        DayForecastView(dailyForecast: forecast.daily.first!)
+        DayForecastView(dailyForecast: forecast.daily.first!, timezoneOffset: 0)
             .preferredColorScheme(.dark)
     }
 }

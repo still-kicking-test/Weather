@@ -12,32 +12,62 @@ import WeatherNetworkingKit
 
 struct HourForecastView: View {
     var hourlyForecast: HourlyForecast
+    var timezoneOffset: Int
+
+    // Other views need this view's height - fastest & most straightforward way is to construct it from its known structure...
+    static let preferredHeight = Constants.font.lineHeight + // time
+                                 Constants.iconHeight + Constants.iconPaddingBottom +  // icon
+                                 Constants.temperatureHeight + Constants.temperaturePaddingBottom  + // temperature
+                                 Constants.font.lineHeight  + // feels-like temperature
+                                (verticalSpacing * 4)
+
+    static let verticalSpacing: CGFloat = 8
+    enum Constants {
+        static let iconHeight: CGFloat = 40
+        static let iconPaddingBottom: CGFloat = 12
+        static let temperatureHeight: CGFloat = 35
+        static let temperaturePaddingBottom: CGFloat = 4
+        static let font = UIKit.UIFont.defaultFont
+    }
 
     var body: some View {
-        VStack(spacing: 8) {
-            Text(hourlyForecast.date.formattedTime)
+        VStack(spacing: HourForecastView.verticalSpacing) {
+            // time
+            Text(hourlyForecast.detail != nil ? (hourlyForecast.date.formattedTime(timezoneOffset) ?? "-") : "-")
+                .font(Font(Constants.font))
 
-            AsyncImage(url: ImageLoader.iconURL(for: hourlyForecast.displayable.first?.icon ?? "")) { image in
-                image
-                   .resizable()
-                   .aspectRatio(contentMode: .fit)
-            } placeholder: {
-              // loadingView
+            // icon
+            if let hourlyForecastDetail = hourlyForecast.detail {
+                AsyncImage(url: ImageLoader.iconURL(for: hourlyForecastDetail.displayable.first?.icon ?? "")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    // loadingView
+                }
+                .frame(height: Constants.iconHeight)
+                .padding(.bottom, Constants.iconPaddingBottom)
+            } else {
+                Text("No data")
+                    .font(Font(Constants.font))
+                    .frame(height: Constants.iconHeight)
+                    .padding(.bottom, Constants.iconPaddingBottom)
             }
-            .frame(height: 40)
-            .padding(.bottom, 12)
 
-            Text(hourlyForecast.temp.temperatureString)
-                .foregroundColor(.black)
-                .frame(width: 35, height: 35)
-                .background(Color(UIColor.colour(for: hourlyForecast.temp)))
+            // temperature
+            Text(hourlyForecast.detail?.temp.temperatureString ?? "-")
+                .font(Font(Constants.font))
+                .foregroundColor(hourlyForecast.detail == nil ? Color(.defaultText()) : .black)
+                .frame(width: Constants.temperatureHeight, height: Constants.temperatureHeight)
+                .background(Color(UIColor.colour(for: hourlyForecast.detail?.temp)))
                 .cornerRadius(4)
-                .padding(.bottom, 4)
+                .padding(.bottom, Constants.temperaturePaddingBottom)
  
-            Text(hourlyForecast.feels_like.temperatureString)
-                .padding(.bottom, 8)
-       }
-        .frame(width: (UIScreen.main.bounds.width - 16) / 6)
+            // feels-like temperature
+            Text(hourlyForecast.detail?.feels_like.temperatureString ?? "-")
+                .font(Font(Constants.font))
+                .padding(.bottom, HourForecastView.verticalSpacing)
+        }
     }
 }
 
@@ -46,7 +76,8 @@ struct HourForecastView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        HourForecastView(hourlyForecast: forecast.hourly.first!)
+        HourForecastView(hourlyForecast: forecast.hourly.first!, timezoneOffset: 0)
             .preferredColorScheme(.dark)
+            .frame(width: 60, height: HourForecastView.preferredHeight)
     }
 }

@@ -14,7 +14,7 @@ extension UIColor {
             static let defaultText = UIColor.white
             static let backgroundPrimary = UIColor.black
             static let backgroundSecondary = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
-            static let backgroundTertiary = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+            static let divider = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
             static let backgroundGradientFrom = backgroundSecondary
             static let backgroundGradientTo = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
             static let navbarBackground = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
@@ -26,7 +26,7 @@ extension UIColor {
             static let defaultText = UIColor.black
             static let backgroundPrimary = UIColor.white
             static let backgroundSecondary = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-            static let backgroundTertiary = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            static let divider = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
             static let backgroundGradientFrom = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
             static let backgroundGradientTo = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
             static let navbarBackground = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
@@ -87,13 +87,13 @@ extension UIColor {
         return color.withAlphaComponent(alpha)
     }
     
-    static func backgroundTertiary() -> UIColor {
+    static func divider() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.backgroundTertiary : Colours.light.backgroundTertiary
+            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.divider : Colours.light.divider
         }
     }
     
-    static func colour(for degreesCelsius: Decimal) -> UIColor {
+    static func colour(for degreesCelsius: Decimal?) -> UIColor {
 
         func mapValue(value: CGFloat, inMin: CGFloat, inMax: CGFloat, outMin: CGFloat, outMax: CGFloat) -> CGFloat {
             let value = max(min(value, inMax), inMin)
@@ -102,6 +102,8 @@ extension UIColor {
 
             return (value - inMin) / div * (outMax - outMin) + outMin
         }
+
+        guard let degreesCelsius = degreesCelsius else { return .clear }
 
         lazy var colourImage = UIImage(named: "temperatureColourScale.png")!
         let imageSize = colourImage.size

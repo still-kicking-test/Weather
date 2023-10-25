@@ -14,7 +14,7 @@ extension Decimal {
         NSDecimalRound(&self, &localCopy, scale, roundingMode)
     }
 
-    func rounded(_ scale: Int, _ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> Decimal {
+    func rounded(_ scale: Int = 0, _ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> Decimal {
         var result = Decimal()
         var localCopy = self
         NSDecimalRound(&result, &localCopy, scale, roundingMode)
@@ -22,7 +22,7 @@ extension Decimal {
     }
 
     var temperatureString: String {
-        "\(rounded(0))°"
+        "\(rounded())°"
     }
 
     var beaufort: Beaufort { Beaufort.fromSpeed(self) }

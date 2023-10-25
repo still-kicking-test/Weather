@@ -102,6 +102,7 @@ extension CoreDataManager {
         CoreDataManager.shared.addLocation(displayOrder: 1, name: "Chicago", latitude: 41.8755616, longitude: -87.6244212, country: "US", state: "Illinois")
         CoreDataManager.shared.addLocation(displayOrder: 2, name: "Rome", latitude: 41.8933203, longitude: 12.4829321, country: "IT", state: "Lazio")
         CoreDataManager.shared.addLocation(displayOrder: 3, name: "Tokyo", latitude: 35.709674, longitude: 139.454224, country: "JP", state: "")
+        CoreDataManager.shared.addLocation(displayOrder: 4, name: "Honolulu", latitude: 21.316, longitude: -157.800, country: "US", state: "Hawaii")
         CoreDataManager.shared.saveContext()
         loadData()
     }

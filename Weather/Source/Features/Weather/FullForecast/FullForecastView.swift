@@ -32,6 +32,7 @@ struct FullForecastView: View {
                         HStack(alignment: .top, spacing: 0) {
                             ForEach(Array(forecastModel.forecast.daily.enumerated()), id: \.offset) { index, dailyForecast in
                                 DayForecastView(dailyForecast: dailyForecast)
+                                    .frame(width: UIScreen.main.bounds.width / 4.5)
                                     .background(forecastModel.day == index ? Color(UIColor.navbarBackground()) : Color(UIColor.backgroundPrimary()))
                                     .overlay(forecastModel.day == index ?
                                              RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1) : nil
@@ -49,10 +50,18 @@ struct FullForecastView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .top, spacing: 0) {
-                            ForEach(forecastModel.forecast.hourly) { hourlyForecast in
-                                HourForecastView(hourlyForecast: hourlyForecast)
+                            let timezoneOffset = forecastModel.forecast.timezoneOffset
+                            ForEach(Array(forecastModel.forecast.hourly.enumerated()), id: \.offset) { index, hourlyForecast in
+                                let size = CGSize(width: (UIScreen.main.bounds.width - 16) / 6, height: HourForecastView.preferredHeight)
+                                HourForecastView(hourlyForecast: hourlyForecast, timezoneOffset: timezoneOffset)
+                                    .frame(width: size.width, height:  size.height)
+                                
+                                if hourlyForecast.isLastForecastOfDay ?? false {
+                                    HourForecastSeparatorView(day: hourlyForecast.date.nextDay.shortDayOfWeek(timezoneOffset) ?? "-")
+                                        .frame(width: size.width, height: size.height)
+                                }
                             }
-                        }
+                       }
                     }
                     .padding([.top, .bottom], 8)
                     .background(Color(UIColor.backgroundPrimary()))
@@ -88,7 +97,7 @@ struct FullForecastView: View {
 
 struct FullForecastView_Previews: PreviewProvider {
     static let location = Location(coordinates: CLLocationCoordinate2D(latitude: 41.8933203, longitude: 12.4829321), name: "Rome (Lazio)")
-    static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
+    static var forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
         FullForecastView(forecastModel: ForecastModel(location: location, forecast: forecast, day: 5))

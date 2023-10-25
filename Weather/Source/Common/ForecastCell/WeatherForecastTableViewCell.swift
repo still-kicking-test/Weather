@@ -94,7 +94,7 @@ class WeatherForecastTableViewCell: UITableViewCell {
     }
 
     private func initNavigationViewStack() {
-        navigationStackView.backgroundColor = .backgroundTertiary() // effectively the cell separator color
+        navigationStackView.backgroundColor = .divider() // effectively the cell separator color
         scrollLeftButton.backgroundColor = .backgroundPrimary()
         scrollLeftButton.tintColor = .button(for: .highlighted)
         scrollLeftButton.isEnabled = false
