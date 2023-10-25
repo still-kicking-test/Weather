@@ -66,6 +66,7 @@
 		AB89D48E2AA5CD6A0042B292 /* Beaufort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D48D2AA5CD6A0042B292 /* Beaufort.swift */; };
 		AB89D4902AA5CDA70042B292 /* WindDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89D48F2AA5CDA70042B292 /* WindDirection.swift */; };
 		AB8BA04C2AB51010004212D3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8BA04B2AB51010004212D3 /* CoreDataManager.swift */; };
+		AB8EC7872AE95E1E00808A6A /* WeatherNetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB8EC7862AE95E1E00808A6A /* WeatherNetworkingKit */; };
 		AB8FBE812AAA09B800AA51CC /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE802AAA09B800AA51CC /* Int+Ext.swift */; };
 		AB8FBE842AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE822AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift */; };
 		AB8FBE852AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB8FBE832AAA326800AA51CC /* SummaryForecastCollectionViewCell.xib */; };
@@ -93,7 +94,6 @@
 		AB9A8FF62AE41E90003FAA6D /* WebViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9A8FF42AE41E90003FAA6D /* WebViewTableViewCell.xib */; };
 		ABAAC4402AE4416A00A8EEC6 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAC43F2AE4416A00A8EEC6 /* ForecastModel.swift */; };
 		ABB36DA42ABAF402007255A8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ABB36DA32ABAF402007255A8 /* README.md */; };
-		ABBB1C942AE82E9E000288DE /* WeatherNetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = ABBB1C932AE82E9E000288DE /* WeatherNetworkingKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,7 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABBB1C942AE82E9E000288DE /* WeatherNetworkingKit in Frameworks */,
+				AB8EC7872AE95E1E00808A6A /* WeatherNetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +546,7 @@
 			);
 			name = Weather;
 			packageProductDependencies = (
-				ABBB1C932AE82E9E000288DE /* WeatherNetworkingKit */,
+				AB8EC7862AE95E1E00808A6A /* WeatherNetworkingKit */,
 			);
 			productName = Weather;
 			productReference = AB8136C32AA0EACF005B26B0 /* Weather.app */;
@@ -621,7 +621,7 @@
 			);
 			mainGroup = AB8136BA2AA0EACF005B26B0;
 			packageReferences = (
-				ABBB1C922AE82E9E000288DE /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */,
+				AB8EC7852AE95E1E00808A6A /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */,
 			);
 			productRefGroup = AB8136C42AA0EACF005B26B0 /* Products */;
 			projectDirPath = "";
@@ -1107,7 +1107,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ABBB1C922AE82E9E000288DE /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */ = {
+		AB8EC7852AE95E1E00808A6A /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/still-kicking-test/WeatherNetworkingKit";
 			requirement = {
@@ -1118,9 +1118,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ABBB1C932AE82E9E000288DE /* WeatherNetworkingKit */ = {
+		AB8EC7862AE95E1E00808A6A /* WeatherNetworkingKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ABBB1C922AE82E9E000288DE /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */;
+			package = AB8EC7852AE95E1E00808A6A /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */;
 			productName = WeatherNetworkingKit;
 		};
 /* End XCSwiftPackageProductDependency section */

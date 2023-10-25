@@ -50,6 +50,12 @@ class WeatherForecastTableViewCell: UITableViewCell {
         layer.masksToBounds = true
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        headerContainer.removeAllSubviews()
+        collectionViewFooterContainer.removeAllSubviews()
+    }
+
     func configure(with forecast: Forecast,
                    delegate: WeatherForecastTableViewCellDelegate,
                    collectionCellType: WeatherCollectionViewCell.Type,
@@ -61,15 +67,15 @@ class WeatherForecastTableViewCell: UITableViewCell {
 
         collectionView.registerCell(withType: collectionCellType) // repeated registration?
 
-        headerContainer.removeAllSubviews()
         headerContainer.addSubview(header)
         header.translatesAutoresizingMaskIntoConstraints = false
         header.pinEdges(to: headerContainer)
 
-        collectionViewFooterContainer.removeAllSubviews()
         collectionViewFooterContainer.addSubview(collectionFooter)
         collectionFooter.translatesAutoresizingMaskIntoConstraints = false
         collectionFooter.pinEdges(to: collectionViewFooterContainer)
+
+        collectionView.reloadData()
     }
     
     @IBAction func scrollLeftButtonTapped(sender: UIButton) {
