@@ -22,11 +22,11 @@ struct DaySummaryView: View {
             HStack(spacing: 4) {
                 Text("Day")
                     .padding(.leading)
-                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.max.temperatureString ?? "")
+                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.max.temperatureString ?? "-")
                     .font(Font(UIFont.veryLargeFontBold))
                 Text("/")
                     .font(Font(UIFont.veryLargeFont))
-                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.min.temperatureString ?? "")
+                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.min.temperatureString ?? "-")
                     .font(Font(UIFont.veryLargeFontBold))
                 Text("Night")
                Spacer()

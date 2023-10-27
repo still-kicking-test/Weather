@@ -71,11 +71,13 @@ extension SummaryForecastsTableController: UITableViewDataSource {
             else { return UITableViewCell() }
             
             let header = UIButton(title: forecast.location?.fullName ?? "<unknown>",
-                                  attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: UIColor.defaultText(),
+                                  attributes: AttributeContainer([NSAttributedString.Key.backgroundColor: UIColor.backgroundPrimary(),
+                                                                  NSAttributedString.Key.foregroundColor: UIColor.defaultText(),
                                                                   NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0)]),
                                   isUserInteractionEnabled: false)
          
             let collectionFooter = UIButton(title: "View full forecast")
+            collectionFooter.backgroundColor =  UIColor.backgroundPrimary()
             collectionFooter.tag = indexPath.section
             collectionFooter.addTarget(self, action: #selector(tappedCollectionFooter(_:)), for: .touchUpInside)
             

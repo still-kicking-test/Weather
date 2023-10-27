@@ -68,10 +68,12 @@ class WeatherForecastTableViewCell: UITableViewCell {
         collectionView.registerCell(withType: collectionCellType) // repeated registration?
 
         headerContainer.addSubview(header)
+        header.backgroundColor = UIColor.backgroundPrimary()
         header.translatesAutoresizingMaskIntoConstraints = false
         header.pinEdges(to: headerContainer)
 
         collectionViewFooterContainer.addSubview(collectionFooter)
+        collectionFooter.backgroundColor = UIColor.backgroundPrimary()
         collectionFooter.translatesAutoresizingMaskIntoConstraints = false
         collectionFooter.pinEdges(to: collectionViewFooterContainer)
 

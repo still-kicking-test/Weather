@@ -25,5 +25,14 @@ extension Decimal {
         "\(rounded())°"
     }
 
+    var precipitationString: String {
+        guard self <= 1 else { return "-" }
+        guard self <= 0.95 else { return "95%" }
+        guard self > 0.05 else { return "<5%" }
+
+        let percentageRoundedTo5 = (self * 100 / 5).rounded() * 5
+        return "\(percentageRoundedTo5)%"
+    }
+
     var beaufort: Beaufort { Beaufort.fromSpeed(self) }
 }

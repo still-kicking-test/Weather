@@ -35,7 +35,7 @@ class SummaryForecastCollectionViewCell:  WeatherCollectionViewCell {
         
         timePeriod.text = dailyForecast.date.shortDayOfWeek(forecast.timezoneOffset) ?? "-"
         maxTemp.text = dailyForecast.temperature.max.temperatureString
-        minTemp.text = dailyForecast.temperature.max.temperatureString
+        minTemp.text = dailyForecast.temperature.min.temperatureString
         
         Task {
             await loadImage(iconId: dailyForecast.displayable.first?.icon)

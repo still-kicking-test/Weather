@@ -13,6 +13,7 @@ import WeatherNetworkingKit
 struct HourForecastView: View {
     var hourlyForecast: HourlyForecast
     var timezoneOffset: Int
+    var selectorState: FullForecastView.SelectorState
 
     // Other views need this view's height - fastest & most straightforward way is to construct it from its known structure...
     static let preferredHeight = Constants.font.lineHeight + // time
@@ -62,9 +63,9 @@ struct HourForecastView: View {
                 .background(Color(UIColor.colour(for: hourlyForecast.detail?.temp)))
                 .cornerRadius(4)
                 .padding(.bottom, Constants.temperaturePaddingBottom)
- 
-            // feels-like temperature
-            Text(hourlyForecast.detail?.feels_like.temperatureString ?? "-")
+
+            // feels-like temperature OR liklihood of precipitation
+            Text(selectorState == .precipitation ? (hourlyForecast.detail?.precipitation.precipitationString ?? "-") : (hourlyForecast.detail?.feels_like.temperatureString ?? "-"))
                 .font(Font(Constants.font))
                 .padding(.bottom, HourForecastView.verticalSpacing)
         }
@@ -76,7 +77,7 @@ struct HourForecastView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        HourForecastView(hourlyForecast: forecast.hourly.first!, timezoneOffset: 0)
+        HourForecastView(hourlyForecast: forecast.hourly.first!, timezoneOffset: 0, selectorState: .precipitation)
             .preferredColorScheme(.dark)
             .frame(width: 60, height: HourForecastView.preferredHeight)
     }

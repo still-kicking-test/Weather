@@ -41,7 +41,7 @@ extension Date {
     }
 
     func daysInFuture(_ days: Int) -> Date {
-        Calendar.current.date(byAdding: .day, value: days, to: self)!
+        addingTimeInterval(Double(days * 86400))
     }
     
     var nextDay: Date {

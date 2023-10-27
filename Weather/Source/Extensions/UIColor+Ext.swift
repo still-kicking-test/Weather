@@ -9,6 +9,8 @@ import UIKit
 
 extension UIColor {
     
+    static var forceMode: UIUserInterfaceStyle = .dark // very quick and dirty DEV-ONLY way to force darkmode until I have implemented sensible light colours
+
     private enum Colours {
         enum dark {
             static let defaultText = UIColor.white
@@ -38,7 +40,7 @@ extension UIColor {
     
     static func defaultText() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.defaultText : Colours.light.defaultText
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.defaultText : Colours.light.defaultText
         }
     }
 
@@ -46,50 +48,50 @@ extension UIColor {
         switch state {
         case .disabled:
             return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-                UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.buttonDisabled : Colours.light.buttonDisabled }
+                UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.buttonDisabled : Colours.light.buttonDisabled }
         case .highlighted, .selected:
             return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-                UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.buttonHighlighted : Colours.light.buttonHighlighted }
+                UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.buttonHighlighted : Colours.light.buttonHighlighted }
         default:
             return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-                UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.buttonNormal : Colours.light.buttonNormal }
+                UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.buttonNormal : Colours.light.buttonNormal }
         }
     }
 
     static func navbarBackground() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.navbarBackground : Colours.light.navbarBackground
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.navbarBackground : Colours.light.navbarBackground
         }
     }
 
     static func backgroundPrimary() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.backgroundPrimary : Colours.light.backgroundPrimary
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.backgroundPrimary : Colours.light.backgroundPrimary
         }
     }
 
     static func backgroundGradientFrom() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.backgroundGradientFrom : Colours.light.backgroundGradientFrom
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.backgroundGradientFrom : Colours.light.backgroundGradientFrom
         }
     }
 
     static func backgroundGradientTo() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.backgroundGradientTo : Colours.light.backgroundGradientTo
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.backgroundGradientTo : Colours.light.backgroundGradientTo
         }
     }
 
     static func backgroundSecondary(alpha: CGFloat = 1.0) -> UIColor {
         let color = UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.backgroundSecondary : Colours.light.backgroundSecondary
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.backgroundSecondary : Colours.light.backgroundSecondary
         }
         return color.withAlphaComponent(alpha)
     }
     
     static func divider() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-            UITraitCollection.userInterfaceStyle == .dark ? Colours.dark.divider : Colours.light.divider
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.divider : Colours.light.divider
         }
     }
     

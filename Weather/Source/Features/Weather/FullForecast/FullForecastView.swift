@@ -12,6 +12,7 @@ import WeatherNetworkingKit
 struct FullForecastView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var forecastModel: ForecastModel
+    @State var slidingSelectedIndex: Int = 0
 
     var body: some View {
         NavigationStack() {
@@ -22,6 +23,7 @@ struct FullForecastView: View {
                 VStack(spacing: 0) {
                     Divider()
                         .background(Color(UIColor.backgroundPrimary()))
+
                     Text(forecastModel.location.fullName)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(Font(UIFont.largeFontBold))
@@ -34,9 +36,7 @@ struct FullForecastView: View {
                                 DayForecastView(dailyForecast: dailyForecast)
                                     .frame(width: UIScreen.main.bounds.width / 4.5)
                                     .background(forecastModel.day == index ? Color(UIColor.navbarBackground()) : Color(UIColor.backgroundPrimary()))
-                                    .overlay(forecastModel.day == index ?
-                                             RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1) : nil
-                                    )
+                                    .overlay(forecastModel.day == index ? RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1) : nil)
                                     .onTapGesture() {
                                         forecastModel.day = index
                                     }
@@ -48,24 +48,34 @@ struct FullForecastView: View {
                     DaySummaryView(forecastModel: forecastModel)
                         .padding([.top, .bottom])
 
+                    SlidingSelectorView(selectedIndex: $slidingSelectedIndex, titles: SelectorState.titles)
+                        .padding(16)
+                        .background(Color(UIColor.backgroundPrimary()))
+                        .clipShape(.rect( topLeadingRadius: 12, topTrailingRadius: 12))
+                        .padding([.leading, .trailing], 8)
+
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(alignment: .top, spacing: 0) {
-                            let timezoneOffset = forecastModel.forecast.timezoneOffset
-                            ForEach(Array(forecastModel.forecast.hourly.enumerated()), id: \.offset) { index, hourlyForecast in
-                                let size = CGSize(width: (UIScreen.main.bounds.width - 16) / 6, height: HourForecastView.preferredHeight)
-                                HourForecastView(hourlyForecast: hourlyForecast, timezoneOffset: timezoneOffset)
-                                    .frame(width: size.width, height:  size.height)
+                        VStack(spacing: 8) {
+                            HStack(alignment: .top, spacing: 0) {
+                                let timezoneOffset = forecastModel.forecast.timezoneOffset
                                 
-                                if hourlyForecast.isLastForecastOfDay ?? false {
-                                    HourForecastSeparatorView(day: hourlyForecast.date.nextDay.shortDayOfWeek(timezoneOffset) ?? "-")
-                                        .frame(width: size.width, height: size.height)
+                                ForEach(Array(forecastModel.forecast.hourly.enumerated()), id: \.offset) { index, hourlyForecast in
+                                    let size = CGSize(width: (UIScreen.main.bounds.width - 16) / 6, height: HourForecastView.preferredHeight)
+                                    HourForecastView(hourlyForecast: hourlyForecast, timezoneOffset: timezoneOffset, 
+                                                     selectorState: SelectorState(rawValue: slidingSelectedIndex) ?? .precipitation)
+                                        .frame(width: size.width, height:  size.height)
+                                    
+                                    if hourlyForecast.isLastForecastOfDay ?? false {
+                                        HourForecastSeparatorView(day: hourlyForecast.date.nextDay.shortDayOfWeek(timezoneOffset) ?? "-")
+                                            .frame(width: size.width, height: size.height)
+                                    }
                                 }
                             }
-                       }
+                        }
                     }
                     .padding([.top, .bottom], 8)
                     .background(Color(UIColor.backgroundPrimary()))
-                    .cornerRadius(12)
+                    .clipShape(.rect( bottomLeadingRadius: 12, bottomTrailingRadius: 12))
                     .padding([.leading, .trailing], 8)
 
                     Spacer()
@@ -82,7 +92,7 @@ struct FullForecastView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
-                                dismiss()
+                                // TBD
                             } label: {
                                 Image(systemName: "square.and.arrow.up")
                             }
@@ -91,6 +101,26 @@ struct FullForecastView: View {
                     }
                 }
             }
+        }
+    }
+    
+    enum SelectorState: Int, CaseIterable {
+        case precipitation
+        case feelsLike
+        
+        var title: String {
+            switch self {
+            case .precipitation: return "Precipitation"
+            case .feelsLike: return "Feels like°"
+            }
+        }
+        
+        static var titles: [String] {
+            var titles: [String] = []
+            for state in SelectorState.allCases {
+                titles.append(state.title)
+            }
+            return titles
         }
     }
 }
@@ -104,4 +134,3 @@ struct FullForecastView_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
    }
 }
-
