@@ -29,17 +29,6 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
-    var midnight: Date {
-        Calendar.current.nextDate(after: self, matching: DateComponents(hour: 23, minute: 59, second: 59), matchingPolicy: .nextTime)!
-    }
- 
-    func hours(_ secondsFromGMT: Int) -> Int {
-        guard let timezone = TimeZone(secondsFromGMT: secondsFromGMT) else { return 0 }
-        var calendar = Calendar.current
-        calendar.timeZone = timezone
-        return calendar.component(.hour, from: self)
-    }
-
     func daysInFuture(_ days: Int) -> Date {
         addingTimeInterval(Double(days * 86400))
     }

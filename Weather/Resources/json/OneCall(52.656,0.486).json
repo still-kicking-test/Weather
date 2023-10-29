@@ -2,7 +2,7 @@
     "lat": 52.656,
     "lon": 0.486,
     "timezone": "BST/GBR",
-    "timezone_offset": 0,
+    "timezone_offset": 3600,
     "current": {
         "dt": 1684929490,
         "sunrise": 1684926645,

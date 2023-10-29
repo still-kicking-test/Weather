@@ -1,8 +1,8 @@
 {
     "lat": 41.893,
     "lon": 12.483,
-    "timezone": "BST/GBR",
-    "timezone_offset": 0,
+    "timezone": "Europe/Rome",
+    "timezone_offset": 7200,
     "current": {
         "dt": 1684929490,
         "sunrise": 1684926645,

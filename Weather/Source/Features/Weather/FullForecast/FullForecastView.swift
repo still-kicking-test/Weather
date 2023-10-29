@@ -33,7 +33,7 @@ struct FullForecastView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .top, spacing: 0) {
                             ForEach(Array(forecastModel.forecast.daily.enumerated()), id: \.offset) { index, dailyForecast in
-                                DayForecastView(dailyForecast: dailyForecast)
+                                DayForecastView(dailyForecast: dailyForecast, timezoneOffset: forecastModel.forecast.timezoneOffset)
                                     .frame(width: UIScreen.main.bounds.width / 4.5)
                                     .background(forecastModel.day == index ? Color(UIColor.navbarBackground()) : Color(UIColor.backgroundPrimary()))
                                     .overlay(forecastModel.day == index ? RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1) : nil)
@@ -65,7 +65,7 @@ struct FullForecastView: View {
                                                      selectorState: SelectorState(rawValue: slidingSelectedIndex) ?? .precipitation)
                                         .frame(width: size.width, height:  size.height)
                                     
-                                    if hourlyForecast.isLastForecastOfDay ?? false {
+                                    if hourlyForecast.isLastForecastOfDay {
                                         HourForecastSeparatorView(day: hourlyForecast.date.nextDay.shortDayOfWeek(timezoneOffset) ?? "-")
                                             .frame(width: size.width, height: size.height)
                                     }
