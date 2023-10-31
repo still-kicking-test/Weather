@@ -77,15 +77,16 @@ struct FullForecastView: View {
                                     }
                                     .onChange(of: forecastModel.day) { day in
                                         withAnimation {
-                                            let dayDate = forecastModel.forecast.daily[day].date
-                                            var calendar = Calendar.current
-                                            calendar.timeZone = TimeZone(secondsFromGMT: forecastModel.forecast.timezoneOffset)!
-                                        
-                                            if let hourly: HourlyForecast = forecastModel.forecast.hourly.first(where: { calendar.isDate(dayDate, inSameDayAs: $0.date) }) {
-                                                pageScroller.scrollTo(hourly.id, anchor: .leading)
+                                            if let firstHourlyId = forecastModel.forecast.firstHourlyId(for: day) {
+                                                pageScroller.scrollTo(firstHourlyId, anchor: .leading)
                                             }
                                         }
                                     }
+                                }
+                            }
+                            .onAppear() {
+                                if let firstHourlyId = forecastModel.forecast.firstHourlyId(for: forecastModel.day) {
+                                    pageScroller.scrollTo(firstHourlyId, anchor: .leading)
                                 }
                             }
                         }
@@ -139,6 +140,16 @@ struct FullForecastView: View {
             }
             return titles
         }
+    }
+}
+
+private extension Forecast {
+    func firstHourlyId(for day: Int) -> UUID? {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(secondsFromGMT: timezoneOffset)!
+        
+        let firstHourlyForecast = hourly.first(where: { calendar.isDate(daily[day].date, inSameDayAs: $0.date) })
+        return firstHourlyForecast?.id
     }
 }
 
