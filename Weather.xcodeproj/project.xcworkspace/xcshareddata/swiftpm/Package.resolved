@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/still-kicking-test/WeatherNetworkingKit",
       "state" : {
-        "revision" : "308dccd0326bdb40d1d4b6eacce8d0d3b1d16c39",
-        "version" : "1.1.0"
+        "revision" : "1272e790dd487b12d749b6be47763aea42d2c613",
+        "version" : "1.2.0"
       }
     }
   ],

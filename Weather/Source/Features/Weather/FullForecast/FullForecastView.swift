@@ -55,19 +55,36 @@ struct FullForecastView: View {
                         .padding([.leading, .trailing], 8)
 
                     ScrollView(.horizontal, showsIndicators: false) {
-                        VStack(spacing: 8) {
-                            HStack(alignment: .top, spacing: 0) {
-                                let timezoneOffset = forecastModel.forecast.timezoneOffset
-                                
-                                ForEach(Array(forecastModel.forecast.hourly.enumerated()), id: \.offset) { index, hourlyForecast in
-                                    let size = CGSize(width: (UIScreen.main.bounds.width - 16) / 6, height: HourForecastView.preferredHeight)
-                                    HourForecastView(hourlyForecast: hourlyForecast, timezoneOffset: timezoneOffset, 
-                                                     selectorState: SelectorState(rawValue: slidingSelectedIndex) ?? .precipitation)
-                                        .frame(width: size.width, height:  size.height)
+                        ScrollViewReader { pageScroller in
+                            VStack(spacing: 8) {
+                                HStack(alignment: .top, spacing: 0) {
+                                    let timezoneOffset = forecastModel.forecast.timezoneOffset
                                     
-                                    if hourlyForecast.isLastForecastOfDay {
-                                        HourForecastSeparatorView(day: hourlyForecast.date.nextDay.shortDayOfWeek(timezoneOffset) ?? "-")
-                                            .frame(width: size.width, height: size.height)
+                                    ForEach(forecastModel.forecast.hourly, id: \.id) { hourlyForecast in
+                                        let size = CGSize(width: (UIScreen.main.bounds.width - 16) / 6, height: HourForecastView.preferredHeight)
+                                        let isFirstForecast = forecastModel.forecast.hourly.first?.id == hourlyForecast.id
+                                        let isLastForecast = forecastModel.forecast.hourly.last?.id == hourlyForecast.id
+                                        
+                                        if hourlyForecast.isFirstForecastOfDay && !isFirstForecast {
+                                            HourForecastSeparatorView(day: hourlyForecast.date.shortDayOfWeek(timezoneOffset) ?? "-")
+                                                .frame(width: size.width, height: size.height)
+                                        }
+                                        
+                                        HourForecastView(hourlyForecast: hourlyForecast, timezoneOffset: timezoneOffset,
+                                                         selectorState: SelectorState(rawValue: slidingSelectedIndex) ?? .precipitation)
+                                        .frame(width: size.width, height:  size.height)
+                                        .padding(.trailing, isLastForecast ? 28 : 0)
+                                    }
+                                    .onChange(of: forecastModel.day) { day in
+                                        withAnimation {
+                                            let dayDate = forecastModel.forecast.daily[day].date
+                                            var calendar = Calendar.current
+                                            calendar.timeZone = TimeZone(secondsFromGMT: forecastModel.forecast.timezoneOffset)!
+                                        
+                                            if let hourly: HourlyForecast = forecastModel.forecast.hourly.first(where: { calendar.isDate(dayDate, inSameDayAs: $0.date) }) {
+                                                pageScroller.scrollTo(hourly.id, anchor: .leading)
+                                            }
+                                        }
                                     }
                                 }
                             }

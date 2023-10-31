@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB0CA5342AEE812E005A2952 /* WeatherNetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB0CA5332AEE812E005A2952 /* WeatherNetworkingKit */; };
 		AB1B51382AB8893F00F8D69D /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B51352AB8893F00F8D69D /* LocationCollectionViewCell.swift */; };
 		AB1B51392AB8893F00F8D69D /* LocationsCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B51362AB8893F00F8D69D /* LocationsCollectionController.swift */; };
 		AB1B513A2AB8893F00F8D69D /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1B51372AB8893F00F8D69D /* LocationCollectionViewCell.xib */; };
@@ -27,6 +26,7 @@
 		AB6F50AF2AA23B0400B86F22 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F50AE2AA23B0400B86F22 /* UIColor+Ext.swift */; };
 		AB7194D32AD014EC00FE7DA6 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7194D22AD014EC00FE7DA6 /* MapsView.swift */; };
 		AB7194D52AD01B6600FE7DA6 /* WarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7194D42AD01B6600FE7DA6 /* WarningsView.swift */; };
+		AB73AECA2AF0FBFF0058884D /* WeatherNetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB73AEC92AF0FBFF0058884D /* WeatherNetworkingKit */; };
 		AB74B67F2AB5F16300F2F492 /* Decimal+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB74B67E2AB5F16300F2F492 /* Decimal+Ext.swift */; };
 		AB7A118F2ACAE8AB007F14ED /* BusyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7A118E2ACAE8AB007F14ED /* BusyViewController.swift */; };
 		AB8136C72AA0EACF005B26B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8136C62AA0EACF005B26B0 /* AppDelegate.swift */; };
@@ -219,7 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB0CA5342AEE812E005A2952 /* WeatherNetworkingKit in Frameworks */,
+				AB73AECA2AF0FBFF0058884D /* WeatherNetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,7 +558,7 @@
 			);
 			name = Weather;
 			packageProductDependencies = (
-				AB0CA5332AEE812E005A2952 /* WeatherNetworkingKit */,
+				AB73AEC92AF0FBFF0058884D /* WeatherNetworkingKit */,
 			);
 			productName = Weather;
 			productReference = AB8136C32AA0EACF005B26B0 /* Weather.app */;
@@ -633,7 +633,7 @@
 			);
 			mainGroup = AB8136BA2AA0EACF005B26B0;
 			packageReferences = (
-				AB0CA5322AEE812E005A2952 /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */,
+				AB73AEC82AF0FBFF0058884D /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */,
 			);
 			productRefGroup = AB8136C42AA0EACF005B26B0 /* Products */;
 			projectDirPath = "";
@@ -1123,7 +1123,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AB0CA5322AEE812E005A2952 /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */ = {
+		AB73AEC82AF0FBFF0058884D /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/still-kicking-test/WeatherNetworkingKit";
 			requirement = {
@@ -1135,9 +1135,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AB0CA5332AEE812E005A2952 /* WeatherNetworkingKit */ = {
+		AB73AEC92AF0FBFF0058884D /* WeatherNetworkingKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AB0CA5322AEE812E005A2952 /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */;
+			package = AB73AEC82AF0FBFF0058884D /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */;
 			productName = WeatherNetworkingKit;
 		};
 /* End XCSwiftPackageProductDependency section */
