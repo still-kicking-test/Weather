@@ -10,23 +10,24 @@ import CoreLocation
 import WeatherNetworkingKit
 
 struct DaySummaryView: View {
-    @ObservedObject var forecastModel: ForecastModel
+    @State var forecast: Forecast
+    @State var selectedDay: Int
     
     var body: some View {
         VStack(spacing: 0) {
             
-            Text(forecastModel.forecast.daily[safe: forecastModel.day]?.displayable.first?.description ?? "")
+            Text(forecast.daily[safe: selectedDay]?.displayable.first?.description ?? "")
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack(spacing: 4) {
                 Text("Day")
                     .padding(.leading)
-                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.max.temperatureString ?? "-")
+                Text(forecast.daily[safe: selectedDay]?.temperature.max.temperatureString ?? "-")
                     .font(Font(UIFont.veryLargeFontBold))
                 Text("/")
                     .font(Font(UIFont.veryLargeFont))
-                Text(forecastModel.forecast.daily[safe: forecastModel.day]?.temperature.min.temperatureString ?? "-")
+                Text(forecast.daily[safe: selectedDay]?.temperature.min.temperatureString ?? "-")
                     .font(Font(UIFont.veryLargeFontBold))
                 Text("Night")
                Spacer()
@@ -40,7 +41,7 @@ struct DaySummaryView_Previews: PreviewProvider {
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        DaySummaryView(forecastModel: ForecastModel(location: location, forecast: forecast, day: 5))
+        DaySummaryView(forecast: forecast, selectedDay: 5)
             .preferredColorScheme(.dark)
     }
 }
