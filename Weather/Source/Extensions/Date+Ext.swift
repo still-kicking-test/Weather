@@ -28,12 +28,4 @@ extension Date {
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: self)
     }
-    
-    func daysInFuture(_ days: Int) -> Date {
-        addingTimeInterval(Double(days * 86400))
-    }
-    
-    var nextDay: Date {
-        daysInFuture(1)
-    }
 }

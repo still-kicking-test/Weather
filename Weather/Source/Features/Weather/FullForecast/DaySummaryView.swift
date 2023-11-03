@@ -10,8 +10,8 @@ import CoreLocation
 import WeatherNetworkingKit
 
 struct DaySummaryView: View {
-    @State var forecast: Forecast
-    @State var selectedDay: Int
+    var forecast: Forecast
+    var selectedDay: Int
     
     var body: some View {
         VStack(spacing: 0) {
