@@ -40,6 +40,7 @@ class SummaryForecastsTableController: NSObject {
         tableView.dataSource = self
         tableView.registerCell(withType: WebViewTableViewCell.self)
         tableView.registerCell(withType: WeatherForecastTableViewCell.self)
+        tableView.registerCell(withType: InlineMessageTableViewCell.self)
     }
     
     private func bind() {
@@ -90,6 +91,13 @@ extension SummaryForecastsTableController: UITableViewDataSource {
             
             cell.configure(with: title, url: url)
             return cell
+            
+        case .inlineMessage(let inlineMessage):
+            guard let cell: InlineMessageTableViewCell = tableView.dequeueReusableCell(withType: InlineMessageTableViewCell.self, for: indexPath)
+            else { return UITableViewCell() }
+            
+            cell.configure(with: inlineMessage)
+            return cell
        }
     }
     
@@ -106,7 +114,7 @@ extension SummaryForecastsTableController: UITableViewDataSource {
 extension SummaryForecastsTableController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        section == tableView.numberOfSections - 1 ? 80 : 10
+        section == tableView.numberOfSections - 1 ? 80 : 10 // add some space at the bottom of the table
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -12,10 +12,10 @@ import WeatherNetworkingKit
 
 enum WeatherDisplayItem {
     static let currentLocationName = "\u{1F4CC} Current location"
-    static let videoTitle = "UK video forecast (from archives)"
 
     case video(title: String, url: URL)
     case location(forecast: Forecast)
+    case inlineMessage(message: InlineMessage)
 }
 
 class WeatherViewModel: NSObject {
@@ -29,10 +29,8 @@ class WeatherViewModel: NSObject {
     private let apiService: APIServiceProtocol
     private let locationManager: LocationManagerProtocol
     private let coreDataManager: CoreDataManager
-
-    /// There is  no easy way to determine the latest MetOffice video forecast, so for the time being, hardcode an existing one...
-    private let videoUrl = URL(string: "https://www.youtube.com/embed/MS8g7QYg6As?playsinline=1")!
-
+    private var inlineMessage: InlineMessage?
+    
     private var locations: [Location] {
         var locations: [Location] = coreDataManager.locations.map { Location(from: $0) }
         
@@ -56,21 +54,32 @@ class WeatherViewModel: NSObject {
 
     var displayItemCount: Int {
         forecast.count + (locationManager.showVideo ? 1 : 0)
+                       + (inlineMessage != nil ? 1 : 0)
     }
 
     func displayItem(forIndex index: Int) -> WeatherDisplayItem? {
         var forecastOffset = 0
-        var showVideoAt: Int?
+
+        if let inlineMessage = inlineMessage {
+            let showInlineMessageAt = 0  // always show an inline message in the first cell
+            if index == showInlineMessageAt {
+                return .inlineMessage(message: inlineMessage)
+            }
+            forecastOffset = 1
+        }
         
         if locationManager.showVideo {
-            showVideoAt = locations.containsCurrentLocation ? 1 : 0
-            forecastOffset = index > showVideoAt! ? 1 : 0
+            let showVideoAt = forecastOffset + (locations.containsCurrentLocation ? 1 : 0)
+            if index == showVideoAt {
+                /// There is  no easy way to determine the latest MetOffice video forecast, so for the time being, hardcode an existing one...
+                let videoUrl = URL(string: "https://www.youtube.com/embed/MS8g7QYg6As?playsinline=1")!
+                let videoTitle = "UK video forecast (from archives)"
+
+                return .video(title: videoTitle, url: videoUrl)
+            }
+            forecastOffset += index > showVideoAt ? 1 : 0
         }
         
-        if index == showVideoAt {
-            return .video(title: WeatherDisplayItem.videoTitle, url: videoUrl)
-        }
-
         guard forecast.indices.contains(index - forecastOffset) else { return nil }
         return .location(forecast: forecast[index - forecastOffset])
     }
@@ -84,9 +93,14 @@ class WeatherViewModel: NSObject {
             self.apiService.getForecasts(locations: self.locations)
                 .sink{
                     self.isLoading = false
+                    self.inlineMessage = nil
                     switch $0 {
                     case .failure(let error): self.generalError = error
-                    case .success(let value): self.forecast = value
+                    case .success(let value): 
+                        if value.isEmpty {
+                            self.inlineMessage = .noSummariesToDisplay
+                        }
+                        self.forecast = value
                     }
                 }
                 .store(in: &self.cancellables)
