@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SelectableCollectionViewCellDelegate: AnyObject {
-    func changedValue(sender: UISwitch)
+    func cell(_ cell: SelectableCollectionViewCell, didChangeSelectableValueTo newValue: Bool)
 }
 
 class SelectableCollectionViewCell: UICollectionViewCell {
@@ -42,6 +42,6 @@ class SelectableCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func didChangeSwitch(sender: UISwitch) {
-        delegate?.changedValue(sender: sender)
+        delegate?.cell(self, didChangeSelectableValueTo: sender.isOn)
     }
 }

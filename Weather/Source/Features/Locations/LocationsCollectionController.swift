@@ -54,7 +54,7 @@ extension LocationsCollectionController: UICollectionViewDataSource {
         guard let displayItem = viewModel?.displayItem(forIndex: indexPath.row) else { return UICollectionViewCell() }
         
         switch displayItem {
-        case .local(let isEnabled):
+        case .currentLocation(let isEnabled):
             guard let cell: SelectableCollectionViewCell = collectionView.dequeueReusableCell(withType: SelectableCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
             
@@ -65,7 +65,7 @@ extension LocationsCollectionController: UICollectionViewDataSource {
             guard let cell: LocationCollectionViewCell = collectionView.dequeueReusableCell(withType: LocationCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
             
-            cell.configure(with: value, for: indexPath)
+            cell.configure(with: value, delegate: self)
             return cell
             
         case .video(let isEnabled):
@@ -114,8 +114,18 @@ extension LocationsCollectionController: UICollectionViewDragDelegate, UICollect
 }
 
 extension LocationsCollectionController: SelectableCollectionViewCellDelegate {
-    func changedValue(sender: UISwitch) {
-        viewModel?.valueDidChangeAt(IndexPath(row: sender.tag, section: 0),
-                                    with: sender.isOn)
+    func cell(_ cell: SelectableCollectionViewCell, didChangeSelectableValueTo newValue: Bool) {
+        guard let viewModel = viewModel,
+              let indexPath = collectionView.indexPath(for: cell) else { return }
+        viewModel.valueDidChangeAt(indexPath, with: newValue)
+    }
+}
+
+extension LocationsCollectionController: LocationCollectionViewCellProtocol {
+    func didTapDeleteForCell(_ cell: LocationCollectionViewCell) {
+        guard let viewModel = viewModel,
+              let indexPath = collectionView.indexPath(for: cell) else { return }
+        viewModel.deleteLocationAt(indexPath)
+        collectionView.deleteItems(at: [indexPath])
     }
 }

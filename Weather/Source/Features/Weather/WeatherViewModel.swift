@@ -72,7 +72,7 @@ class WeatherViewModel: NSObject {
             let showVideoAt = forecastOffset + (locations.containsCurrentLocation ? 1 : 0)
             if index == showVideoAt {
                 /// There is  no easy way to determine the latest MetOffice video forecast, so for the time being, hardcode an existing one...
-                let videoUrl = URL(string: "https://www.youtube.com/embed/MS8g7QYg6As?playsinline=1")!
+                let videoUrl = URL(string: "https://www.youtube.com/embed/UxFyCqJoOpE?playsinline=1")!
                 let videoTitle = "UK video forecast (from archives)"
 
                 return .video(title: videoTitle, url: videoUrl)

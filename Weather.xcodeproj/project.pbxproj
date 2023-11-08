@@ -250,14 +250,11 @@
 		AB40B9F72AB1B96A00A00DCB /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				AB65E9A62AFBA8AF00A5459C /* Cells */,
 				AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */,
 				AB40BA032AB20E5800A00DCB /* LocationsViewController.swift */,
 				AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */,
 				AB1B51362AB8893F00F8D69D /* LocationsCollectionController.swift */,
-				AB1B51352AB8893F00F8D69D /* LocationCollectionViewCell.swift */,
-				AB1B51372AB8893F00F8D69D /* LocationCollectionViewCell.xib */,
-				AB1B514C2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift */,
-				AB1B514B2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib */,
 			);
 			path = Locations;
 			sourceTree = "<group>";
@@ -271,6 +268,17 @@
 				AB87CAA02AC5AC9900428046 /* SettingsRowModifier.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		AB65E9A62AFBA8AF00A5459C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AB1B51352AB8893F00F8D69D /* LocationCollectionViewCell.swift */,
+				AB1B51372AB8893F00F8D69D /* LocationCollectionViewCell.xib */,
+				AB1B514C2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift */,
+				AB1B514B2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		AB6799E02AFA515C0091B7FF /* InlineMessageCell */ = {

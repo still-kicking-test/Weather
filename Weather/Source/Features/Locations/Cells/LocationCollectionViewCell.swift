@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LocationCollectionViewCellProtocol: NSObject {
+    func didTapDeleteForCell(_ cell: LocationCollectionViewCell)
+}
+
 class LocationCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var name: UILabel!
@@ -14,6 +18,7 @@ class LocationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var deleteButton: UIButton!
 
     private var location: CDLocation?
+    private weak var delegate: LocationCollectionViewCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,13 +35,14 @@ class LocationCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with location: CDLocation,
-                   for indexPath: IndexPath) {
+                   delegate: LocationCollectionViewCellProtocol) {
         self.location = location
+        self.delegate = delegate
         name.text = location.name
     }
 
-    @objc
-    private func deleteLocation(sender: UIButton) {
-        print("tapped delete \(sender.tag))")
+    @IBAction
+    func deleteLocation(sender: UIButton) {
+        delegate?.didTapDeleteForCell(self)
     }
 }

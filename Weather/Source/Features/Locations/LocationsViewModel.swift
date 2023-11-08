@@ -13,7 +13,7 @@ import WeatherNetworkingKit
 enum LocationsDisplayItem {
     case location(value: CDLocation)
     case video(isEnabled: Bool)
-    case local(isEnabled: Bool)
+    case currentLocation(isEnabled: Bool)
 }
 
 class LocationsViewModel {
@@ -24,8 +24,14 @@ class LocationsViewModel {
     private var locationManager: LocationManagerProtocol
     private let coreDataManager: CoreDataManager
     private var cancellables = Set<AnyCancellable>()
-    private let immovableDisplayItemsCount = 2 // allows for the current-location and UK-video rows
     
+    private enum StaticDisplayItems: Int, CaseIterable {
+        case currentLocation
+        case video
+    }
+
+    fileprivate static var staticDisplayItemsCount: Int { StaticDisplayItems.allCases.count }
+
     init(apiService: APIServiceProtocol,
          locationManager: LocationManagerProtocol,
          coreDataManager: CoreDataManager) {
@@ -37,17 +43,19 @@ class LocationsViewModel {
     public var displayItemsCount: Int {
         // Could use a derived data type here (locationsCount) for the count, but that would
         // require the creation of another entity just to hold that count, so a bit of an overkill.
-        coreDataManager.locations.count + immovableDisplayItemsCount
+        coreDataManager.locations.count + LocationsViewModel.staticDisplayItemsCount
     }
     
     public func displayItem(forIndex index: Int) -> LocationsDisplayItem? {
         switch index {
-        case 0:
-            return .local(isEnabled: locationManager.showCurrentLocation)
-        case 1:
+        case StaticDisplayItems.currentLocation.rawValue:
+            return .currentLocation(isEnabled: locationManager.showCurrentLocation)
+
+        case StaticDisplayItems.video.rawValue:
             return .video(isEnabled: locationManager.showVideo)
+        
         default:
-            let locationIndex = index - immovableDisplayItemsCount
+            let locationIndex = index - LocationsViewModel.staticDisplayItemsCount
             if coreDataManager.locations.indices.contains(locationIndex) {
                 return .location(value: coreDataManager.locations[locationIndex])
             } else {
@@ -58,35 +66,35 @@ class LocationsViewModel {
     
     func valueDidChangeAt(_ indexPath: IndexPath, with value: Bool) {
         switch indexPath.row {
-        case 0: locationManager.showCurrentLocation = value
+        case StaticDisplayItems.currentLocation.rawValue: locationManager.showCurrentLocation = value
                 if value {
                     locationManager.requestAuthorizationIfRequired()
                 }
-        case 1: locationManager.showVideo = value
+        case StaticDisplayItems.video.rawValue: locationManager.showVideo = value
         default: break
         }
     }
 
-    func removeLocationAt(_ indexPath: IndexPath, shouldPersist: Bool = true) {
-        coreDataManager.locations.remove(at: indexPath.row)
-        if shouldPersist {
-            saveChanges()
-        }
+    func deleteLocationAt(_ indexPath: IndexPath) {
+        guard let indexPath = indexPath.ignoreStaticDisplayItems else { return }
+        coreDataManager.deleteLocationAt(indexPath.row)
+        saveChanges()
     }
     
     func insertLocation(_ location: CDLocation, at indexPath: IndexPath, shouldPersist: Bool = true) {
+        guard let indexPath = indexPath.ignoreStaticDisplayItems else { return }
         coreDataManager.locations.insert(location, at: indexPath.row)
         saveChanges()
     }
     
     func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let sourceIndexPath = sourceIndexPath.previousRow(step: immovableDisplayItemsCount),
-              let destinationIndexPath = destinationIndexPath.previousRow(step: immovableDisplayItemsCount) else { return }
+        guard let sourceIndexPath = sourceIndexPath.ignoreStaticDisplayItems,
+              let destinationIndexPath = destinationIndexPath.ignoreStaticDisplayItems else { return }
               
         let location = coreDataManager.locations[sourceIndexPath.row]
-        removeLocationAt(sourceIndexPath, shouldPersist: false)
-        insertLocation(location, at: destinationIndexPath, shouldPersist: false)
-        
+        coreDataManager.locations.remove(at: sourceIndexPath.row)
+        coreDataManager.locations.insert(location, at: destinationIndexPath.row)
+ 
         for i in 0..<coreDataManager.locations.count {
             coreDataManager.locations[i].displayOrder = Int16(i)
         }
@@ -95,10 +103,16 @@ class LocationsViewModel {
     }
     
     func canMoveItemAt(_ indexPath: IndexPath) -> Bool {
-        indexPath.row >= immovableDisplayItemsCount
+        indexPath.row >= LocationsViewModel.staticDisplayItemsCount
     }
 
     func saveChanges() {
         coreDataManager.saveContext()
+    }
+}
+
+fileprivate extension IndexPath {
+    var ignoreStaticDisplayItems: IndexPath? {
+        previousRow(step: LocationsViewModel.staticDisplayItemsCount)
     }
 }

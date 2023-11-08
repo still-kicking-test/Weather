@@ -73,6 +73,13 @@ class CoreDataManager {
         }
     }
     
+    func deleteLocationAt(_ row: Int) {
+        guard let moc = moc,
+              let managedObject = locations[safe: row] else { return }
+        locations.remove(at: row)
+        moc.delete(managedObject)
+    }
+
     func addLocation(displayOrder: Int,
                      name: String,
                      latitude: Decimal,
