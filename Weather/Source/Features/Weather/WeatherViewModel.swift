@@ -108,8 +108,8 @@ class WeatherViewModel: NSObject {
     }
 
     private func observeReloadTriggers() {
-        // Simple observations of a Notification triggered when either CoreData (i.e. the set of location) is changed
-        // or when the Settings options (show video, etc.) are changed. To keep things simple, we simply refresh
+        // Simple observations of a Notification triggered when either CoreData (i.e. the set of locations) is changed
+        // or when one of the Settings options (show video, etc.) is changed. To keep things simple, we simply refresh
         // the whole screen with an API call. Nice and clean...
         NotificationCenter.default.addObserver(self, selector: #selector(loadForecasts), name: .coreDataSaved, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadForecasts), name: UIApplication.willEnterForegroundNotification, object: nil)

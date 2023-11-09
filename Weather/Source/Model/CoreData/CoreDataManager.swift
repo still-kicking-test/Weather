@@ -66,8 +66,8 @@ class CoreDataManager {
         // locationRequest.predicate = NSPredicate(format: "name BEGINSWITH %@", "L")
         do {
             try locations = moc.fetch(locationRequest)
-            print("CoreData locations:\n")
-            for location in locations { print("[displayOrder: \(location.displayOrder), name: \(location.name), lat: \(location.latitude), lon:\(location.longitude), country: \(location.country), state: \(location.state)]") }
+            // print("CoreData locations:\n")
+            // for location in locations { print("[displayOrder: \(location.displayOrder), name: \(location.name), lat: \(location.latitude), lon:\(location.longitude), country: \(location.country), state: \(location.state)]") }
         } catch {
             print("Could not load locations")
         }
@@ -102,8 +102,13 @@ class CoreDataManager {
 extension CoreDataManager {
     
     // DEV ONLY
-    func loadTestDataIfEmpty() {
-        guard locations.isEmpty else { return }
+    func loadTestData(onlyIfEmpty: Bool) {
+        guard (onlyIfEmpty && locations.isEmpty) || onlyIfEmpty == false else { return }
+        
+        while locations.isEmpty == false {
+            deleteLocationAt(0)
+        }
+        saveContext()
         
         CoreDataManager.shared.addLocation(displayOrder: 0, name: "London", latitude: 51.4875167, longitude: -0.1687007, country: "GB", state: "England")
         CoreDataManager.shared.addLocation(displayOrder: 1, name: "Chicago", latitude: 41.8755616, longitude: -87.6244212, country: "US", state: "Illinois")

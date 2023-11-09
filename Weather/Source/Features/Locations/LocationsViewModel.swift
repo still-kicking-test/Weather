@@ -11,9 +11,13 @@ import UIKit
 import WeatherNetworkingKit
 
 enum LocationsDisplayItem {
+    static let searchPlaceholder = "Search & save your places"
+    static let videoTitle = "UK video forecast"
+
     case location(value: CDLocation)
     case video(isEnabled: Bool)
     case currentLocation(isEnabled: Bool)
+    case search
 }
 
 class LocationsViewModel {
@@ -26,6 +30,7 @@ class LocationsViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     private enum StaticDisplayItems: Int, CaseIterable {
+        case search
         case currentLocation
         case video
     }
@@ -48,6 +53,9 @@ class LocationsViewModel {
     
     public func displayItem(forIndex index: Int) -> LocationsDisplayItem? {
         switch index {
+        case StaticDisplayItems.search.rawValue:
+            return .search
+
         case StaticDisplayItems.currentLocation.rawValue:
             return .currentLocation(isEnabled: locationManager.showCurrentLocation)
 
@@ -64,6 +72,18 @@ class LocationsViewModel {
         }
     }
     
+    func searchTapped() {
+        // Until we have a decent city search API, the search field is just a tappable button - we ask the user
+        // if they want to reset the locations to the set of test locations...
+        let message = "Location search is not yet implemented. Do you wish to update your locations to the set of test locations?"
+        let alertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "No", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Update locations", style: .destructive) { _ in self.coreDataManager.loadTestData(onlyIfEmpty: false) })
+        
+        let topController = UIApplication.shared.topViewController()
+        topController?.present(alertController, animated: true)
+     }
+
     func valueDidChangeAt(_ indexPath: IndexPath, with value: Bool) {
         switch indexPath.row {
         case StaticDisplayItems.currentLocation.rawValue: locationManager.showCurrentLocation = value
@@ -114,5 +134,38 @@ class LocationsViewModel {
 fileprivate extension IndexPath {
     var ignoreStaticDisplayItems: IndexPath? {
         previousRow(step: LocationsViewModel.staticDisplayItemsCount)
+    }
+}
+
+// Temporary - can be removed when searchTapped no longer displays a message
+private extension UIApplication {
+    func topViewController() -> UIViewController? {
+        var topViewController: UIViewController? = nil
+        if #available(iOS 13, *) {
+            for scene in connectedScenes {
+                if let windowScene = scene as? UIWindowScene {
+                    for window in windowScene.windows {
+                        if window.isKeyWindow {
+                            topViewController = window.rootViewController
+                        }
+                    }
+                }
+            }
+        } else {
+            topViewController = keyWindow?.rootViewController
+        }
+        while true {
+            if let presented = topViewController?.presentedViewController {
+                topViewController = presented
+            } else if let navController = topViewController as? UINavigationController {
+                topViewController = navController.topViewController
+            } else if let tabBarController = topViewController as? UITabBarController {
+                topViewController = tabBarController.selectedViewController
+            } else {
+                // Handle any other third party container in `else if` if required
+                break
+            }
+        }
+        return topViewController
     }
 }

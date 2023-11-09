@@ -21,6 +21,8 @@
 		AB40BA062AB20E5900A00DCB /* LocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */; };
 		AB40BA0C2AB20F0C00A00DCB /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */; };
 		AB5014062AE92EAB005026E6 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5014052AE92EAB005026E6 /* DateTests.swift */; };
+		AB65E9A92AFBDA6500A5459C /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB65E9A72AFBDA6500A5459C /* SearchCollectionViewCell.xib */; };
+		AB65E9AA2AFBDA6500A5459C /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65E9A82AFBDA6500A5459C /* SearchCollectionViewCell.swift */; };
 		AB6799DD2AFA45560091B7FF /* InlineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6799DC2AFA45560091B7FF /* InlineMessage.swift */; };
 		AB6799DE2AFA45560091B7FF /* InlineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6799DC2AFA45560091B7FF /* InlineMessage.swift */; };
 		AB6799E32AFA515C0091B7FF /* InlineMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6799E12AFA515C0091B7FF /* InlineMessageTableViewCell.swift */; };
@@ -137,6 +139,8 @@
 		AB40BA042AB20E5800A00DCB /* LocationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationsViewController.xib; sourceTree = "<group>"; };
 		AB40BA0B2AB20F0C00A00DCB /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		AB5014052AE92EAB005026E6 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		AB65E9A72AFBDA6500A5459C /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
+		AB65E9A82AFBDA6500A5459C /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB6799DC2AFA45560091B7FF /* InlineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineMessage.swift; sourceTree = "<group>"; };
 		AB6799E12AFA515C0091B7FF /* InlineMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineMessageTableViewCell.swift; sourceTree = "<group>"; };
 		AB6799E22AFA515C0091B7FF /* InlineMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InlineMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 		AB65E9A62AFBA8AF00A5459C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				AB65E9A82AFBDA6500A5459C /* SearchCollectionViewCell.swift */,
+				AB65E9A72AFBDA6500A5459C /* SearchCollectionViewCell.xib */,
 				AB1B51352AB8893F00F8D69D /* LocationCollectionViewCell.swift */,
 				AB1B51372AB8893F00F8D69D /* LocationCollectionViewCell.xib */,
 				AB1B514C2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift */,
@@ -687,6 +693,7 @@
 				AB872BE22AA355E200EA5ACB /* WeatherForecastTableViewCell.xib in Resources */,
 				ABB36DA42ABAF402007255A8 /* README.md in Resources */,
 				AB8739842AEBC01B005AF5D8 /* OneCall(21.316,-157.801).json in Resources */,
+				AB65E9A92AFBDA6500A5459C /* SearchCollectionViewCell.xib in Resources */,
 				AB819B9D2ACEE80700DF11A4 /* OneCall(41.893,12.483).json in Resources */,
 				AB1B514D2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib in Resources */,
 				AB819B992ACEDE0400DF11A4 /* OneCall(51.488,-0.169).json in Resources */,
@@ -795,6 +802,7 @@
 				AB6F509F2AA21A5E00B86F22 /* MapsCoordinator.swift in Sources */,
 				AB1B51482AB9CEB400F8D69D /* TabBarController.swift in Sources */,
 				AB8FBE8B2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift in Sources */,
+				AB65E9AA2AFBDA6500A5459C /* SearchCollectionViewCell.swift in Sources */,
 				AB81371D2AA1EDDD005B26B0 /* TabBarCoordinator.swift in Sources */,
 				AB1B51462AB9BC9A00F8D69D /* CDLocation+Ext.swift in Sources */,
 				AB87D1F72ACC61F800D1067A /* CDLocation+CoreDataProperties.swift in Sources */,

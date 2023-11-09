@@ -25,6 +25,7 @@ class LocationsCollectionController: NSObject {
     private func initUI() {
         collectionView.registerCell(withType: LocationCollectionViewCell.self)
         collectionView.registerCell(withType: SelectableCollectionViewCell.self)
+        collectionView.registerCell(withType: SearchCollectionViewCell.self)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -54,6 +55,13 @@ extension LocationsCollectionController: UICollectionViewDataSource {
         guard let displayItem = viewModel?.displayItem(forIndex: indexPath.row) else { return UICollectionViewCell() }
         
         switch displayItem {
+        case .search:
+            guard let cell: SearchCollectionViewCell = collectionView.dequeueReusableCell(withType: SearchCollectionViewCell.self, for: indexPath)
+            else { return UICollectionViewCell() }
+            
+            cell.configure(with: LocationsDisplayItem.searchPlaceholder, delegate: self)
+            return cell
+            
         case .currentLocation(let isEnabled):
             guard let cell: SelectableCollectionViewCell = collectionView.dequeueReusableCell(withType: SelectableCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
@@ -72,7 +80,7 @@ extension LocationsCollectionController: UICollectionViewDataSource {
             guard let cell: SelectableCollectionViewCell = collectionView.dequeueReusableCell(withType: SelectableCollectionViewCell.self, for: indexPath)
             else { return UICollectionViewCell() }
             
-            cell.configure(with: isEnabled, text: "UK video forecast", for: indexPath, delegate: self)
+            cell.configure(with: isEnabled, text:  LocationsDisplayItem.videoTitle, for: indexPath, delegate: self)
             return cell
         }
     }
@@ -121,11 +129,18 @@ extension LocationsCollectionController: SelectableCollectionViewCellDelegate {
     }
 }
 
-extension LocationsCollectionController: LocationCollectionViewCellProtocol {
+extension LocationsCollectionController: LocationCollectionViewCellDelegate {
     func didTapDeleteForCell(_ cell: LocationCollectionViewCell) {
         guard let viewModel = viewModel,
               let indexPath = collectionView.indexPath(for: cell) else { return }
         viewModel.deleteLocationAt(indexPath)
-        collectionView.deleteItems(at: [indexPath])
+    }
+}
+
+extension LocationsCollectionController: SearchCollectionViewCellDelegate {
+    // Until we have a decent city search API, the search field is just a tappable button
+    func searchTapped() {
+        guard let viewModel = viewModel else { return }
+        viewModel.searchTapped()
     }
 }
