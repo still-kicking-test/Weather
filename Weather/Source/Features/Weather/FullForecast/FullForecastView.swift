@@ -108,6 +108,13 @@ struct FullForecastView: View {
                     .clipShape(.rect( bottomLeadingRadius: 12, bottomTrailingRadius: 12))
                     .padding([.leading, .trailing], 8)
                     
+                    SunriseSunsetView(forecast: forecast, selectedDay: selectedDay)
+                        .padding(16)
+                        .background(Color(UIColor.backgroundPrimary()))
+                        .cornerRadius(12)
+                        .padding([.leading, .trailing], 8)
+                        .padding([.top], 24)
+
                     Spacer()
                 }
                 .foregroundColor(Color(UIColor.defaultText()))

@@ -15,6 +15,7 @@
 		AB1B514A2AB9E6BE00F8D69D /* CALayer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B51492AB9E6BE00F8D69D /* CALayer+Ext.swift */; };
 		AB1B514D2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1B514B2AB9F3E900F8D69D /* SelectableCollectionViewCell.xib */; };
 		AB1B514E2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B514C2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift */; };
+		AB2787F72AFD28A700F6B2B3 /* WeatherNetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB2787F62AFD28A700F6B2B3 /* WeatherNetworkingKit */; };
 		AB391A942AB1A6B900199EFD /* IndexPath+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB391A932AB1A6B900199EFD /* IndexPath+Ext.swift */; };
 		AB40B9FC2AB1C0FC00A00DCB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B9FB2AB1C0FC00A00DCB /* SettingsView.swift */; };
 		AB40BA052AB20E5900A00DCB /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40BA032AB20E5800A00DCB /* LocationsViewController.swift */; };
@@ -103,8 +104,8 @@
 		AB9A8FEF2AE41773003FAA6D /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A8FEE2AE41773003FAA6D /* WeatherCollectionViewCell.swift */; };
 		AB9A8FF52AE41E90003FAA6D /* WebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9A8FF32AE41E90003FAA6D /* WebViewTableViewCell.swift */; };
 		AB9A8FF62AE41E90003FAA6D /* WebViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9A8FF42AE41E90003FAA6D /* WebViewTableViewCell.xib */; };
+		AB9AB2842AFD128600532FE7 /* SunriseSunsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9AB2832AFD128600532FE7 /* SunriseSunsetView.swift */; };
 		ABB36DA42ABAF402007255A8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ABB36DA32ABAF402007255A8 /* README.md */; };
-		ABD839372AFA658C0067FA7A /* WeatherNetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = ABD839362AFA658C0067FA7A /* WeatherNetworkingKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +223,7 @@
 		AB9A8FEE2AE41773003FAA6D /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB9A8FF32AE41E90003FAA6D /* WebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewTableViewCell.swift; sourceTree = "<group>"; };
 		AB9A8FF42AE41E90003FAA6D /* WebViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewTableViewCell.xib; sourceTree = "<group>"; };
+		AB9AB2832AFD128600532FE7 /* SunriseSunsetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseSunsetView.swift; sourceTree = "<group>"; };
 		ABB36DA32ABAF402007255A8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 /* End PBXFileReference section */
 
@@ -230,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABD839372AFA658C0067FA7A /* WeatherNetworkingKit in Frameworks */,
+				AB2787F72AFD28A700F6B2B3 /* WeatherNetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				AB98FF032AD3EE4C00DF821F /* FullForecastView.swift */,
+				AB9AB2832AFD128600532FE7 /* SunriseSunsetView.swift */,
 				AB98FF092AD5495700DF821F /* DaySummaryView.swift */,
 				AB98FF052AD433DC00DF821F /* DayForecastView.swift */,
 				AB934C092AE4748B00766CE6 /* HourForecastView.swift */,
@@ -589,7 +592,7 @@
 			);
 			name = Weather;
 			packageProductDependencies = (
-				ABD839362AFA658C0067FA7A /* WeatherNetworkingKit */,
+				AB2787F62AFD28A700F6B2B3 /* WeatherNetworkingKit */,
 			);
 			productName = Weather;
 			productReference = AB8136C32AA0EACF005B26B0 /* Weather.app */;
@@ -664,7 +667,7 @@
 			);
 			mainGroup = AB8136BA2AA0EACF005B26B0;
 			packageReferences = (
-				ABD839352AFA658C0067FA7A /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */,
+				AB2787F52AFD28A700F6B2B3 /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */,
 			);
 			productRefGroup = AB8136C42AA0EACF005B26B0 /* Products */;
 			projectDirPath = "";
@@ -793,6 +796,7 @@
 				AB7A118F2ACAE8AB007F14ED /* BusyViewController.swift in Sources */,
 				AB81371F2AA1EE13005B26B0 /* TabBarItem.swift in Sources */,
 				AB8136C72AA0EACF005B26B0 /* AppDelegate.swift in Sources */,
+				AB9AB2842AFD128600532FE7 /* SunriseSunsetView.swift in Sources */,
 				AB1B51392AB8893F00F8D69D /* LocationsCollectionController.swift in Sources */,
 				AB40BA052AB20E5900A00DCB /* LocationsViewController.swift in Sources */,
 				AB8FBE842AAA326800AA51CC /* SummaryForecastCollectionViewCell.swift in Sources */,
@@ -1161,20 +1165,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ABD839352AFA658C0067FA7A /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */ = {
+		AB2787F52AFD28A700F6B2B3 /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/still-kicking-test/WeatherNetworkingKit";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = versionRange;
+				maximumVersion = 2.0.0;
 				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ABD839362AFA658C0067FA7A /* WeatherNetworkingKit */ = {
+		AB2787F62AFD28A700F6B2B3 /* WeatherNetworkingKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ABD839352AFA658C0067FA7A /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */;
+			package = AB2787F52AFD28A700F6B2B3 /* XCRemoteSwiftPackageReference "WeatherNetworkingKit" */;
 			productName = WeatherNetworkingKit;
 		};
 /* End XCSwiftPackageProductDependency section */
