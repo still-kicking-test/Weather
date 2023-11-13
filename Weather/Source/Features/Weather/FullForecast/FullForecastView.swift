@@ -17,6 +17,7 @@ struct FullForecastView: View {
     @State private var dailyScrollIndex: Int?
     @State private var hourlyScrollIndex: Int?
     @State private var slidingSelectedIndex: Int = 0
+    @State private var selectorState: SelectorState = .precipitation
 
     private var calendar: Calendar {
         var calendar = Calendar.current
@@ -29,7 +30,7 @@ struct FullForecastView: View {
         NavigationStack() {
             ZStack {
                 Color(UIColor.navbarBackground()).ignoresSafeArea()
-                
+
                 VStack(spacing: 0) {
                     Divider()
                         .background(Color(UIColor.backgroundPrimary()))
@@ -57,65 +58,65 @@ struct FullForecastView: View {
                     }
                     .scrollPosition(id: $dailyScrollIndex, anchor: .center)
                     .background(Color(UIColor.backgroundPrimary()))
-                    
-                    DaySummaryView(forecast: forecast, selectedDay: selectedDay)
-                        .padding([.top, .bottom])
-                    
-                    SlidingSelectorView(selectedIndex: $slidingSelectedIndex, titles: SelectorState.titles)
-                        .padding(16)
-                        .background(Color(UIColor.backgroundPrimary()))
-                        .clipShape(.rect( topLeadingRadius: 12, topTrailingRadius: 12))
-                        .padding([.leading, .trailing], 8)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        VStack(spacing: 8) {
-                            HStack(alignment: .top, spacing: 0) {
-                                let timezoneOffset = forecast.timezoneOffset
+ 
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 0) {
+
+                             DaySummaryView(forecast: forecast, selectedDay: selectedDay)
+                                .padding([.top, .bottom])
+
+                            SlidingSelectorView(selectedIndex: $slidingSelectedIndex, titles: SelectorState.titles)
+                                .padding(16)
+                                .background(Color(UIColor.backgroundPrimary()))
+                                .clipShape(.rect( topLeadingRadius: defaultCornerRadius, topTrailingRadius: defaultCornerRadius))
+                                .padding([.leading, .trailing], 8)
+                                .onChange(of: slidingSelectedIndex) { oldValue, newValue in
+                                    selectorState = SelectorState(rawValue: newValue) ?? .precipitation
+                                }
+                            
+                            ZStack() {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    VStack(spacing: 0) {
+                                        HourlyForecastsView(forecast: forecast, contentType: .multiple(selectorState))
                                     
-                                ForEach(Array(forecast.hourly.enumerated()), id: \.offset) { index, hourlyForecast in
-                                    let size = CGSize(width: (UIScreen.main.bounds.width - 16) / 6, height: HourForecastView.preferredHeight)
-                                    let isFirstForecast = forecast.hourly.first?.id == hourlyForecast.id
-                                    let isLastForecast = forecast.hourly.last?.id == hourlyForecast.id
-                                        
-                                    HStack(spacing: 0) {
-                                        if hourlyForecast.isFirstForecastOfDay && !isFirstForecast {
-                                            HourForecastSeparatorView(day: hourlyForecast.date.shortDayOfWeek(timezoneOffset) ?? "-")
-                                                .frame(width: size.width, height: size.height)
-                                        }
-                                        
-                                        HourForecastView(hourlyForecast: hourlyForecast,
-                                                         timezoneOffset: timezoneOffset,
-                                                         selectorState: SelectorState(rawValue: slidingSelectedIndex) ?? .precipitation)
-                                        .frame(width: size.width, height:  size.height)
-                                        .padding(.trailing, isLastForecast ? 28 : 0)
+                                        Rectangle()
+                                            .frame(height: FullForecastOverlayView.height)
+                                    
+                                        HourlyForecastsView(forecast: forecast, contentType: .wind)
+                                            .scrollTargetLayout()
                                     }
                                 }
+                                
+                                FullForecastOverlayView()
+                                    .frame(height: FullForecastOverlayView.height)
+                                    .background(Color(UIColor.navbarBackground()))
+                                    .offset(y: ((HourForecastMultipleView.preferredHeight - HourForecastWindView.preferredHeight) / 2))
                             }
-                            .scrollTargetLayout()
-                        }
-                    }
-                    .scrollPosition(id: $hourlyScrollIndex)
-                    .onAppear() { hourlyScrollIndex = hourlyScrollIndex(for: selectedDay, in: forecast) }
-                    .onChange(of: hourlyScrollIndex) { oldValue, newValue in
-                        if let newValue = newValue,
-                           let index = dailyScrollIndex(for: newValue, in: forecast) {
-                            selectedDay = index
-                            withAnimation { dailyScrollIndex = index }
-                        }
-                    }
-                    .padding([.top, .bottom], 8)
-                    .background(Color(UIColor.backgroundPrimary()))
-                    .clipShape(.rect( bottomLeadingRadius: 12, bottomTrailingRadius: 12))
-                    .padding([.leading, .trailing], 8)
-                    
-                    SunriseSunsetView(forecast: forecast, selectedDay: selectedDay)
-                        .padding(16)
-                        .background(Color(UIColor.backgroundPrimary()))
-                        .cornerRadius(12)
-                        .padding([.leading, .trailing], 8)
-                        .padding([.top], 24)
+                            .background(Color(UIColor.backgroundPrimary()))
+                            .padding([.leading, .trailing], 8)
+                            .scrollPosition(id: $hourlyScrollIndex)
+                            .onAppear() { hourlyScrollIndex = hourlyScrollIndex(for: selectedDay, in: forecast) }
+                            .onChange(of: hourlyScrollIndex) { oldValue, newValue in
+                                if let newValue = newValue,
+                                   let index = dailyScrollIndex(for: newValue, in: forecast) {
+                                    selectedDay = index
+                                    withAnimation { dailyScrollIndex = index }
+                                }
+                            }
+                            
+                            Rectangle()
+                                .foregroundColor(Color(UIColor.backgroundPrimary()))
+                                .clipShape(.rect( bottomLeadingRadius: defaultCornerRadius, bottomTrailingRadius: defaultCornerRadius))
+                                .padding([.leading, .trailing], 8)
 
-                    Spacer()
+                            SunriseSunsetView(forecast: forecast, selectedDay: selectedDay)
+                                .padding(16)
+                                .background(Color(UIColor.backgroundPrimary()))
+                                .cornerRadius(defaultCornerRadius)
+                                .padding([.leading, .trailing], 8)
+                                .padding([.top], 24)
+                        }
+                    }
                 }
                 .foregroundColor(Color(UIColor.defaultText()))
                 .font(Font(UIFont.defaultFont))

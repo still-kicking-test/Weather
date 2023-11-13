@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     
     static var forceMode: UIUserInterfaceStyle = .dark // very quick and dirty DEV-ONLY way to force darkmode until I have implemented sensible light colours
 
@@ -23,6 +23,7 @@ extension UIColor {
             static let buttonNormal = UIColor.gray
             static let buttonDisabled = UIColor.lightGray
             static let buttonHighlighted = UIColor(red: 0.8, green: 1, blue: 0.2, alpha:1)
+            static let windAndRain = UIColor(red: 0.3, green: 0.7, blue: 0.97, alpha:1)
        }
         enum light {
             static let defaultText = UIColor.black
@@ -35,6 +36,7 @@ extension UIColor {
             static let buttonNormal = UIColor.gray
             static let buttonDisabled = UIColor.lightGray
             static let buttonHighlighted = UIColor(red: 0, green: 0.5, blue: 0, alpha: 1)
+            static let windAndRain = UIColor(red: 0.3, green: 0.7, blue: 0.97, alpha:1)
         }
     }
     
@@ -92,6 +94,12 @@ extension UIColor {
     static func divider() -> UIColor {
         UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
             UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.divider : Colours.light.divider
+        }
+    }
+    
+    static func windAndRain() -> UIColor {
+        UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+            UITraitCollection.userInterfaceStyle == .dark || forceMode == .dark ? Colours.dark.windAndRain : Colours.light.windAndRain
         }
     }
     

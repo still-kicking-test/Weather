@@ -1,8 +1,8 @@
 //
-//  HourForecastView.swift
+//  HourForecastMultipleView.swift
 //  Weather
 //
-//  Created by jonathan saville on 09/10/2023.
+//  Created by jonathan saville on 10/11/2023.
 //
 
 import SwiftUI
@@ -10,20 +10,20 @@ import CoreLocation
 import UIKit
 import WeatherNetworkingKit
 
-struct HourForecastView: View {
+struct HourForecastMultipleView: View {
     var hourlyForecast: HourlyForecast
     var timezoneOffset: Int
     var selectorState: FullForecastView.SelectorState
 
     // Other views need this view's height - fastest & most straightforward way is to construct it from its known structure...
-    static let preferredHeight = Constants.font.lineHeight + // time
-                                 Constants.iconHeight + Constants.iconPaddingBottom +  // icon
-                                 Constants.temperatureHeight + Constants.temperaturePaddingBottom  + // temperature
-                                 Constants.font.lineHeight  + // feels-like temperature
-                                (verticalSpacing * 4)
+    static let preferredHeight = Constants.font.lineHeight + verticalSpacing +// time
+                                 Constants.iconHeight + Constants.iconPaddingBottom + verticalSpacing + // icon
+                                 Constants.temperatureHeight + Constants.temperaturePaddingBottom + verticalSpacing + // temperature
+                                 Constants.font.lineHeight // feels-like temperature
 
-    static let verticalSpacing: CGFloat = 8
-    enum Constants {
+    private static let verticalSpacing: CGFloat = 8
+    
+    private enum Constants {
         static let iconHeight: CGFloat = 40
         static let iconPaddingBottom: CGFloat = 12
         static let temperatureHeight: CGFloat = 35
@@ -32,7 +32,7 @@ struct HourForecastView: View {
     }
 
     var body: some View {
-        VStack(spacing: HourForecastView.verticalSpacing) {
+        VStack(spacing: HourForecastMultipleView.verticalSpacing) {
             // time
             Text(hourlyForecast.detail != nil ? (hourlyForecast.date.formattedTime(timezoneOffset) ?? "-") : "-")
                 .font(Font(Constants.font))
@@ -67,18 +67,18 @@ struct HourForecastView: View {
             // feels-like temperature OR liklihood of precipitation
             Text(selectorState == .precipitation ? (hourlyForecast.detail?.precipitation.precipitationString ?? "-") : (hourlyForecast.detail?.feels_like.temperatureString ?? "-"))
                 .font(Font(Constants.font))
-                .padding(.bottom, HourForecastView.verticalSpacing)
         }
     }
 }
 
-struct HourForecastView_Previews: PreviewProvider {
+struct HourForecastMultipleView_Previews: PreviewProvider {
     static let location = Location(coordinates: CLLocationCoordinate2D(latitude: 41.8933203, longitude: 12.4829321), name: "Rome (Lazio)")
     static let forecast: Forecast = try! MockAPIService().getForecast(for: location.coordinates, from: [location])
     
     static var previews: some View {
-        HourForecastView(hourlyForecast: forecast.hourly.first!, timezoneOffset: 0, selectorState: .precipitation)
+        HourForecastMultipleView(hourlyForecast: forecast.hourly.first!, timezoneOffset: 0, selectorState: .precipitation)
             .preferredColorScheme(.dark)
-            .frame(width: 60, height: HourForecastView.preferredHeight)
+            .frame(width: 60, height: HourForecastMultipleView.preferredHeight)
+            .background(.gray)
     }
 }

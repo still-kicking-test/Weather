@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIFont {
+public extension UIFont {
     static let defaultFont: UIFont = .systemFont(ofSize: 15)
     static let defaultFontBold: UIFont = .systemFont(ofSize: 15, weight: .bold)
     static let largeFont: UIFont = .systemFont(ofSize: 18)

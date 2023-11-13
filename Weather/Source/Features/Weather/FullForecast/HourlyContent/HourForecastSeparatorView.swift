@@ -14,7 +14,7 @@ struct HourForecastSeparatorView: View {
     var day: String
 
     var body: some View {
-        VStack(spacing: HourForecastView.verticalSpacing) {
+        VStack(spacing: 8) {
 
             DottedLine()
                 .stroke(style: StrokeStyle(lineWidth: 1, dash: [2]))
@@ -23,7 +23,6 @@ struct HourForecastSeparatorView: View {
             
             Text(day)
                 .font(Font(UIFont.defaultFontBold))
-                .padding(.bottom, HourForecastView.verticalSpacing)
         }
     }
 }

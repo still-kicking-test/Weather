@@ -25,6 +25,12 @@ extension Decimal {
         "\(rounded())°"
     }
 
+    var windSpeedString: String {
+        guard self > 0 else { return "-" }
+        guard self <= 100 else { return ">100" }
+        return "\(rounded())"
+    }
+
     var precipitationString: String {
         guard self <= 1 else { return "-" }
         guard self <= 0.95 else { return "95%" }
