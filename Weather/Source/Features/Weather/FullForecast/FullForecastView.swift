@@ -62,13 +62,14 @@ struct FullForecastView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 0) {
 
-                             DaySummaryView(forecast: forecast, selectedDay: selectedDay)
+                            DaySummaryView(forecast: forecast, selectedDay: selectedDay)
                                 .padding([.top, .bottom])
 
                             SlidingSelectorView(selectedIndex: $slidingSelectedIndex, titles: SelectorState.titles)
                                 .padding(16)
                                 .background(Color(UIColor.backgroundPrimary()))
-                                .clipShape(.rect( topLeadingRadius: defaultCornerRadius, topTrailingRadius: defaultCornerRadius))
+                                .clipShape(.rect( topLeadingRadius: RoundedCorners.defaultRadius,
+                                                  topTrailingRadius: RoundedCorners.defaultRadius))
                                 .padding([.leading, .trailing], 8)
                                 .onChange(of: slidingSelectedIndex) { oldValue, newValue in
                                     selectorState = SelectorState(rawValue: newValue) ?? .precipitation
@@ -106,13 +107,14 @@ struct FullForecastView: View {
                             
                             Rectangle()
                                 .foregroundColor(Color(UIColor.backgroundPrimary()))
-                                .clipShape(.rect( bottomLeadingRadius: defaultCornerRadius, bottomTrailingRadius: defaultCornerRadius))
+                                .clipShape(.rect( bottomLeadingRadius: RoundedCorners.defaultRadius,
+                                                  bottomTrailingRadius: RoundedCorners.defaultRadius))
                                 .padding([.leading, .trailing], 8)
 
                             SunriseSunsetView(forecast: forecast, selectedDay: selectedDay)
                                 .padding(16)
                                 .background(Color(UIColor.backgroundPrimary()))
-                                .cornerRadius(defaultCornerRadius)
+                                .cornerRadius(RoundedCorners.defaultRadius)
                                 .padding([.leading, .trailing], 8)
                                 .padding([.top], 24)
                         }

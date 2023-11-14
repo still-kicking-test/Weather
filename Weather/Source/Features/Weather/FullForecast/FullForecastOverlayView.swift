@@ -9,21 +9,19 @@ import SwiftUI
 
 struct FullForecastOverlayView: View {
 
-    static let topSpacerHeight: CGFloat = 12
-    static let feedbackViewHeight: CGFloat = 76
-    static let bottomSpacerHeight: CGFloat = 12
-    static let bottomTitleHeight: CGFloat = 36
-    static let height: CGFloat = topSpacerHeight + feedbackViewHeight + bottomSpacerHeight + bottomTitleHeight
+    static let height: CGFloat = roundedTopCornerRadius + feedbackViewHeight + roundedBottomCornerRadius + bottomTitleHeight
+    
+    private static let roundedTopCornerRadius: CGFloat = RoundedCorners.defaultRadius
+    private static let feedbackViewHeight: CGFloat = 76
+    private static let roundedBottomCornerRadius: CGFloat = RoundedCorners.defaultRadius
+    private static let bottomTitleHeight: CGFloat = 36
 
     var body: some View {
 
         VStack(spacing: 0) {
-     
-            Rectangle()
-                .foregroundColor(Color(UIColor.backgroundPrimary()))
-                .clipShape(.rect( bottomLeadingRadius: defaultCornerRadius, bottomTrailingRadius: defaultCornerRadius))
-                .frame(height: Self.topSpacerHeight)
-         
+
+            RoundedCornersRectangle(roundedCorners: .bottom(), height: Self.roundedTopCornerRadius)
+
             HStack() {
                 Text("How accurate do you find the forecast?")
                  .padding(8)
@@ -33,13 +31,10 @@ struct FullForecastOverlayView: View {
             .foregroundColor(Color(.button(for: .highlighted)))
             .padding(8)
             .background(Color(UIColor.backgroundPrimary()))
-            .cornerRadius(defaultCornerRadius)
+            .cornerRadius(RoundedCorners.defaultRadius)
             .frame(height: Self.feedbackViewHeight)
-         
-            Rectangle()
-                .foregroundColor(Color(UIColor.backgroundPrimary()))
-                .clipShape(.rect( topLeadingRadius: defaultCornerRadius, topTrailingRadius: defaultCornerRadius))
-                .frame(height: Self.bottomSpacerHeight)
+
+            RoundedCornersRectangle(roundedCorners: .top(), height: Self.roundedBottomCornerRadius)
 
             HStack() {
                 Text("Wind Forecast")

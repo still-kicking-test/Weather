@@ -60,13 +60,14 @@ struct HourForecastMultipleView: View {
                 .font(Font(Constants.font))
                 .foregroundColor(hourlyForecast.detail == nil ? Color(.defaultText()) : .black)
                 .frame(width: Constants.temperatureHeight, height: Constants.temperatureHeight)
-                .background(Color(UIColor.colour(for: hourlyForecast.detail?.temp)))
+                .background(Color(.colour(forDegreesCelsius: hourlyForecast.detail?.temp)))
                 .cornerRadius(4)
                 .padding(.bottom, Constants.temperaturePaddingBottom)
 
             // feels-like temperature OR liklihood of precipitation
             Text(selectorState == .precipitation ? (hourlyForecast.detail?.precipitation.precipitationString ?? "-") : (hourlyForecast.detail?.feels_like.temperatureString ?? "-"))
                 .font(Font(Constants.font))
+                .foregroundColor(selectorState == .precipitation ? Color(.colour(forPrecipitation: hourlyForecast.detail?.precipitation)) : Color(.defaultText()))
         }
     }
 }

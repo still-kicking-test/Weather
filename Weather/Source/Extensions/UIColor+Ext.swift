@@ -103,7 +103,7 @@ public extension UIColor {
         }
     }
     
-    static func colour(for degreesCelsius: Decimal?) -> UIColor {
+    static func colour(forDegreesCelsius degreesCelsius: Decimal?) -> UIColor {
 
         func mapValue(value: CGFloat, inMin: CGFloat, inMax: CGFloat, outMin: CGFloat, outMax: CGFloat) -> CGFloat {
             let value = max(min(value, inMax), inMin)
@@ -127,5 +127,9 @@ public extension UIColor {
         let pixelPosition = CGPoint(x: mappedInput, y: 0)
 
         return colourImage.getPixelColor(position: pixelPosition)
+    }
+
+    static func colour(forPrecipitation precipitation: Decimal?) -> UIColor {
+        precipitation ?? 0 >= 0.5 ? .windAndRain() : .defaultText()
     }
 }

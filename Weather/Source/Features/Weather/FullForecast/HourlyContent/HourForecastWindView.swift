@@ -35,12 +35,19 @@ struct HourForecastWindView: View {
                 .font(Font(Constants.font))
 
             // icon
-            Image(systemName: "location.fill")
-                .renderingMode(.template)
-                .rotationEffect(.degrees(Double(hourlyForecast.detail?.windDirection ?? 0) - 225))
-                .foregroundColor(Color(.windAndRain()))
-                .frame(height: Constants.iconHeight)
-                .padding(.bottom, 0)
+            if let hourlyForecastDetail = hourlyForecast.detail {
+                Image(systemName: "location.fill")
+                    .renderingMode(.template)
+                    .rotationEffect(.degrees(Double(hourlyForecastDetail.windDirection) - 225))
+                    .foregroundColor(Color(.windAndRain()))
+                    .frame(height: Constants.iconHeight)
+                    .padding(.bottom, 0)
+            } else {
+                Text("No data")
+                    .font(Font(Constants.font))
+                    .frame(height: Constants.iconHeight)
+                    .padding(.bottom, 0)
+            }
 
             // Wind speed
             Text(hourlyForecast.detail?.windSpeed.windSpeedString ?? "-")
