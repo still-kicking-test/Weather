@@ -9,33 +9,64 @@ import SwiftUI
 
 struct FullForecastOverlayView: View {
 
-    static let height: CGFloat = roundedTopCornerRadius + feedbackViewHeight + roundedBottomCornerRadius + bottomTitleHeight
+    static let height: CGFloat = topViewHeight + feedbackViewHeight + bottomViewHeight
     
-    private static let roundedTopCornerRadius: CGFloat = RoundedCorners.defaultRadius
+    @Binding var isScrollLeftButtonEnabled: Bool
+    @Binding var isScrollRightButtonEnabled: Bool
+    var scrollLeftButtonTapped: () -> Void
+    var scrollRightButtonTapped: () -> Void
+    
+    private static let topViewHeight: CGFloat = 48
     private static let feedbackViewHeight: CGFloat = 76
-    private static let roundedBottomCornerRadius: CGFloat = RoundedCorners.defaultRadius
-    private static let bottomTitleHeight: CGFloat = 36
+    private static let bottomViewHeight: CGFloat = 44
 
     var body: some View {
 
         VStack(spacing: 0) {
 
-            RoundedCornersRectangle(roundedCorners: .bottom(), height: Self.roundedTopCornerRadius)
+            // topView
+            HStack() {
+                Spacer()
+                HStack(spacing: 16) {
+                    Button(action: { scrollLeftButtonTapped() }) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(isScrollLeftButtonEnabled ? Color(.button(for: .highlighted)) : Color(.divider()))
+                    }
+                    .disabled(!isScrollLeftButtonEnabled)
+                    
+                    Rectangle()
+                        .fill(Color(.divider()))
+                        .frame(width: 1)
 
+                    Button(action: { scrollRightButtonTapped() }) {
+                        Image(systemName: "chevron.forward")
+                            .foregroundColor(isScrollRightButtonEnabled ? Color(.button(for: .highlighted)) : Color(.divider()))
+                    }
+                    .disabled(!isScrollRightButtonEnabled)
+               }
+                .frame(height: 32)
+                .padding([.trailing], 24)
+            }
+            .padding([.top, .bottom], 8)
+            .background(Color(UIColor.backgroundPrimary()))
+            .clipShape(.rect( bottomLeadingRadius: RoundedCorners.defaultRadius,
+                              bottomTrailingRadius: RoundedCorners.defaultRadius))
+            .frame(height: Self.topViewHeight)
+
+            // feedbackView
             HStack() {
                 Text("How accurate do you find the forecast?")
                  .padding(8)
                 Spacer()
                 Image(systemName: "chevron.down")
             }
-            .foregroundColor(Color(.button(for: .highlighted)))
             .padding(8)
             .background(Color(UIColor.backgroundPrimary()))
+            .foregroundColor(Color(.button(for: .highlighted)))
             .cornerRadius(RoundedCorners.defaultRadius)
             .frame(height: Self.feedbackViewHeight)
 
-            RoundedCornersRectangle(roundedCorners: .top(), height: Self.roundedBottomCornerRadius)
-
+            // bottomView
             HStack() {
                 Text("Wind Forecast")
                     .font(Font(UIFont.largeFontBold))
@@ -43,17 +74,23 @@ struct FullForecastOverlayView: View {
                 Image(systemName: "info.circle.fill")
                     .foregroundColor(Color(.button(for: .highlighted)))
             }
-            .padding(8)
-            .padding([.bottom], 12)
-            .frame(height: Self.bottomTitleHeight)
+            .padding([.leading, .trailing], 8)
+            .padding([.top, .bottom], 12)
             .background(Color(UIColor.backgroundPrimary()))
-        }
+            .clipShape(.rect( topLeadingRadius: RoundedCorners.defaultRadius,
+                              topTrailingRadius: RoundedCorners.defaultRadius))
+            .frame(height: Self.bottomViewHeight)
+       }
     }
 }
 
-#Preview {
-    FullForecastOverlayView()
-        .preferredColorScheme(.dark)
-        .frame(height: FullForecastOverlayView.height)
+struct FullforecastOverlayView_Previews: PreviewProvider {
+    static var previews: some View {
+        TwoStatesPreviewWrapper(false, true) { FullForecastOverlayView(isScrollLeftButtonEnabled: $0,
+                                                                       isScrollRightButtonEnabled: $1,
+                                                                       scrollLeftButtonTapped: {},
+                                                                       scrollRightButtonTapped: {}) }
         .background(.gray)
+        .preferredColorScheme(.dark)
+    }
 }

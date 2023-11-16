@@ -16,8 +16,14 @@ struct FullForecastView: View {
 
     @State private var dailyScrollIndex: Int?
     @State private var hourlyScrollIndex: Int?
-    @State private var slidingSelectedIndex: Int = 0
+    
     @State private var selectorState: SelectorState = .precipitation
+    @State private var slidingSelectedIndex: Int = 0
+
+    @State private var isScrollLeftButtonEnabled: Bool = true
+    @State private var isScrollRightButtonEnabled: Bool = true
+
+    private let numHourlyForecastsPerScreen = 6
 
     private var calendar: Calendar {
         var calendar = Calendar.current
@@ -78,17 +84,20 @@ struct FullForecastView: View {
                             ZStack() {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     VStack(spacing: 0) {
-                                        HourlyForecastsView(forecast: forecast, contentType: .multiple(selectorState))
+                                        HourlyForecastsView(forecast: forecast, contentType: .multiple(selectorState), numForecastsPerScreen: numHourlyForecastsPerScreen)
                                     
-                                        Rectangle()
+                                        Rectangle() // make room for the non-scrolling overlay
                                             .frame(height: FullForecastOverlayView.height)
                                     
-                                        HourlyForecastsView(forecast: forecast, contentType: .wind)
+                                        HourlyForecastsView(forecast: forecast, contentType: .wind, numForecastsPerScreen: numHourlyForecastsPerScreen)
                                             .scrollTargetLayout()
                                     }
                                 }
-                                
-                                FullForecastOverlayView()
+
+                                FullForecastOverlayView(isScrollLeftButtonEnabled: $isScrollLeftButtonEnabled,
+                                                        isScrollRightButtonEnabled: $isScrollRightButtonEnabled,
+                                                        scrollLeftButtonTapped: { hourlyScrollLeftTapped() },
+                                                        scrollRightButtonTapped: { hourlyScrollRightTapped() })
                                     .frame(height: FullForecastOverlayView.height)
                                     .background(Color(UIColor.navbarBackground()))
                                     .offset(y: ((HourForecastMultipleView.preferredHeight - HourForecastWindView.preferredHeight) / 2))
@@ -101,14 +110,15 @@ struct FullForecastView: View {
                                 if let newValue = newValue,
                                    let index = dailyScrollIndex(for: newValue, in: forecast) {
                                     selectedDay = index
+                                    isScrollLeftButtonEnabled = newValue > 0
+                                    isScrollRightButtonEnabled = HourlyForecastsView.indexForScrollRight(from: newValue,
+                                                                                                         in: forecast.hourly,
+                                                                                                         itemCount: numHourlyForecastsPerScreen) < forecast.hourly.count - 1
                                     withAnimation { dailyScrollIndex = index }
                                 }
                             }
-                            
-                            Rectangle()
-                                .foregroundColor(Color(UIColor.backgroundPrimary()))
-                                .clipShape(.rect( bottomLeadingRadius: RoundedCorners.defaultRadius,
-                                                  bottomTrailingRadius: RoundedCorners.defaultRadius))
+
+                            RoundedCornersRectangle(roundedCorners: .bottom())
                                 .padding([.leading, .trailing], 8)
 
                             SunriseSunsetView(forecast: forecast, selectedDay: selectedDay)
@@ -144,6 +154,18 @@ struct FullForecastView: View {
         }
     }
     
+    private func hourlyScrollLeftTapped() {
+        withAnimation { hourlyScrollIndex = HourlyForecastsView.indexForScrollLeft(from: hourlyScrollIndex,
+                                                                                   in: forecast.hourly,
+                                                                                   itemCount: numHourlyForecastsPerScreen) }
+    }
+
+    private func hourlyScrollRightTapped() {
+        withAnimation { hourlyScrollIndex = HourlyForecastsView.indexForScrollRight(from: hourlyScrollIndex,
+                                                                                    in: forecast.hourly,
+                                                                                    itemCount: numHourlyForecastsPerScreen) }
+    }
+
     enum SelectorState: Int, CaseIterable {
         case precipitation
         case feelsLike

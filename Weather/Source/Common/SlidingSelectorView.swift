@@ -69,7 +69,8 @@ private extension View {
 
 struct SlidingSelectorView_Previews: PreviewProvider {
     static var previews: some View {
-        StatefulPreviewWrapper(0) { SlidingSelectorView(selectedIndex: $0, titles: ["A", "B", "C"]) }
+        OneStatePreviewWrapper(0) { SlidingSelectorView(selectedIndex: $0,
+                                                        titles: ["A", "B", "C"]) }
             .preferredColorScheme(.dark)
     }
 }
