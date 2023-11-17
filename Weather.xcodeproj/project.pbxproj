@@ -88,6 +88,7 @@
 		AB8FBE892AAA71B500AA51CC /* UITableViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE882AAA71B500AA51CC /* UITableViewCell+Ext.swift */; };
 		AB8FBE8B2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE8A2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift */; };
 		AB8FBE8D2AAA7D3F00AA51CC /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8FBE8C2AAA7D3F00AA51CC /* Date+Ext.swift */; };
+		AB91EC712B076C5500673919 /* HourlyScrollButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB91EC702B076C5500673919 /* HourlyScrollButtonsView.swift */; };
 		AB9266222AE516F500F83710 /* HourForecastSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9266212AE516F500F83710 /* HourForecastSeparatorView.swift */; };
 		AB934C0A2AE4748B00766CE6 /* HourForecastMultipleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C092AE4748B00766CE6 /* HourForecastMultipleView.swift */; };
 		AB934C0E2AE4922300766CE6 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C0D2AE4922300766CE6 /* UIImage+Ext.swift */; };
@@ -212,6 +213,7 @@
 		AB8FBE882AAA71B500AA51CC /* UITableViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE8A2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Ext.swift"; sourceTree = "<group>"; };
 		AB8FBE8C2AAA7D3F00AA51CC /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		AB91EC702B076C5500673919 /* HourlyScrollButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyScrollButtonsView.swift; sourceTree = "<group>"; };
 		AB9266212AE516F500F83710 /* HourForecastSeparatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourForecastSeparatorView.swift; sourceTree = "<group>"; };
 		AB934C092AE4748B00766CE6 /* HourForecastMultipleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourForecastMultipleView.swift; sourceTree = "<group>"; };
 		AB934C0D2AE4922300766CE6 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				AB869A082AFE8EBF00871299 /* HourForecastWindView.swift */,
 				AB934C092AE4748B00766CE6 /* HourForecastMultipleView.swift */,
 				AB9266212AE516F500F83710 /* HourForecastSeparatorView.swift */,
+				AB91EC702B076C5500673919 /* HourlyScrollButtonsView.swift */,
 			);
 			path = HourlyContent;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 				AB87CAA32AC5AD3E00428046 /* PrimaryButtonStyle.swift in Sources */,
 				AB6799E32AFA515C0091B7FF /* InlineMessageTableViewCell.swift in Sources */,
 				AB1B514E2AB9F3E900F8D69D /* SelectableCollectionViewCell.swift in Sources */,
+				AB91EC712B076C5500673919 /* HourlyScrollButtonsView.swift in Sources */,
 				AB6F509F2AA21A5E00B86F22 /* MapsCoordinator.swift in Sources */,
 				AB1B51482AB9CEB400F8D69D /* TabBarController.swift in Sources */,
 				AB8FBE8B2AAA71CF00AA51CC /* UICollectionViewCell+Ext.swift in Sources */,

@@ -118,8 +118,14 @@ struct FullForecastView: View {
                                 }
                             }
 
-                            RoundedCornersRectangle(roundedCorners: .bottom())
-                                .padding([.leading, .trailing], 8)
+                            HourlyScrollButtonsView (isScrollLeftButtonEnabled: $isScrollLeftButtonEnabled,
+                                                     isScrollRightButtonEnabled: $isScrollRightButtonEnabled,
+                                                     scrollLeftButtonTapped: { hourlyScrollLeftTapped() },
+                                                     scrollRightButtonTapped: { hourlyScrollRightTapped() })
+                            .padding([.top, .bottom], 8)
+                            .background(Color(UIColor.backgroundPrimary()))
+                            .clipShape(.rect( bottomLeadingRadius: RoundedCorners.defaultRadius,
+                                              bottomTrailingRadius: RoundedCorners.defaultRadius))
 
                             SunriseSunsetView(forecast: forecast, selectedDay: selectedDay)
                                 .padding(16)

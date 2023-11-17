@@ -25,28 +25,10 @@ struct FullForecastOverlayView: View {
         VStack(spacing: 0) {
 
             // topView
-            HStack() {
-                Spacer()
-                HStack(spacing: 16) {
-                    Button(action: { scrollLeftButtonTapped() }) {
-                        Image(systemName: "chevron.backward")
-                            .foregroundColor(isScrollLeftButtonEnabled ? Color(.button(for: .highlighted)) : Color(.divider()))
-                    }
-                    .disabled(!isScrollLeftButtonEnabled)
-                    
-                    Rectangle()
-                        .fill(Color(.divider()))
-                        .frame(width: 1)
-
-                    Button(action: { scrollRightButtonTapped() }) {
-                        Image(systemName: "chevron.forward")
-                            .foregroundColor(isScrollRightButtonEnabled ? Color(.button(for: .highlighted)) : Color(.divider()))
-                    }
-                    .disabled(!isScrollRightButtonEnabled)
-               }
-                .frame(height: 32)
-                .padding([.trailing], 24)
-            }
+            HourlyScrollButtonsView (isScrollLeftButtonEnabled: $isScrollLeftButtonEnabled,
+                                     isScrollRightButtonEnabled: $isScrollRightButtonEnabled,
+                                     scrollLeftButtonTapped: scrollLeftButtonTapped,
+                                     scrollRightButtonTapped: scrollRightButtonTapped)
             .padding([.top, .bottom], 8)
             .background(Color(UIColor.backgroundPrimary()))
             .clipShape(.rect( bottomLeadingRadius: RoundedCorners.defaultRadius,
