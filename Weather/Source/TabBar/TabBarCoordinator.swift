@@ -44,7 +44,6 @@ class TabBarCoordinator: NSObject, TabCoordinatorProtocol {
 
     func start() {
         coreDataManager.loadData()
-        coreDataManager.loadTestData(onlyIfEmpty: true) // DEV ONLY
 
         let tabs: [TabBarItem] = [.weather, .maps, .warnings]
             .sorted(by: { $0 < $1 })

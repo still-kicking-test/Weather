@@ -36,7 +36,7 @@ struct HourlyForecastsView: View {
                 HStack(spacing: 0) {
                     
                     if HourlyForecastsView.shouldDisplaySeparator(for: index, in: forecast.hourly) {
-                        HourForecastSeparatorView(day: hourlyForecast.date.shortDayOfWeek(timezoneOffset) ?? "-")
+                        HourForecastSeparatorView(day: hourlyForecast.date.dayOfWeek(timezoneOffset) ?? "-")
                             .frame(width: width, height: height)
                     }
                     

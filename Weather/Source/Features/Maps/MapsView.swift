@@ -15,6 +15,8 @@ struct MapsView: View {
         NavigationStack() {
             ZStack {
                 Color.black.ignoresSafeArea()
+                Text(AlertMessage.notYetImplemented)
+                    .foregroundColor(Color(.button(for: .highlighted)))
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Maps")

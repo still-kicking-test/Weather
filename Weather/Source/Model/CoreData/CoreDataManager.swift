@@ -9,10 +9,6 @@ import Foundation
 import CoreData
 import UIKit
 
-extension NSNotification.Name {
-    static let coreDataSaved = Notification.Name("coreDataSaved")
-}
-
 class CoreDataManager {
 
     static let shared = CoreDataManager()
@@ -47,7 +43,6 @@ class CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-                NotificationCenter.default.post(name: .coreDataSaved, object: nil)
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -102,9 +97,7 @@ class CoreDataManager {
 extension CoreDataManager {
     
     // DEV ONLY
-    func loadTestData(onlyIfEmpty: Bool) {
-        guard (onlyIfEmpty && locations.isEmpty) || onlyIfEmpty == false else { return }
-        
+    func loadTestData() {
         while locations.isEmpty == false {
             deleteLocationAt(0)
         }

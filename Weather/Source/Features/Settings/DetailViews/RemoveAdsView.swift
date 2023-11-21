@@ -11,6 +11,8 @@ struct RemoveAdsView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
+            Text(AlertMessage.notYetImplemented)
+                .foregroundColor(Color(.button(for: .highlighted)))
         }
         .navigationTitle("Advertising")
         .toolbarBackground(.hidden, for: .navigationBar)

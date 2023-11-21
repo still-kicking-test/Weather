@@ -147,9 +147,7 @@ struct FullForecastView: View {
                                 .buttonStyle(PrimaryButtonStyle())
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                // TBD
-                            } label: {
+                            ShareLink(item: "\(forecast.sharedSummary(for: selectedDay))") {
                                 Image(systemName: "square.and.arrow.up")
                             }
                             .buttonStyle(PrimaryButtonStyle())
@@ -205,6 +203,16 @@ struct FullForecastView: View {
         if let id = firstHourlyForecast?.id {
             scrollProxy.scrollTo(id, anchor: .leading)
         }
+    }
+}
+
+extension Forecast {
+    func sharedSummary(for day: Int) -> String {
+        guard let dailyForecast = daily[safe: day],
+              let date = dailyForecast.date.dayOfWeek(timezoneOffset, dayFormat: "EEEE"),
+              let location = location?.fullName else { return "No data" }
+        
+        return "Weather forecast for \(location) from the Weather App. \(date): \(dailyForecast.summary.lowercaseFirstChar)"
     }
 }
 

@@ -33,7 +33,7 @@ class SummaryForecastCollectionViewCell:  WeatherCollectionViewCell {
     override func configure(with forecast: Forecast, indexPath: IndexPath) {
         guard let dailyForecast = forecast.daily[safe: indexPath.row] else { return }
         
-        timePeriod.text = dailyForecast.date.shortDayOfWeek(forecast.timezoneOffset) ?? "-"
+        timePeriod.text = dailyForecast.date.dayOfWeek(forecast.timezoneOffset) ?? "-"
         maxTemp.text = dailyForecast.temperature.max.temperatureString
         minTemp.text = dailyForecast.temperature.min.temperatureString
         

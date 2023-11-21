@@ -10,6 +10,10 @@ import Combine
 import UIKit
 import WeatherNetworkingKit
 
+extension NSNotification.Name {
+    static let locationDataSaved = Notification.Name("locationDataSaved")
+}
+
 enum LocationsDisplayItem {
     static let searchPlaceholder = "Search & save your places"
     static let videoTitle = "UK video forecast"
@@ -23,7 +27,8 @@ enum LocationsDisplayItem {
 class LocationsViewModel {
     
     @Published var generalError: Error? = nil
-    
+    @Published var isUpdated = false
+
     private let apiService: APIServiceProtocol
     private var locationManager: LocationManagerProtocol
     private let coreDataManager: CoreDataManager
@@ -75,10 +80,13 @@ class LocationsViewModel {
     func searchTapped() {
         // Until we have a decent city search API, the search field is just a tappable button - we ask the user
         // if they want to reset the locations to the set of test locations...
-        let message = "Location search is not yet implemented. Do you wish to update your locations to the set of test locations?"
+        let message = "Location search is not yet implemented. Do you wish to update your locations with the set of test locations?"
         let alertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "No", style: .cancel))
-        alertController.addAction(UIAlertAction(title: "Update locations", style: .destructive) { _ in self.coreDataManager.loadTestData(onlyIfEmpty: false) })
+        alertController.addAction(UIAlertAction(title: "Update locations", style: .destructive) { _ in
+            self.coreDataManager.loadTestData()
+            self.isUpdated = true
+            self.saveChanges() })
         
         let topController = UIApplication.shared.topViewController()
         topController?.present(alertController, animated: true)
@@ -93,18 +101,19 @@ class LocationsViewModel {
         case StaticDisplayItems.video.rawValue: locationManager.showVideo = value
         default: break
         }
+        isUpdated = true
     }
 
     func deleteLocationAt(_ indexPath: IndexPath) {
         guard let indexPath = indexPath.ignoreStaticDisplayItems else { return }
         coreDataManager.deleteLocationAt(indexPath.row)
-        saveChanges()
+        isUpdated = true
     }
     
     func insertLocation(_ location: CDLocation, at indexPath: IndexPath, shouldPersist: Bool = true) {
         guard let indexPath = indexPath.ignoreStaticDisplayItems else { return }
         coreDataManager.locations.insert(location, at: indexPath.row)
-        saveChanges()
+        isUpdated = true
     }
     
     func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -118,8 +127,7 @@ class LocationsViewModel {
         for i in 0..<coreDataManager.locations.count {
             coreDataManager.locations[i].displayOrder = Int16(i)
         }
-        
-        saveChanges()
+        isUpdated = true
     }
     
     func canMoveItemAt(_ indexPath: IndexPath) -> Bool {
@@ -127,7 +135,11 @@ class LocationsViewModel {
     }
 
     func saveChanges() {
-        coreDataManager.saveContext()
+         if isUpdated {
+             coreDataManager.saveContext()
+             NotificationCenter.default.post(name: .locationDataSaved, object: nil)
+             isUpdated = false
+        }
     }
 }
 

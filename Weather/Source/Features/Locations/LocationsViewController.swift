@@ -41,15 +41,22 @@ class LocationsViewController: UIViewController {
                  showDismissableError(message: error.localizedDescription)
              }
              .store(in: &cancellables)
-         
-         NotificationCenter.default.addObserver(self, selector: #selector(locationsUpdated), name: .coreDataSaved, object: nil)
+
+         viewModel?.$isUpdated
+             .receive(on: DispatchQueue.main)
+             .sink{ [weak self] error in
+                 guard let self else { return }
+                 self.reloadData()
+             }
+             .store(in: &cancellables)
      }
      
      @objc private func didTapDoneButton(sender: UIButton) {
+         viewModel?.saveChanges()
          navigationController?.popViewController(animated: false)
      }
     
-     @objc private func locationsUpdated() {
+     @objc private func reloadData() {
         collectionView.reloadData()
      }
 }

@@ -48,6 +48,7 @@ enum SettingsRow: Int {
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var pathStore = PathStore()
+    @State private var shouldShowNotImplemented: Bool = false
 
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     let rows: [SettingsRow] = [.notifications, .customise, .advertisements, .acknowledgements, .privacy, .email, .call, .contact, .footer]
@@ -67,7 +68,9 @@ struct SettingsView: View {
                         .settingsRowModifier()
                         
                     case .privacy, .email, .call:
-                        SettingsRowView(row: row)
+                        Button() { shouldShowNotImplemented = true } label: {
+                            SettingsRowView(row: row)
+                        }
                         .settingsRowModifier(foregroundColor: Color(UIColor.button(for: .highlighted)))
                     
                     case .contact:
@@ -97,6 +100,9 @@ struct SettingsView: View {
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(.inset)
+            }
+            .alert(isPresented: $shouldShowNotImplemented) {
+                Alert(title: Text(AlertMessage.notYetImplemented), dismissButton: .default(Text("OK")))
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Settings")

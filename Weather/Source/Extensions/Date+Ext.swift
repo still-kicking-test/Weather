@@ -9,7 +9,7 @@ import Foundation
 
 extension Date {
     
-    func shortDayOfWeek(_ secondsFromGMT: Int) -> String? {
+    func dayOfWeek(_ secondsFromGMT: Int, dayFormat: String = "EEE") -> String? {
         guard let timezone = TimeZone(secondsFromGMT: secondsFromGMT) else { return nil }
         var calendar = Calendar.current
         calendar.timeZone = timezone
@@ -17,7 +17,7 @@ extension Date {
     
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timezone
-        dateFormatter.dateFormat = "EEE"
+        dateFormatter.dateFormat = dayFormat
         return dateFormatter.string(from: self).capitalized
     }
     

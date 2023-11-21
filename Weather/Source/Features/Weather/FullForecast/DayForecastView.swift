@@ -26,7 +26,7 @@ struct DayForecastView: View {
             .frame(height: 40)
             .padding(.bottom, 0)
 
-            Text(dailyForecast.date.shortDayOfWeek(timezoneOffset) ?? "-")
+            Text(dailyForecast.date.dayOfWeek(timezoneOffset) ?? "-")
                 .font(Font(UIFont.largeFont))
                 .padding(.bottom, 8)
        }

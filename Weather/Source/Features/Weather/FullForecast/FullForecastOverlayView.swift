@@ -11,6 +11,8 @@ struct FullForecastOverlayView: View {
 
     static let height: CGFloat = topViewHeight + feedbackViewHeight + bottomViewHeight
     
+    @State private var shouldShowNotImplemented: Bool = false
+
     @Binding var isScrollLeftButtonEnabled: Bool
     @Binding var isScrollRightButtonEnabled: Bool
     var scrollLeftButtonTapped: () -> Void
@@ -40,7 +42,12 @@ struct FullForecastOverlayView: View {
                 Text("How accurate do you find the forecast?")
                  .padding(8)
                 Spacer()
-                Image(systemName: "chevron.down")
+                Button() {
+                    shouldShowNotImplemented = true
+                } label: {
+                    Image(systemName: "chevron.down")
+                        .foregroundColor(Color(.button(for: .highlighted)))
+                }
             }
             .padding(8)
             .background(Color(UIColor.backgroundPrimary()))
@@ -53,8 +60,12 @@ struct FullForecastOverlayView: View {
                 Text("Wind Forecast")
                     .font(Font(UIFont.largeFontBold))
                 Spacer()
-                Image(systemName: "info.circle.fill")
-                    .foregroundColor(Color(.button(for: .highlighted)))
+                Button() {
+                    shouldShowNotImplemented = true
+                } label: {
+                    Image(systemName: "info.circle.fill")
+                        .foregroundColor(Color(.button(for: .highlighted)))
+                }
             }
             .padding([.leading, .trailing], 8)
             .padding([.top, .bottom], 12)
@@ -62,7 +73,10 @@ struct FullForecastOverlayView: View {
             .clipShape(.rect( topLeadingRadius: RoundedCorners.defaultRadius,
                               topTrailingRadius: RoundedCorners.defaultRadius))
             .frame(height: Self.bottomViewHeight)
-       }
+        }
+        .alert(isPresented: $shouldShowNotImplemented) {
+            Alert(title: Text(AlertMessage.notYetImplemented), dismissButton: .default(Text("OK")))
+        }
     }
 }
 

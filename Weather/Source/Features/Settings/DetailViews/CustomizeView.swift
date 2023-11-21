@@ -11,6 +11,8 @@ struct CustomizeView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
+            Text(AlertMessage.notYetImplemented)
+                .foregroundColor(Color(.button(for: .highlighted)))
         }
         .navigationTitle("Customise your view")
         .toolbarBackground(.hidden, for: .navigationBar)
