@@ -47,7 +47,6 @@ enum SettingsRow: Int {
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var pathStore = PathStore()
     @State private var shouldShowNotImplemented: Bool = false
 
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -55,7 +54,7 @@ struct SettingsView: View {
     
     var body: some View {
 
-        NavigationStack(path: $pathStore.path) {
+        NavigationStack {
             ZStack {
                 Color.black.ignoresSafeArea()
                 
@@ -71,7 +70,7 @@ struct SettingsView: View {
                         Button() { shouldShowNotImplemented = true } label: {
                             SettingsRowView(row: row)
                         }
-                        .settingsRowModifier(foregroundColor: Color(UIColor.button(for: .highlighted)))
+                        .settingsRowModifier(foregroundColor: Color.accentColor)
                     
                     case .contact:
                         SettingsRowView(row: row)
@@ -82,7 +81,7 @@ struct SettingsView: View {
                             Text("Version \(appVersion ?? "")")
                             Spacer()
                             Text(row.description)
-                                .foregroundColor(Color(UIColor.button(for: .highlighted)))
+                                .foregroundColor(Color.accentColor)
                                 .overlay(NavigationLink(value: row.rawValue) { EmptyView() })
                         }
                         .settingsRowModifier(font: .footnote, separatorTint: .clear)
@@ -90,11 +89,11 @@ struct SettingsView: View {
                 }
                 .navigationDestination(for: Int.self) { i in
                     switch i {
-                    case SettingsRow.notifications.rawValue: NotificationsView().environmentObject(pathStore)
-                    case SettingsRow.customise.rawValue: CustomizeView().environmentObject(pathStore)
-                    case SettingsRow.advertisements.rawValue: RemoveAdsView().environmentObject(pathStore)
-                    case SettingsRow.acknowledgements.rawValue: AcknowledgementsView().environmentObject(pathStore)
-                    case SettingsRow.footer.rawValue: PrivacyPolicyView().environmentObject(pathStore)
+                    case SettingsRow.notifications.rawValue: NotificationsView()
+                    case SettingsRow.customise.rawValue: CustomizeView()
+                    case SettingsRow.advertisements.rawValue: RemoveAdsView()
+                    case SettingsRow.acknowledgements.rawValue: AcknowledgementsView()
+                    case SettingsRow.footer.rawValue: PrivacyPolicyView()
                     default: EmptyView()
                     }
                 }
@@ -102,7 +101,7 @@ struct SettingsView: View {
                 .listStyle(.inset)
             }
             .alert(isPresented: $shouldShowNotImplemented) {
-                Alert(title: Text(AlertMessage.notYetImplemented), dismissButton: .default(Text("OK")))
+                Alert(title: Text(CommonStrings.notYetImplemented), dismissButton: .default(Text("OK")))
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Settings")
@@ -124,9 +123,4 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
             .preferredColorScheme(.dark)
     }
-}
-
-// Still working on the usage of this
-class PathStore: ObservableObject {
-    @Published var path = [Int]() // { didSet { print("set path \(path)") } }
 }

@@ -17,7 +17,7 @@ struct SettingsRowModifier: ViewModifier {
          foregroundColor: Color?) {
         self.font = font
         self.separatorTint = separatorTint
-        self.foregroundColor = foregroundColor ?? (Color(UIColor.defaultText()))
+        self.foregroundColor = foregroundColor ?? .defaultText
     }
     
     func body(content: Content) -> some View {

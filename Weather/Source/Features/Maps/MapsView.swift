@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct MapsView: View {
-    @Environment(\.dismiss) var dismiss
     
     var body: some View {
 
         NavigationStack() {
             ZStack {
-                Color.black.ignoresSafeArea()
-                Text(AlertMessage.notYetImplemented)
-                    .foregroundColor(Color(.button(for: .highlighted)))
+                LinearGradient(gradient: Gradient(colors: [.backgroundGradientFrom,
+                                                           .backgroundGradientTo]), startPoint: .bottom, endPoint: .top)
+                Text(CommonStrings.notYetImplemented)
+                    .foregroundColor(.defaultText)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Maps")
-            .toolbarBackground(.hidden, for: .navigationBar)
+            .toolbarBackground(Color.navbarBackground, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Maps").font(.largeFont)
+                        .foregroundColor(.defaultText)
+                }
+            }
         }
     }
 }

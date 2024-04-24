@@ -6,34 +6,11 @@
 //
 
 import UIKit
-import CoreData
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = .navbarBackground()
-        navBarAppearance.shadowColor = .clear
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.defaultText()]
-        UINavigationBar.appearance().tintColor = .button(for: .highlighted)
-        UINavigationBar.appearance().standardAppearance = navBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-
-        let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = .backgroundSecondary(alpha: 0.5)
-        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = .button(for: .normal)
-        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.button(for: .normal)]
-        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = .button(for: .selected)
-        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.button(for: .selected)]
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        
-        UISwitch.appearance().onTintColor = .button(for: .highlighted)
-
         registerSettingsBundleDefaults()
-
         return true
     }
 
@@ -72,4 +49,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: defaults)
     }
 }
-

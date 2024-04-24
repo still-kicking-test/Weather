@@ -9,10 +9,8 @@ import SwiftUI
 
 struct PrimaryButtonStyle: ButtonStyle {
     
-    var stateColour: UIControl.State = .highlighted
-    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(Color(UIColor.button(for: stateColour)))
+            .foregroundColor(Color.accentColor)
     }
 }

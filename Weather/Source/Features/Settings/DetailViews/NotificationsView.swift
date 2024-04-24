@@ -11,8 +11,8 @@ struct NotificationsView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            Text(AlertMessage.notYetImplemented)
-                .foregroundColor(Color(.button(for: .highlighted)))
+            Text(CommonStrings.notYetImplemented)
+                .foregroundColor(.defaultText)
         }
         .navigationTitle("Notifications")
         .toolbarBackground(.hidden, for: .navigationBar)
