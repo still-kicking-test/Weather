@@ -13,6 +13,20 @@ struct DayForecastView: View {
     var dailyForecast: DailyForecast
     var timezoneOffset: Int = 0
 
+    // This view can be embedded in a lazy contyainer (e.g. a LazyHStack), so we need to know its height in advance...
+    static let preferredHeight = Constants.imageHeight + // icon
+                                 Constants.fontLineHeight + // day of week
+                                 Constants.bottomPadding
+
+    private static let verticalSpacing: CGFloat = 8
+    
+    private enum Constants {
+        static let imageHeight: CGFloat = 40
+        static let font = Font.largeFont
+        static let fontLineHeight = Font.largeFontLineHeight
+        static let bottomPadding: CGFloat = 8
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             AsyncImage(url: ImageLoader.iconURL(for: dailyForecast.displayable.first?.icon ?? "")) { image in
@@ -22,12 +36,12 @@ struct DayForecastView: View {
             } placeholder: {
               // loadingView
             }
-            .frame(height: 40)
+            .frame(height: Constants.imageHeight)
             .padding(.bottom, 0)
 
             Text(dailyForecast.date.dayOfWeek(timezoneOffset) ?? "-")
-                .font(.largeFont)
-                .padding(.bottom, 8)
+                .font(Constants.font)
+                .padding(.bottom, Constants.bottomPadding)
        }
     }
 }
