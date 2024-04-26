@@ -27,10 +27,7 @@ struct LocationsWrapperView: View {
                                 .foregroundColor(.defaultText)
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("Done") {
-                                injected.interactors.locationsInteractor.saveContext()
-                                dismiss()
-                            }
+                            Button("Done") { dismiss() }
                             .buttonStyle(PrimaryButtonStyle())
                         }
                     }

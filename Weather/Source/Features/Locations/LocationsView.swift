@@ -11,13 +11,11 @@ import Combine
 struct LocationsView: UIViewControllerRepresentable {
 
     @EnvironmentObject var appState: AppState
-    @Environment(\.injected) private var injected: InteractorContainer
 
     private var cancellables = Set<AnyCancellable>()
 
     func makeUIViewController(context: Self.Context) -> LocationsViewController {
-        let viewModel = LocationsViewModel(appState: appState,
-                                           interactor: injected.interactors.locationsInteractor)
+        let viewModel = LocationsViewModel(appState: appState)
         let viewController = LocationsViewController.fromNib()
         viewController.viewModel = viewModel
         return viewController

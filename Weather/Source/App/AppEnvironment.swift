@@ -17,13 +17,10 @@ extension AppEnvironment {
     static func bootstrap(apiService: APIServiceProtocol = APIService.shared) -> AppEnvironment {
 
         let appState = AppState()
-        let coreDataManager: CoreDataManagerProtocol = CoreDataManager(appState: appState)
         let networkManager: NetworkManagerProtocol = NetworkManager(appState: appState,apiService: apiService)
-
         let weatherInteractor = WeatherInteractor(networkManager: networkManager)
-        let locationsInteractor = LocationsInteractor(appState: appState, networkManager: networkManager, coreDataManager: coreDataManager)
         
-        let interactors = InteractorContainer.Interactors(weatherInteractor: weatherInteractor, locationsInteractor: locationsInteractor)
+        let interactors = InteractorContainer.Interactors(weatherInteractor: weatherInteractor)
         let interactorContainer = InteractorContainer(appState: appState, interactors: interactors)
 
         return AppEnvironment(container: interactorContainer, appState: appState)

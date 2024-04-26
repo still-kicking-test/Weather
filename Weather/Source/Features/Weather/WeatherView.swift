@@ -27,7 +27,7 @@ struct WeatherView: View {
                 
                 switch appState.state {
 
-                case .idle:
+                case .idle, .loaded(_, true):
                     EmptyView()
 
                 case .loading:
@@ -36,7 +36,7 @@ struct WeatherView: View {
                         .background(.clear)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                case .loaded(let forecasts):
+                case .loaded(let forecasts, false):
 
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 16) {
@@ -78,6 +78,10 @@ struct WeatherView: View {
             .toolbarBackground(Color.navbarBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Weather").font(.largeFont)
+                        .foregroundColor(.defaultText)
+                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button { showSettingsView = true } label: { Image(systemName: "gearshape") }
                         .buttonStyle(PrimaryButtonStyle())
@@ -86,18 +90,20 @@ struct WeatherView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showEditView = true } label: { Text("Edit") }
                         .buttonStyle(PrimaryButtonStyle())
-                    .fullScreenCover(isPresented: $showEditView) { LocationsWrapperView() }
+                        .fullScreenCover(isPresented: $showEditView) { LocationsWrapperView().onDisappear { loadForecastsIfRequired() } }
                         .transaction({ transaction in transaction.disablesAnimations = true })
                 }
-                ToolbarItem(placement: .principal) {
-                    Text("Weather").font(.largeFont)
-                        .foregroundColor(.defaultText)
-                }
             }
+            .onAppear { loadForecastsIfRequired() }
         }
-        .onAppear {
-            guard case .idle = appState.state else { return }
+    }
+    
+    private func loadForecastsIfRequired() {
+        switch appState.state {
+        case .idle,
+             .loaded(_, true):
             injected.interactors.weatherInteractor.loadForecasts()
+        default: break
         }
     }
 }

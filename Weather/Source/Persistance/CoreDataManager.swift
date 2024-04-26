@@ -8,14 +8,17 @@
 import CoreData
 
 protocol CoreDataManagerProtocol {
-    func saveContext()
-    func deleteLocationAt(_ row: Int)
+    func deleteLocationAt(_ row: Int, shouldSaveContext: Bool)
+    func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    var locations: [CDLocation] { get }
 #if DEBUG
     func loadTestData()
 #endif
 }
 
 class CoreDataManager: CoreDataManagerProtocol  {
+    
+    public static let shared: CoreDataManagerProtocol = CoreDataManager()
     
     private lazy var moc: NSManagedObjectContext? = persistentContainer.viewContext
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -39,16 +42,60 @@ class CoreDataManager: CoreDataManagerProtocol  {
         return container
     }()
 
-    private let appState: AppState
-
-    init(appState: AppState) {
-        self.appState = appState
+    var locations: [CDLocation] = []
+    
+    private init() {
         loadData()
     }
 
     // MARK: - Core Data Saving support
 
-    func saveContext() {
+    func deleteLocationAt(_ row: Int, shouldSaveContext: Bool = false) {
+        guard let moc = moc,
+              let managedObject = locations[safe: row] else { return }
+        locations.remove(at: row)
+        moc.delete(managedObject)
+
+        if shouldSaveContext {
+            saveContext()
+        }
+    }
+
+    func addLocation(displayOrder: Int,
+                     name: String,
+                     latitude: Decimal,
+                     longitude: Decimal,
+                     country: String,
+                     state: String,
+                     shouldSaveContext: Bool = false) {
+        
+        guard let moc = moc else { return }
+        
+        let locationItem = CDLocation(context: moc)
+        locationItem.displayOrder = Int16(displayOrder)
+        locationItem.name = name
+        locationItem.latitude = NSDecimalNumber(decimal: latitude)
+        locationItem.longitude = NSDecimalNumber(decimal: longitude)
+        locationItem.country = country
+        locationItem.state = state
+        
+        if shouldSaveContext {
+            saveContext()
+        }
+    }
+
+    func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard let location = locations[safe: sourceIndexPath.row] else { return }
+        locations.remove(at: sourceIndexPath.row)
+        locations.insert(location, at: destinationIndexPath.row)
+ 
+        for i in 0..<locations.count {
+            locations[i].displayOrder = Int16(i)
+        }
+        saveContext()
+    }
+
+    private func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -62,31 +109,6 @@ class CoreDataManager: CoreDataManagerProtocol  {
         }
     }
 
-    func deleteLocationAt(_ row: Int) {
-        guard let moc = moc,
-              let managedObject = appState.locations[safe: row] else { return }
-        appState.locations.remove(at: row)
-        moc.delete(managedObject)
-    }
-
-    func addLocation(displayOrder: Int,
-                     name: String,
-                     latitude: Decimal,
-                     longitude: Decimal,
-                     country: String,
-                     state: String) {
-        
-        guard let moc = moc else { return }
-        
-        let locationItem = CDLocation(context: moc)
-        locationItem.displayOrder = Int16(displayOrder)
-        locationItem.name = name
-        locationItem.latitude = NSDecimalNumber(decimal: latitude)
-        locationItem.longitude = NSDecimalNumber(decimal: longitude)
-        locationItem.country = country
-        locationItem.state = state
-    }
-
     private func loadData() {
         guard let moc = moc else { return }
         
@@ -95,7 +117,7 @@ class CoreDataManager: CoreDataManagerProtocol  {
         locationRequest.sortDescriptors = [sortDescriptor]
         // locationRequest.predicate = NSPredicate(format: "name BEGINSWITH %@", "L")
         do {
-            try appState.locations = moc.fetch(locationRequest)
+            try locations = moc.fetch(locationRequest)
             // print("CoreData locations:\n")
             // for location in locations { print("[displayOrder: \(location.displayOrder), name: \(location.name), lat: \(location.latitude), lon:\(location.longitude), country: \(location.country), state: \(location.state)]") }
         } catch {
@@ -107,7 +129,7 @@ class CoreDataManager: CoreDataManagerProtocol  {
 #if DEBUG
 extension CoreDataManager {
     func loadTestData() {
-        while appState.locations.isEmpty == false {
+        while locations.isEmpty == false {
             deleteLocationAt(0)
         }
         saveContext()

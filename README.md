@@ -50,6 +50,6 @@ WIP
 
 If required, switch to a mocked API service through the device's Settings. Note that the current location is mocked as Apple's offices in Cupertino, so please ensure your Simulator's location is set to 'Apple', otherwise a JSON error will occur as the correct resource file will not be found'.
 
-## Acknowledgments
+## Acknowledgements
 
 * [OpenWeather](https://openweathermap.org)

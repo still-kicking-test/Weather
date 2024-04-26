@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AB0ABC7C2BB19B1300737A2F /* LocationsWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0ABC7B2BB19B1300737A2F /* LocationsWrapperView.swift */; };
-		AB0ABC7E2BB1D44400737A2F /* LocationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0ABC7D2BB1D44400737A2F /* LocationsInteractor.swift */; };
 		AB0ABC832BB2C82C00737A2F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0ABC822BB2C82C00737A2F /* NetworkManager.swift */; };
 		AB0ABC882BB2CB9000737A2F /* NetworkManager+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0ABC872BB2CB9000737A2F /* NetworkManager+Stubs.swift */; };
-		AB0ABC8A2BB33E4C00737A2F /* CoreDataManager+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0ABC892BB33E4C00737A2F /* CoreDataManager+Stubs.swift */; };
 		AB1863F72BD941140003048C /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1863F62BD941140003048C /* UIFont+Ext.swift */; };
 		AB1B51382AB8893F00F8D69D /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B51352AB8893F00F8D69D /* LocationCollectionViewCell.swift */; };
 		AB1B51392AB8893F00F8D69D /* LocationsCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B51362AB8893F00F8D69D /* LocationsCollectionController.swift */; };
@@ -120,10 +118,8 @@
 
 /* Begin PBXFileReference section */
 		AB0ABC7B2BB19B1300737A2F /* LocationsWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsWrapperView.swift; sourceTree = "<group>"; };
-		AB0ABC7D2BB1D44400737A2F /* LocationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsInteractor.swift; sourceTree = "<group>"; };
 		AB0ABC822BB2C82C00737A2F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AB0ABC872BB2CB9000737A2F /* NetworkManager+Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Stubs.swift"; sourceTree = "<group>"; };
-		AB0ABC892BB33E4C00737A2F /* CoreDataManager+Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager+Stubs.swift"; sourceTree = "<group>"; };
 		AB1863F62BD941140003048C /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
 		AB1B51352AB8893F00F8D69D /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB1B51362AB8893F00F8D69D /* LocationsCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsCollectionController.swift; sourceTree = "<group>"; };
@@ -292,7 +288,6 @@
 				AB3F3CEE2BA473D3000A2573 /* Legacy */,
 				AB0ABC7B2BB19B1300737A2F /* LocationsWrapperView.swift */,
 				AB3F3CEC2BA47323000A2573 /* LocationsView.swift */,
-				AB0ABC7D2BB1D44400737A2F /* LocationsInteractor.swift */,
 			);
 			path = Locations;
 			sourceTree = "<group>";
@@ -554,7 +549,6 @@
 			isa = PBXGroup;
 			children = (
 				AB0ABC872BB2CB9000737A2F /* NetworkManager+Stubs.swift */,
-				AB0ABC892BB33E4C00737A2F /* CoreDataManager+Stubs.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -748,7 +742,6 @@
 				AB40B9FC2AB1C0FC00A00DCB /* SettingsView.swift in Sources */,
 				AB2006782BACBE8600A0971F /* WeatherInteractor.swift in Sources */,
 				AB0ABC7C2BB19B1300737A2F /* LocationsWrapperView.swift in Sources */,
-				AB0ABC7E2BB1D44400737A2F /* LocationsInteractor.swift in Sources */,
 				AB20067A2BACC82200A0971F /* AppEnvironment.swift in Sources */,
 				AB8BA04C2AB51010004212D3 /* CoreDataManager.swift in Sources */,
 				AB9744B82AC30D7C00D9EEA4 /* CustomizeView.swift in Sources */,
@@ -761,7 +754,6 @@
 				AB9744C32AC33A3600D9EEA4 /* RemoveAdsView.swift in Sources */,
 				AB8FBE812AAA09B800AA51CC /* Int+Ext.swift in Sources */,
 				AB2C35832BA99386000334A6 /* ContentView.swift in Sources */,
-				AB0ABC8A2BB33E4C00737A2F /* CoreDataManager+Stubs.swift in Sources */,
 				AB87D1F62ACC61F800D1067A /* CDLocation+CoreDataClass.swift in Sources */,
 				AB8FBE8D2AAA7D3F00AA51CC /* Date+Ext.swift in Sources */,
 				AB8137092AA12B06005B26B0 /* UIViewController+Ext.swift in Sources */,

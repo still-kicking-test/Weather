@@ -30,18 +30,25 @@ class NetworkManager: NetworkManagerProtocol {
     }
 
     func loadForecasts() async {
+        let locations = self.locations
+
+        guard locations.isEmpty == false else {
+            appState.changeState(to: .loaded([], isReloadRequired: false))
+            return
+        }
+
         appState.changeState(to: .loading)
 
         let delay: CGFloat = 0.5 // set to non-zero for dev testing, then reset to 0 (or remove)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.apiService.getForecasts(locations: self.locations)
+            self.apiService.getForecasts(locations: locations)
                 .sink{
                     switch $0 {
                     case .failure(let error):
                         self.appState.changeState(to: .error(error))
                     case .success(let forecasts):
-                        self.appState.changeState(to: .loaded(forecasts))
+                        self.appState.changeState(to: .loaded(forecasts, isReloadRequired: false))
                     }
                 }
                 .store(in: &self.cancellables)

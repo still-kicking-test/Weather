@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum LocationsDisplayItem {
     static let searchPlaceholder = "Search & save your places"
@@ -17,7 +18,7 @@ enum LocationsDisplayItem {
     case search
 }
 
-class LocationsViewModel: ObservableObject {
+class LocationsViewModel: NSObject {
     
     @Published var generalError: Error? = nil
     @Published var isUpdated = false
@@ -29,13 +30,17 @@ class LocationsViewModel: ObservableObject {
     }
 
     private let appState: AppState
-    private var interactor: LocationsInteractor
+    private let coreDataManager: CoreDataManagerProtocol
+    private let userDefaults = UserDefaults.standard
+    private let clLocationManager = CLLocationManager()
 
     fileprivate static var staticDisplayItemsCount: Int { StaticDisplayItems.allCases.count }
 
-    init(appState: AppState, interactor: LocationsInteractor) {
+    init(appState: AppState, coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared) {
         self.appState = appState
-        self.interactor = interactor
+        self.coreDataManager = coreDataManager
+        super.init()
+        clLocationManager.delegate = self
     }
 
     public var displayItemsCount: Int {
@@ -72,7 +77,9 @@ class LocationsViewModel: ObservableObject {
         let alertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "No", style: .cancel))
         alertController.addAction(UIAlertAction(title: "Update locations", style: .destructive) { _ in
-            self.interactor.loadTestData()
+            self.coreDataManager.loadTestData()
+            self.appState.locations = self.coreDataManager.locations
+            self.appState.setReloadRequired()
             self.isUpdated = true
         })
         
@@ -83,9 +90,15 @@ class LocationsViewModel: ObservableObject {
     func valueDidChangeAt(_ indexPath: IndexPath, with value: Bool) {
         switch indexPath.row {
         case StaticDisplayItems.currentLocation.rawValue: 
-            interactor.shouldShowCurrentLocation(value)
+            userDefaults.set(value, forKey: AppState.UserDefaultsKeys.showCurrentLocation)
+            appState.showCurrentLocation = value
+            appState.setReloadRequired()
+            if value {
+                requestAuthorizationIfRequired()
+            }
         case StaticDisplayItems.video.rawValue:
-            interactor.shouldShowVideo(value)
+            userDefaults.set(value, forKey: AppState.UserDefaultsKeys.showVideo)
+            appState.showVideo = value
         default: break
         }
         isUpdated = true
@@ -93,26 +106,42 @@ class LocationsViewModel: ObservableObject {
 
     func deleteLocationAt(_ indexPath: IndexPath) {
         guard let indexPath = indexPath.ignoreStaticDisplayItems else { return }
-        interactor.deleteLocationAt(indexPath.row)
+        coreDataManager.deleteLocationAt(indexPath.row, shouldSaveContext: true)
+        appState.locations = coreDataManager.locations
+        appState.setReloadRequired()
         isUpdated = true
     }
     
     func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         guard let sourceIndexPath = sourceIndexPath.ignoreStaticDisplayItems,
               let destinationIndexPath = destinationIndexPath.ignoreStaticDisplayItems else { return }
-              
-        let location = appState.locations[sourceIndexPath.row]
-        appState.locations.remove(at: sourceIndexPath.row)
-        appState.locations.insert(location, at: destinationIndexPath.row)
- 
-        for i in 0..<appState.locations.count {
-            appState.locations[i].displayOrder = Int16(i)
-        }
+        coreDataManager.moveLocationAt(sourceIndexPath, to: destinationIndexPath)
+        appState.locations = coreDataManager.locations
+        appState.setReloadRequired()
         isUpdated = true
     }
     
     func canMoveItemAt(_ indexPath: IndexPath) -> Bool {
         indexPath.row >= LocationsViewModel.staticDisplayItemsCount
+    }
+}
+
+
+extension LocationsViewModel: CLLocationManagerDelegate {
+
+    func requestAuthorizationIfRequired() {
+        guard clLocationManager.authorizationStatus != .authorizedWhenInUse,
+              clLocationManager.authorizationStatus != .authorizedAlways else { return }
+        clLocationManager.requestWhenInUseAuthorization()
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            appState.locationManagerAuthorized = true
+        default:
+            appState.locationManagerAuthorized = false
+        }
     }
 }
 

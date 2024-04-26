@@ -31,17 +31,13 @@ extension EnvironmentValues {
 extension InteractorContainer {
     struct Interactors {
         let weatherInteractor: WeatherInteractor
-        let locationsInteractor: LocationsInteractor
 
-        init(weatherInteractor: WeatherInteractor,
-             locationsInteractor: LocationsInteractor) {
+        init(weatherInteractor: WeatherInteractor) {
             self.weatherInteractor = weatherInteractor
-            self.locationsInteractor = locationsInteractor
         }
         
         static func stub(_ appState: AppState) -> Self {
-            .init(weatherInteractor: WeatherInteractor(networkManager: NetworkManager.stub),
-                  locationsInteractor: LocationsInteractor(appState: appState, networkManager: NetworkManager.stub, coreDataManager: CoreDataManager.stub))
+            .init(weatherInteractor: WeatherInteractor(networkManager: NetworkManager.stub))
         }
     }
 }
