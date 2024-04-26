@@ -47,6 +47,7 @@ struct FullForecastView: View {
                         .font(.largeFontBold)
                         .padding([.bottom, .leading, .trailing])
                         .background(Color.backgroundPrimary)
+                        .transaction { transaction in transaction.animation = nil }
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .top, spacing: 0) { // lazy so we can scroll to hidden elements (on the RHS) durinbg onAppear
@@ -73,6 +74,7 @@ struct FullForecastView: View {
 
                             DaySummaryView(forecast: forecast, selectedDay: appState.selectedDay)
                                 .padding([.top, .bottom])
+                                .transaction { transaction in transaction.animation = nil }
 
                             SlidingSelectorView(selectedIndex: $slidingSelectedIndex, titles: SelectorState.titles)
                                 .padding(16)

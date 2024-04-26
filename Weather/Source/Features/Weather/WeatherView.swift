@@ -73,7 +73,7 @@ struct WeatherView: View {
                         .foregroundColor(.defaultText)
                 }
             }
-            .sheet(item: $showFullForecast, content: { forecast in FullForecastView(forecast: forecast) })
+            .fullScreenCover(item: $showFullForecast, content: { forecast in FullForecastView(forecast: forecast) })
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.navbarBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
