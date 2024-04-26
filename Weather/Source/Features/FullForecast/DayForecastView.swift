@@ -29,15 +29,9 @@ struct DayForecastView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: ImageLoader.iconURL(for: dailyForecast.displayable.first?.icon ?? "")) { image in
-                image
-                   .resizable()
-                   .aspectRatio(contentMode: .fit)
-            } placeholder: {
-              // loadingView
-            }
-            .frame(height: Constants.imageHeight)
-            .padding(.bottom, 0)
+            WeatherIcon(fromOpenWeatherCode: dailyForecast.displayable.first?.icon ?? "")
+                .frame(height: Constants.imageHeight)
+                .padding(.bottom, 0)
 
             Text(dailyForecast.date.dayOfWeek(timezoneOffset) ?? "-")
                 .font(Constants.font)

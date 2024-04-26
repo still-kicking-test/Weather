@@ -39,15 +39,9 @@ struct HourForecastMultipleView: View {
 
             // icon
             if let hourlyForecastDetail = hourlyForecast.detail {
-                AsyncImage(url: ImageLoader.iconURL(for: hourlyForecastDetail.displayable.first?.icon ?? "")) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    // loadingView
-                }
-                .frame(height: Constants.iconHeight)
-                .padding(.bottom, Constants.iconPaddingBottom)
+                WeatherIcon(fromOpenWeatherCode: hourlyForecastDetail.displayable.first?.icon ?? "")
+                    .frame(height: Constants.iconHeight)
+                    .padding(.bottom, Constants.iconPaddingBottom)
             } else {
                 Text("No data")
                     .font(Constants.font)

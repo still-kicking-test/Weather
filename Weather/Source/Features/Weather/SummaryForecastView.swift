@@ -37,12 +37,7 @@ struct SummaryForecastView: View {
                                 .font(.largeFont)
                                 .padding(.bottom, 8)
                             
-                            // icon
-                            AsyncImage(url: ImageLoader.iconURL(for: dailyForecast.displayable.first?.icon ?? "")) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            } placeholder: { /* loadingView */ }
+                            WeatherIcon(fromOpenWeatherCode: dailyForecast.displayable.first?.icon ?? "")
                                 .frame(height: 40)
                                 .padding(.bottom, 0)
                             
