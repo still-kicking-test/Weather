@@ -84,17 +84,7 @@ struct WeatherView: View {
                         .sheet(isPresented: $showSettingsView) { SettingsView() }
                 }
                 ToolbarItem(placement: .principal) {
-                    Label {
-                        Text("Weather")
-                            .font(.headline)
-                            .foregroundColor(.defaultText)
-                    } icon: {
-                        Image("appIcon")
-                            .renderingMode(.template)
-                            .resizable().frame(width: 20, height: 20)
-                            .foregroundColor(.accentColor)
-                    }
-                    .labelStyle(.titleAndIcon)
+                    NavBarTitleView()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showEditView = true } label: { Text("Edit") }

@@ -23,8 +23,7 @@ struct LocationsWrapperView: View {
                     .toolbarBackground(.visible, for: .navigationBar)
                     .toolbar {
                         ToolbarItem(placement: .principal) {
-                            Text("Weather").font(.largeFont)
-                                .foregroundColor(.defaultText)
+                            NavBarTitleView()
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Done") { dismiss() }
