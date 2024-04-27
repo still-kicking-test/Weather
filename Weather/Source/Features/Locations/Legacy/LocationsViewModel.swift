@@ -32,7 +32,7 @@ class LocationsViewModel: NSObject {
     private let appState: AppState
     private let coreDataManager: CoreDataManagerProtocol
     private let userDefaults = UserDefaults.standard
-    private let clLocationManager = CLLocationManager()
+    private lazy var clLocationManager = CLLocationManager() { didSet { clLocationManager.delegate = self } }
 
     fileprivate static var staticDisplayItemsCount: Int { StaticDisplayItems.allCases.count }
 
@@ -40,7 +40,6 @@ class LocationsViewModel: NSObject {
         self.appState = appState
         self.coreDataManager = coreDataManager
         super.init()
-        clLocationManager.delegate = self
     }
 
     public var displayItemsCount: Int {
@@ -94,7 +93,7 @@ class LocationsViewModel: NSObject {
             appState.showCurrentLocation = value
             appState.setReloadRequired()
             if value {
-                requestAuthorizationIfRequired()
+                clLocationManager.requestWhenInUseAuthorization()
             }
         case StaticDisplayItems.video.rawValue:
             userDefaults.set(value, forKey: AppState.UserDefaultsKeys.showVideo)
@@ -128,12 +127,6 @@ class LocationsViewModel: NSObject {
 
 
 extension LocationsViewModel: CLLocationManagerDelegate {
-
-    func requestAuthorizationIfRequired() {
-        guard clLocationManager.authorizationStatus != .authorizedWhenInUse,
-              clLocationManager.authorizationStatus != .authorizedAlways else { return }
-        clLocationManager.requestWhenInUseAuthorization()
-    }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {

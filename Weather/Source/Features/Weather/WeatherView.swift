@@ -78,14 +78,23 @@ struct WeatherView: View {
             .toolbarBackground(Color.navbarBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Weather").font(.largeFont)
-                        .foregroundColor(.defaultText)
-                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button { showSettingsView = true } label: { Image(systemName: "gearshape") }
                         .buttonStyle(PrimaryButtonStyle())
                         .sheet(isPresented: $showSettingsView) { SettingsView() }
+                }
+                ToolbarItem(placement: .principal) {
+                    Label {
+                        Text("Weather")
+                            .font(.headline)
+                            .foregroundColor(.defaultText)
+                    } icon: {
+                        Image("appIcon")
+                            .renderingMode(.template)
+                            .resizable().frame(width: 20, height: 20)
+                            .foregroundColor(.accentColor)
+                    }
+                    .labelStyle(.titleAndIcon)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showEditView = true } label: { Text("Edit") }
