@@ -94,6 +94,10 @@ struct WeatherView: View {
                 }
             }
             .onAppear { loadForecastsIfRequired() }
+            .refreshable {
+                appState.setReloadRequired()
+                loadForecastsIfRequired()
+            }
         }
     }
     
