@@ -8,12 +8,16 @@
 import CoreData
 
 protocol CoreDataManagerProtocol {
-    func deleteLocationAt(_ row: Int, shouldSaveContext: Bool)
-    func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    func deleteLocationFor(_ uuid: UUID, shouldSaveContext: Bool)
+    func moveLocationFrom(_ from: Int, to: Int)
     var locations: [CDLocation] { get }
 #if DEBUG
     func loadTestData()
 #endif
+}
+
+extension CoreDataManagerProtocol {
+    func deleteLocationFor(_ uuid: UUID)  { deleteLocationFor(uuid, shouldSaveContext: true) }
 }
 
 class CoreDataManager: CoreDataManagerProtocol  {
@@ -50,10 +54,11 @@ class CoreDataManager: CoreDataManagerProtocol  {
 
     // MARK: - Core Data Saving support
 
-    func deleteLocationAt(_ row: Int, shouldSaveContext: Bool = false) {
+    func deleteLocationFor(_ uuid: UUID, shouldSaveContext: Bool) {
         guard let moc = moc,
-              let managedObject = locations[safe: row] else { return }
-        locations.remove(at: row)
+              let index = locations.firstIndex( where: { $0.uuid as UUID == uuid }),
+              let managedObject = locations[safe: index] else { return }
+        locations.remove(at: index)
         moc.delete(managedObject)
 
         if shouldSaveContext {
@@ -67,6 +72,7 @@ class CoreDataManager: CoreDataManagerProtocol  {
                      longitude: Decimal,
                      country: String,
                      state: String,
+                     uuid: UUID = UUID(),
                      shouldSaveContext: Bool = false) {
         
         guard let moc = moc else { return }
@@ -78,17 +84,15 @@ class CoreDataManager: CoreDataManagerProtocol  {
         locationItem.longitude = NSDecimalNumber(decimal: longitude)
         locationItem.country = country
         locationItem.state = state
-        
+        locationItem.uuid = uuid
+
         if shouldSaveContext {
             saveContext()
         }
     }
 
-    func moveLocationAt(_ sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let location = locations[safe: sourceIndexPath.row] else { return }
-        locations.remove(at: sourceIndexPath.row)
-        locations.insert(location, at: destinationIndexPath.row)
- 
+    func moveLocationFrom(_ from: Int, to: Int) {
+        locations.move(fromOffsets: IndexSet([from]), toOffset: to)
         for i in 0..<locations.count {
             locations[i].displayOrder = Int16(i)
         }
@@ -129,8 +133,8 @@ class CoreDataManager: CoreDataManagerProtocol  {
 #if DEBUG
 extension CoreDataManager {
     func loadTestData() {
-        while locations.isEmpty == false {
-            deleteLocationAt(0)
+        locations.forEach { location in
+            deleteLocationFor(location.uuid, shouldSaveContext: false)
         }
         saveContext()
         

@@ -87,7 +87,7 @@ public extension Color {
 
         let pixelPosition = CGPoint(x: mappedInput, y: 0)
 
-        return Color(colourScaleImage.getPixelColor(position: pixelPosition))
+        return colourScaleImage.getPixelColor(position: pixelPosition)
     }
 
     static func colour(forPrecipitation precipitation: Decimal?) -> Color {

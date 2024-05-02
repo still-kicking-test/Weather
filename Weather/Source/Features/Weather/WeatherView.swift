@@ -43,7 +43,7 @@ struct WeatherView: View {
                             if forecasts.isEmpty {
                                 if appState.showVideo {
                                     VideoForecastView()
-                                        .forecastItem()
+                                        .displayAsCard()
                                 } else {
                                     Text(CommonStrings.noForecastItems) // TBD - make more user-friendly
                                         .foregroundColor(.defaultText)
@@ -54,11 +54,11 @@ struct WeatherView: View {
                             } else {
                                 ForEach(Array(forecasts.enumerated()), id: \.offset) { index, forecast in
                                     SummaryForecastView(forecast: forecast, showFullForecast: $showFullForecast)
-                                        .forecastItem()
+                                        .displayAsCard()
                                     
                                     if appState.showVideo && index == 0 { // video is always the second item (or the first if the only one)
                                         VideoForecastView()
-                                            .forecastItem()
+                                            .displayAsCard()
                                     }
                                 }
                             }
@@ -86,10 +86,10 @@ struct WeatherView: View {
                 ToolbarItem(placement: .principal) {
                     NavBarTitleView()
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button { showEditView = true } label: { Text("Edit") }
                         .buttonStyle(PrimaryButtonStyle())
-                        .fullScreenCover(isPresented: $showEditView) { LocationsWrapperView().onDisappear { loadForecastsIfRequired() } }
+                        .fullScreenCover(isPresented: $showEditView) { LocationsView().onDisappear { loadForecastsIfRequired() } }
                         .transaction({ transaction in transaction.disablesAnimations = true })
                 }
             }
@@ -108,22 +108,6 @@ struct WeatherView: View {
             injected.interactors.weatherInteractor.loadForecasts()
         default: break
         }
-    }
-}
-
-private extension View {
-    func forecastItem() -> some View {
-        self.modifier( ForecastItemModifier() )
-     }
-}
-
-private struct ForecastItemModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .background(Color.backgroundPrimary)
-            .foregroundColor(.defaultText)
-            .cornerRadius(RoundedCorners.defaultRadius)
-            .padding([.leading, .trailing], 8)
     }
 }
 

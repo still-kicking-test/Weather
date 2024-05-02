@@ -19,9 +19,10 @@ extension AppEnvironment {
         let appState = AppState()
         let networkManager: NetworkManagerProtocol = NetworkManager(appState: appState,apiService: apiService)
         let weatherInteractor = WeatherInteractor(networkManager: networkManager)
-        
-        let interactors = InteractorContainer.Interactors(weatherInteractor: weatherInteractor)
-        let interactorContainer = InteractorContainer(appState: appState, interactors: interactors)
+        let locationsInteractor = LocationsInteractor(appState: appState, coreDataManager: CoreDataManager.shared)
+
+        let interactors = InteractorContainer.Interactors(weatherInteractor: weatherInteractor, locationsInteractor: locationsInteractor)
+        let interactorContainer = InteractorContainer(interactors: interactors)
 
         return AppEnvironment(container: interactorContainer, appState: appState)
     }

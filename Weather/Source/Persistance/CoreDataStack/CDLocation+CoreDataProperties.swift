@@ -22,7 +22,7 @@ extension CDLocation {
     @NSManaged public var longitude: NSDecimalNumber
     @NSManaged public var name: String
     @NSManaged public var state: String
-
+    @NSManaged public var uuid: UUID
 }
 
 extension CDLocation : Identifiable {
