@@ -67,6 +67,10 @@ struct WeatherView: View {
                     }
                     .padding(0)
                     .padding(.top, 8)
+                    .refreshable {
+                        appState.setReloadRequired()
+                        loadForecastsIfRequired()
+                    }
 
                 case .error(let error):
                     Text(String(describing: error)) // TBD - make more user-friendly
@@ -94,10 +98,6 @@ struct WeatherView: View {
                 }
             }
             .onAppear { loadForecastsIfRequired() }
-            .refreshable {
-                appState.setReloadRequired()
-                loadForecastsIfRequired()
-            }
         }
     }
     
