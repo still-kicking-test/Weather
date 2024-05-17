@@ -111,7 +111,7 @@ struct LocationsView: View {
                         .foregroundColor(.defaultText)
                         .padding([.leading, .trailing], 12)
                         .frame(height: 50)
-                        .listRowBackground(Color.backgroundGradientTo)// (Color.red)
+                        .listRowBackground(Color.backgroundGradientTo)
                         .listRowSeparator(.hidden)
                         .listRowInsets(EdgeInsets(top:0, leading: 0, bottom: 16, trailing: 0))
                         .displayAsCard()
